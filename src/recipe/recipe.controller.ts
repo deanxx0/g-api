@@ -6,7 +6,6 @@ import {
   Body,
   Put,
   Delete,
-  UseInterceptors,
 } from '@nestjs/common';
 import { RecipeDto } from './dto/recipe.dto';
 import { RecipeService } from './recipe.service';
