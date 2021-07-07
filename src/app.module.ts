@@ -1,6 +1,7 @@
 import { Module } from '@nestjs/common';
-import { VehicleModule } from './vehicle/vehicle.module';
 import { MongooseModule } from '@nestjs/mongoose';
+import { VehicleModule } from './vehicle/vehicle.module';
+import { RecipeModule } from './recipe/recipe.module';
 
 @Module({
   imports: [
@@ -8,6 +9,7 @@ import { MongooseModule } from '@nestjs/mongoose';
       'mongodb://db-admin:laon0118@10.30.2.106:27017/st_db?authSource=admin',
     ),
     VehicleModule,
+    RecipeModule,
   ],
 })
 export class AppModule {}
