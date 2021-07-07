@@ -23,6 +23,10 @@ export class CameraService {
     return this.cameraModel.findById(id).exec();
   }
 
+  async findByGroup(group: string): Promise<CameraDocument[]> {
+    return this.cameraModel.find({ group: group }).exec();
+  }
+
   async update(id: string, createCameraDto: CreateCameraDto): Promise<Camera> {
     return this.cameraModel
       .findByIdAndUpdate(id, { $set: { ...createCameraDto } }, { new: true })

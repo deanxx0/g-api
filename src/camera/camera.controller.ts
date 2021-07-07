@@ -9,7 +9,7 @@ import {
 } from '@nestjs/common';
 import { PostCameraDto } from './dto/post-camera.dto';
 import { CameraService } from './camera.service';
-import { Camera } from './schema/camera.schema';
+import { Camera, CameraDocument } from './schema/camera.schema';
 import { CreateCameraDto } from './dto/create-camera.dto';
 
 @Controller('camera')
@@ -29,6 +29,11 @@ export class CameraController {
   @Get(':id')
   async find(@Param('id') id: string): Promise<Camera> {
     return this.cameraService.find(id);
+  }
+
+  @Get('group/:group')
+  async findByGroup(@Param('group') group: string): Promise<CameraDocument[]> {
+    return this.cameraService.findByGroup(group);
   }
 
   @Put(':id')
