@@ -15,27 +15,27 @@ import { Recipe } from './schema/recipe.schema';
 export class RecipeController {
   constructor(private recipeService: RecipeService) {}
 
-  @Get('recipes')
+  @Get()
   async findAllRecipes(): Promise<Recipe[]> {
     return this.recipeService.findAllRecipes();
   }
 
-  @Get('recipe/:id')
+  @Get(':id')
   async findRecipe(@Param('id') id: string): Promise<Recipe> {
     return this.recipeService.findRecipe(id);
   }
 
-  @Post('recipe')
+  @Post()
   async createRecipe(@Body() recipeDto: RecipeDto) {
     this.recipeService.createRecipe(recipeDto);
   }
 
-  @Put('recipe/:id')
+  @Put(':id')
   async updateRecipe(@Param('id') id: string, @Body() recipeDto: RecipeDto) {
     this.recipeService.updateRecipe(id, recipeDto);
   }
 
-  @Delete('recipe/:id')
+  @Delete(':id')
   async deleteRecipe(@Param('id') id: string) {
     this.recipeService.deleteRecipe(id);
   }
