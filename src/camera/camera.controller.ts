@@ -8,13 +8,17 @@ import {
   Put,
 } from '@nestjs/common';
 import { PostCameraDto } from './dto/post-camera.dto';
+import { CameraService } from './camera.service';
+import { Camera } from './schema/camera.schema';
 import { CreateCameraDto } from './dto/create-camera.dto';
 
 @Controller('camera')
 export class CameraController {
+  constructor(private cameraService: CameraService) {}
+
   @Post()
-  create(@Body() postCameraDto: PostCameraDto): string {
-    return JSON.stringify(postCameraDto);
+  async create(@Body() postCameraDto: PostCameraDto): Promise<Camera> {
+    return this.cameraService.create(this.toCreateDto(postCameraDto));
   }
 
   @Get()
