@@ -1,12 +1,14 @@
 import { Injectable } from '@nestjs/common';
 import { InjectModel } from '@nestjs/mongoose';
 import { Model } from 'mongoose';
-import { VehicleDto } from './dto/glovis.vehicle.dto';
-import { Vehicle, VehicleDocument } from './schma/glovis.vehicle.schma';
+import { VehicleDto } from './dto/vehicle.dto';
+import { Vehicle, VehicleDocument } from './schema/vehicle.schema';
 
 @Injectable()
 export class VehicleService {
-  constructor(@InjectModel(Vehicle.name) private vehicleModel: Model<VehicleDocument>) {}
+  constructor(
+    @InjectModel(Vehicle.name) private vehicleModel: Model<VehicleDocument>,
+  ) {}
 
   async findAllVehicles(): Promise<Vehicle[]> {
     return this.vehicleModel.find().exec();
@@ -22,9 +24,13 @@ export class VehicleService {
   }
 
   async update(id: string, vehicleDto: VehicleDto): Promise<Vehicle> {
-    return this.vehicleModel.findByIdAndUpdate(id, { $set: { 
-      ...vehicleDto
-    }}).exec();
+    return this.vehicleModel
+      .findByIdAndUpdate(id, {
+        $set: {
+          ...vehicleDto,
+        },
+      })
+      .exec();
   }
 
   async delete(id: string) {

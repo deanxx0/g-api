@@ -1,9 +1,21 @@
-import { Controller, Get, Param, Post, Body, Put, Delete, UseInterceptors, HttpException, HttpStatus, ForbiddenException } from '@nestjs/common';
-import { VehicleDto } from './dto/glovis.vehicle.dto';
+import {
+  Controller,
+  Get,
+  Param,
+  Post,
+  Body,
+  Put,
+  Delete,
+  UseInterceptors,
+  HttpException,
+  HttpStatus,
+  ForbiddenException,
+} from '@nestjs/common';
+import { VehicleDto } from './dto/vehicle.dto';
 import { VehicleService } from './vehicle.service';
-import { Vehicle } from './schma/glovis.vehicle.schma';
+import { Vehicle } from './schema/vehicle.schema';
 
-@Controller('glovis')
+@Controller('vehicle')
 export class VehicleController {
   constructor(private vehicleService: VehicleService) {}
 
