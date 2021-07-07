@@ -7,7 +7,8 @@ import { Inspection, InspectionDocument } from './schema/inspection.schema';
 @Injectable()
 export class InspectionService {
   constructor(
-    @InjectModel(Inspection.name) private inspectionModel: Model<InspectionDocument>,
+    @InjectModel(Inspection.name)
+    private inspectionModel: Model<InspectionDocument>,
   ) {}
 
   async findAllRecipes(): Promise<Inspection[]> {
@@ -23,7 +24,10 @@ export class InspectionService {
     return createdInspection.save();
   }
 
-  async updateRecipe(id: string, inspectionDto: InspectionDto): Promise<Inspection> {
+  async updateRecipe(
+    id: string,
+    inspectionDto: InspectionDto,
+  ): Promise<Inspection> {
     return this.inspectionModel
       .findByIdAndUpdate(id, {
         $set: {

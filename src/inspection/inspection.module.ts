@@ -6,7 +6,9 @@ import { Inspection, InspectionSchema } from './schema/inspection.schema';
 
 @Module({
   imports: [
-    MongooseModule.forFeature([{ name: Inspection.name, schema: InspectionSchema }]),
+    MongooseModule.forFeature([
+      { name: Inspection.name, schema: InspectionSchema },
+    ]),
   ],
   controllers: [InspectionController],
   providers: [InspectionService],

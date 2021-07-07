@@ -1,7 +1,7 @@
-import { Prop, raw, Schema, SchemaFactory } from "@nestjs/mongoose";
+import { Prop, raw, Schema, SchemaFactory } from '@nestjs/mongoose';
 import { Document } from 'mongoose';
-import { RecipeDto } from "src/recipe/dto/recipe.dto";
-import { VehicleDto } from "src/vehicle/dto/vehicle.dto";
+import { RecipeDto } from 'src/recipe/dto/recipe.dto';
+import { VehicleDto } from 'src/vehicle/dto/vehicle.dto';
 
 export type InspectionDocument = Inspection & Document;
 
@@ -16,24 +16,24 @@ export class Inspection {
   @Prop()
   status: string;
 
-  @Prop(raw(
-    [
+  @Prop(
+    raw([
       {
-        camera:{ type: String },
-        grab:{ 
-          seq:{ type: Number },
-          distance:{ type: Number }
+        camera: { type: String },
+        grab: {
+          seq: { type: Number },
+          distance: { type: Number },
         },
-        defects:[
-        {
-          x:{ type: Number },
-          y:{ type: Number },
-          resultCode:{ type: Number }
+        defects: [
+          {
+            x: { type: Number },
+            y: { type: Number },
+            resultCode: { type: Number },
           },
-        ]
+        ],
       },
-    ]
-  ))
+    ]),
+  )
   inferenceResults: Record<string, any>;
 
   @Prop()

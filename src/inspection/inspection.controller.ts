@@ -31,7 +31,10 @@ export class InspectionController {
   }
 
   @Put('inspection/:id')
-  async updateRecipe(@Param('id') id: string, @Body() inspectionDto: InspectionDto) {
+  async updateRecipe(
+    @Param('id') id: string,
+    @Body() inspectionDto: InspectionDto,
+  ) {
     this.inspectionService.updateRecipe(id, inspectionDto);
   }
 
