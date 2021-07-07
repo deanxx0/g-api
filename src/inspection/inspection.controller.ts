@@ -16,30 +16,30 @@ export class InspectionController {
   constructor(private inspectionService: InspectionService) {}
 
   @Get()
-  async findAllRecipes(): Promise<Inspection[]> {
-    return this.inspectionService.findAllRecipes();
+  async findAllInspections(): Promise<Inspection[]> {
+    return this.inspectionService.findAllInspection();
   }
 
   @Get(':id')
-  async findRecipe(@Param('id') id: string): Promise<Inspection> {
-    return this.inspectionService.findRecipe(id);
+  async findInspection(@Param('id') id: string): Promise<Inspection> {
+    return this.inspectionService.findInspection(id);
   }
 
   @Post()
-  async createRecipe(@Body() inspectionDto: InspectionDto) {
-    this.inspectionService.createRecipe(inspectionDto);
+  async createInspection(@Body() inspectionDto: InspectionDto) {
+    this.inspectionService.createInspection(inspectionDto);
   }
 
   @Put(':id')
-  async updateRecipe(
+  async updateInspection(
     @Param('id') id: string,
     @Body() inspectionDto: InspectionDto,
   ) {
-    this.inspectionService.updateRecipe(id, inspectionDto);
+    this.inspectionService.updateInspection(id, inspectionDto);
   }
 
   @Delete(':id')
-  async deleteRecipe(@Param('id') id: string) {
-    this.inspectionService.deleteRecipe(id);
+  async deleteInspection(@Param('id') id: string) {
+    this.inspectionService.deleteInspection(id);
   }
 }

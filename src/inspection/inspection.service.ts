@@ -11,20 +11,20 @@ export class InspectionService {
     private inspectionModel: Model<InspectionDocument>,
   ) {}
 
-  async findAllRecipes(): Promise<Inspection[]> {
+  async findAllInspection(): Promise<Inspection[]> {
     return this.inspectionModel.find().exec();
   }
 
-  async findRecipe(id: string): Promise<Inspection> {
+  async findInspection(id: string): Promise<Inspection> {
     return this.inspectionModel.findById(id).exec();
   }
 
-  async createRecipe(inspectionDto: InspectionDto): Promise<Inspection> {
+  async createInspection(inspectionDto: InspectionDto): Promise<Inspection> {
     const createdInspection = new this.inspectionModel(inspectionDto);
     return createdInspection.save();
   }
 
-  async updateRecipe(
+  async updateInspection(
     id: string,
     inspectionDto: InspectionDto,
   ): Promise<Inspection> {
@@ -37,7 +37,7 @@ export class InspectionService {
       .exec();
   }
 
-  async deleteRecipe(id: string) {
+  async deleteInspection(id: string) {
     this.inspectionModel.deleteOne({ _id: id }).exec();
   }
 }
