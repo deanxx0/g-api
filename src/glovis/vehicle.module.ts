@@ -1,7 +1,7 @@
 import { Module } from '@nestjs/common';
 import { MongooseModule } from '@nestjs/mongoose';
-import { GlovisController } from './glovis.controller';
-import { GlovisService } from './glovis.service';
+import { VehicleController } from './vehicle.controller';
+import { VehicleService } from './vehicle.service';
 import { Vehicle, VehicleSchema } from './schma/glovis.vehicle.schma';
 
 @Module({
@@ -10,7 +10,7 @@ import { Vehicle, VehicleSchema } from './schma/glovis.vehicle.schma';
       { name: Vehicle.name, schema: VehicleSchema }
     ])
   ],
-  controllers: [GlovisController],
-  providers: [GlovisService]
+  controllers: [VehicleController],
+  providers: [VehicleService]
 })
-export class GlovisModule {}
+export class VehicleModule {}

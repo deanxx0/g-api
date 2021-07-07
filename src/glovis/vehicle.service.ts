@@ -5,7 +5,7 @@ import { VehicleDto } from './dto/glovis.vehicle.dto';
 import { Vehicle, VehicleDocument } from './schma/glovis.vehicle.schma';
 
 @Injectable()
-export class GlovisService {
+export class VehicleService {
   constructor(@InjectModel(Vehicle.name) private vehicleModel: Model<VehicleDocument>) {}
 
   async findAllVehicles(): Promise<Vehicle[]> {
