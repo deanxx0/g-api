@@ -15,27 +15,27 @@ import { Vehicle } from './schema/vehicle.schema';
 export class VehicleController {
   constructor(private vehicleService: VehicleService) {}
 
-  @Get('vehicles')
+  @Get()
   async findAllVehicles(): Promise<Vehicle[]> {
     return this.vehicleService.findAllVehicles();
   }
 
-  @Get('vehicle/:id')
+  @Get(':id')
   async findVehicle(@Param('id') id: string): Promise<Vehicle> {
     return this.vehicleService.findVehicle(id);
   }
 
-  @Post('vehicle')
+  @Post()
   async create(@Body() vehicleDto: VehicleDto) {
     this.vehicleService.create(vehicleDto);
   }
 
-  @Put('vehicle/:id')
+  @Put(':id')
   async update(@Param('id') id: string, @Body() vehicleDto: VehicleDto) {
     this.vehicleService.update(id, vehicleDto);
   }
 
-  @Delete('vehicle/:id')
+  @Delete(':id')
   async delete(@Param('id') id: string) {
     this.vehicleService.delete(id);
   }
