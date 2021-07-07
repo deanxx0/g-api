@@ -25,6 +25,11 @@ export class VehicleController {
     return this.vehicleService.findVehicle(id);
   }
 
+  @Get('vin/:vin')
+  async findByVin(@Param('vin') vin: string): Promise<Vehicle> {
+    return this.vehicleService.findByVin(vin);
+  }
+
   @Post()
   async create(@Body() vehicleDto: VehicleDto) {
     this.vehicleService.create(vehicleDto);

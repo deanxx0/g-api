@@ -18,6 +18,10 @@ export class VehicleService {
     return this.vehicleModel.findById(id).exec();
   }
 
+  async findByVin(vin: string): Promise<Vehicle> {
+    return this.vehicleModel.findOne({ vinCode: vin }).exec();
+  }
+
   async create(vehicleDto: VehicleDto): Promise<Vehicle> {
     const createdVehicle = new this.vehicleModel(vehicleDto);
     return createdVehicle.save();
