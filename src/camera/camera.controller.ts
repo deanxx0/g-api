@@ -22,26 +22,26 @@ export class CameraController {
   }
 
   @Get()
-  findAll(): string {
-    return 'find all';
+  async findAll(): Promise<Camera[]> {
+    return this.cameraService.findAll();
   }
 
   @Get(':id')
-  find(@Param('id') id: string): string {
-    return `find ${id}`;
+  async find(@Param('id') id: string): Promise<Camera> {
+    return this.cameraService.find(id);
   }
 
   @Put(':id')
-  update(
+  async update(
     @Param('id') id: string,
     @Body() postCameraDto: PostCameraDto,
-  ): string {
-    return JSON.stringify(postCameraDto);
+  ): Promise<Camera> {
+    return this.cameraService.update(id, this.toCreateDto(postCameraDto));
   }
 
   @Delete(':id')
-  delete(@Param('id') id: string): string {
-    return `delete ${id}`;
+  async delete(@Param('id') id: string): Promise<Camera> {
+    return this.cameraService.delete(id);
   }
 
   private toCreateDto(postCameraDto: PostCameraDto): CreateCameraDto {
