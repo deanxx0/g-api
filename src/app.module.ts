@@ -4,11 +4,13 @@ import { VehicleModule } from './vehicle/vehicle.module';
 import { RecipeModule } from './recipe/recipe.module';
 import { InspectionModule } from './inspection/inspection.module';
 import { CameraModule } from './camera/camera.module';
+import { ConfigModule } from '@nestjs/config';
 
 @Module({
   imports: [
+    ConfigModule.forRoot(),
     MongooseModule.forRoot(
-      'mongodb://db-admin:laon0118@10.30.2.106:27017/st_db?authSource=admin',
+      `mongodb://${process.env.DATABASE_USER}:${process.env.DATABASE_PASSWORD}@${process.env.DATABASE_HOST}/${process.env.DATABASE_NAME}?authSource=admin`,
     ),
     VehicleModule,
     RecipeModule,
