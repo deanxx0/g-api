@@ -6,10 +6,6 @@ import {
   Body,
   Put,
   Delete,
-  UseInterceptors,
-  HttpException,
-  HttpStatus,
-  ForbiddenException,
 } from '@nestjs/common';
 import { VehicleDto } from './dto/vehicle.dto';
 import { VehicleService } from './vehicle.service';
@@ -21,7 +17,6 @@ export class VehicleController {
 
   @Get('vehicles')
   async findAllVehicles(): Promise<Vehicle[]> {
-    //throw new ForbiddenException();
     return this.vehicleService.findAllVehicles();
   }
 
