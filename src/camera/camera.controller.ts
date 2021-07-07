@@ -8,6 +8,7 @@ import {
   Put,
 } from '@nestjs/common';
 import { PostCameraDto } from './dto/post-camera.dto';
+import { CreateCameraDto } from './dto/create-camera.dto';
 
 @Controller('camera')
 export class CameraController {
@@ -37,5 +38,19 @@ export class CameraController {
   @Delete(':id')
   delete(@Param('id') id: string): string {
     return `delete ${id}`;
+  }
+
+  private toCreateDto(postCameraDto: PostCameraDto): CreateCameraDto {
+    return {
+      name: postCameraDto.name,
+      group: postCameraDto.group,
+      status: postCameraDto.status,
+      serial: postCameraDto.serial,
+      workingFolderPath: postCameraDto.workingFolderPath,
+      type: postCameraDto.type,
+      ip: postCameraDto.ip,
+      nicIp: postCameraDto.nicIp,
+      serverIp: postCameraDto.serverIp,
+    };
   }
 }
