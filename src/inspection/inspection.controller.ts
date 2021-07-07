@@ -15,22 +15,22 @@ import { Inspection } from './schema/inspection.schema';
 export class InspectionController {
   constructor(private inspectionService: InspectionService) {}
 
-  @Get('inspections')
+  @Get()
   async findAllRecipes(): Promise<Inspection[]> {
     return this.inspectionService.findAllRecipes();
   }
 
-  @Get('inspection/:id')
+  @Get(':id')
   async findRecipe(@Param('id') id: string): Promise<Inspection> {
     return this.inspectionService.findRecipe(id);
   }
 
-  @Post('inspection')
+  @Post()
   async createRecipe(@Body() inspectionDto: InspectionDto) {
     this.inspectionService.createRecipe(inspectionDto);
   }
 
-  @Put('inspection/:id')
+  @Put(':id')
   async updateRecipe(
     @Param('id') id: string,
     @Body() inspectionDto: InspectionDto,
@@ -38,7 +38,7 @@ export class InspectionController {
     this.inspectionService.updateRecipe(id, inspectionDto);
   }
 
-  @Delete('inspection/:id')
+  @Delete(':id')
   async deleteRecipe(@Param('id') id: string) {
     this.inspectionService.deleteRecipe(id);
   }
