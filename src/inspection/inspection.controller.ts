@@ -17,27 +17,27 @@ export class InspectionController {
   constructor(private inspectionService: InspectionService) {}
 
   @Get()
-  async findAllInspections(): Promise<Inspection[]> {
+  async findAll(): Promise<Inspection[]> {
     return this.inspectionService.findAllInspection();
   }
 
-  @Get('gt')
-  async findInspectionsAfterId(@Query() query: any): Promise<Inspection[]> {
+  @Get('after')
+  async findAfterId(@Query() query: any): Promise<Inspection[]> {
     return this.inspectionService.findInspectionsAfterId(query.id, query.limit);
   }
 
   @Get(':id')
-  async findInspection(@Param('id') id: string): Promise<Inspection> {
+  async find(@Param('id') id: string): Promise<Inspection> {
     return this.inspectionService.findInspection(id);
   }
 
   @Post()
-  async createInspection(@Body() inspectionDto: InspectionDto) {
+  async create(@Body() inspectionDto: InspectionDto) {
     this.inspectionService.createInspection(inspectionDto);
   }
 
   @Put(':id')
-  async updateInspection(
+  async update(
     @Param('id') id: string,
     @Body() inspectionDto: InspectionDto,
   ) {
@@ -45,7 +45,7 @@ export class InspectionController {
   }
 
   @Delete(':id')
-  async deleteInspection(@Param('id') id: string) {
+  async delete(@Param('id') id: string) {
     this.inspectionService.deleteInspection(id);
   }
 }
