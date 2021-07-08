@@ -1,4 +1,5 @@
 export class RecipeDto {
+  name: string;
   lights: [
     {
       name: string;

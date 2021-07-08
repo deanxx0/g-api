@@ -5,6 +5,9 @@ export type RecipeDocument = Recipe & Document;
 
 @Schema({ timestamps: true })
 export class Recipe {
+  @Prop()
+  name: string;
+  
   @Prop(
     raw([
       {
