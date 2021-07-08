@@ -19,6 +19,12 @@ export class InspectionService {
     return this.inspectionModel.findById(id).exec();
   }
 
+  async findInspectionsWithLimit(id: string, limit: string): Promise<Inspection[]> {
+    return this.inspectionModel.find({
+      '_id': {$gt: id}
+    }).limit(parseInt(limit)).exec();
+  }
+
   async createInspection(inspectionDto: InspectionDto): Promise<Inspection> {
     const createdInspection = new this.inspectionModel(inspectionDto);
     return createdInspection.save();

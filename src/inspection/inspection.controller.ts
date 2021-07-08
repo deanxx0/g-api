@@ -6,6 +6,7 @@ import {
   Body,
   Put,
   Delete,
+  Query
 } from '@nestjs/common';
 import { InspectionDto } from './dto/inspection.dto';
 import { InspectionService } from './inspection.service';
@@ -18,6 +19,11 @@ export class InspectionController {
   @Get()
   async findAllInspections(): Promise<Inspection[]> {
     return this.inspectionService.findAllInspection();
+  }
+
+  @Get('gt')
+  async findInspectionsWithLimit(@Query() query: any): Promise<Inspection[]> {
+    return this.inspectionService.findInspectionsWithLimit(query.id, query.limit);
   }
 
   @Get(':id')
