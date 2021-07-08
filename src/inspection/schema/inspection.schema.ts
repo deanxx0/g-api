@@ -38,12 +38,6 @@ export class Inspection {
     ]),
   )
   inferenceResults: Record<string, any>;
-
-  @Prop()
-  createdAt: string;
-
-  @Prop()
-  updatedAt: string;
 }
 
 export const InspectionSchema = SchemaFactory.createForClass(Inspection);
