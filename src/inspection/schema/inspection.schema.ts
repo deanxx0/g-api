@@ -1,17 +1,17 @@
 import { Prop, raw, Schema, SchemaFactory } from '@nestjs/mongoose';
 import { Document } from 'mongoose';
-import { RecipeDto } from 'src/recipe/dto/recipe.dto';
-import { VehicleDto } from 'src/vehicle/dto/vehicle.dto';
+import { Recipe } from 'src/recipe/schema/recipe.schema';
+import { Vehicle } from 'src/vehicle/schema/vehicle.schema';
 
 export type InspectionDocument = Inspection & Document;
 
-@Schema()
+@Schema({ timestamps: true })
 export class Inspection {
   @Prop()
-  vehicle: VehicleDto;
+  vehicle: Vehicle;
 
   @Prop()
-  recipe: RecipeDto;
+  recipe: Recipe;
 
   @Prop()
   status: string;

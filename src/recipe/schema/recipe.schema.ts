@@ -3,7 +3,7 @@ import { Document } from 'mongoose';
 
 export type RecipeDocument = Recipe & Document;
 
-@Schema()
+@Schema({ timestamps: true })
 export class Recipe {
   @Prop(
     raw([
