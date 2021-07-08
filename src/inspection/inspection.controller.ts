@@ -33,7 +33,7 @@ export class InspectionController {
   }
 
   @Get('latest')
-  async findLatest(): Promise<Inspection[]> {
+  async findLatest(): Promise<Inspection> {
     return this.inspectionService.findLatest();
   }
 
