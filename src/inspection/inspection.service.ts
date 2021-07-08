@@ -25,6 +25,12 @@ export class InspectionService {
     }).limit(parseInt(limit)).exec();
   }
 
+  async findPeriod(from: string, to: string): Promise<Inspection[]> {
+    const fromDate = new Date(new Date(from).getTime());
+    const toDate = new Date(new Date(to).getTime());
+    return this.inspectionModel.find({ createdAt: { $gt: fromDate, $lt: toDate } }).exec();
+  }
+
   async findLatest(): Promise<Inspection[]> {
     return this.inspectionModel.find().sort( { _id: -1 }).limit(1).exec();
   }

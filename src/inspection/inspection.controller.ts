@@ -27,6 +27,11 @@ export class InspectionController {
     return this.inspectionService.findAfterId(query.id, query.limit);
   }
 
+  @Get('period')
+  async findPeriod(@Query() query: any): Promise<Inspection[]> {
+    return this.inspectionService.findPeriod(query.from, query.to);
+  }
+
   @Get('latest')
   async findLatest(): Promise<Inspection[]> {
     return this.inspectionService.findLatest();
