@@ -19,14 +19,14 @@ export class Recipe {
     raw([
       {
         name: { type: String },
-        grab: { type: Array<Number>() },
-        gain: [
+        grabs: { type: Array<Number>() },
+        gains: [
           {
             distance: { type: Number },
             value: { type: Number },
           },
         ],
-        exposureTime: [
+        exposureTimes: [
           {
             distance: { type: Number },
             value: { type: Number },

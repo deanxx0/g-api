@@ -5,6 +5,7 @@ export class VehicleDto {
     width: number;
     height: number;
     Length: number;
+    Model: string;
     Color: String;
   };
   options: String[];

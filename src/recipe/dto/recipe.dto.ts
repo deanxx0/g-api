@@ -13,14 +13,14 @@ export class RecipeDto {
   cameras: [
     {
       name: string;
-      grab: number[];
-      gain: [
+      grabs: number[];
+      gains: [
         {
           distance: number;
           value: number;
         },
       ];
-      exposureTime: [
+      exposureTimes: [
         {
           distance: number;
           value: number;
