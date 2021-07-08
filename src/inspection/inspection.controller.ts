@@ -8,7 +8,8 @@ import {
   Delete,
   Query
 } from '@nestjs/common';
-import { InspectionDto } from './dto/inspection.dto';
+import { CreateInspectionDto } from './dto/create-inspection.dto';
+import { PostInspectionDto } from './dto/post-inspection.dto';
 import { InspectionService } from './inspection.service';
 import { Inspection } from './schema/inspection.schema';
 
@@ -32,20 +33,30 @@ export class InspectionController {
   }
 
   @Post()
-  async create(@Body() inspectionDto: InspectionDto) {
-    this.inspectionService.create(inspectionDto);
+  async create(@Body() postInspectionDto: PostInspectionDto) {
+    this.inspectionService.create(this.toCreateDto(postInspectionDto));
   }
 
   @Put(':id')
   async update(
     @Param('id') id: string,
-    @Body() inspectionDto: InspectionDto,
+    @Body() postInspectionDto: PostInspectionDto,
   ) {
-    this.inspectionService.update(id, inspectionDto);
+    this.inspectionService.update(id, this.toCreateDto(postInspectionDto));
   }
 
   @Delete(':id')
   async delete(@Param('id') id: string) {
     this.inspectionService.delete(id);
+  }
+
+  private toCreateDto(postInspectionDto: PostInspectionDto): CreateInspectionDto {
+    return {
+      inspectionNo: postInspectionDto.inspectionNo,
+      vehicle: postInspectionDto.vehicle,
+      recipe: postInspectionDto.recipe,
+      status: postInspectionDto.status,
+      inferenceResults: postInspectionDto.inferenceResults,
+    }
   }
 }

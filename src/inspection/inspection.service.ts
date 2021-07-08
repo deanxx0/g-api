@@ -1,7 +1,7 @@
 import { Injectable } from '@nestjs/common';
 import { InjectModel } from '@nestjs/mongoose';
 import { Model } from 'mongoose';
-import { InspectionDto } from './dto/inspection.dto';
+import { CreateInspectionDto } from './dto/create-inspection.dto';
 import { Inspection, InspectionDocument } from './schema/inspection.schema';
 
 @Injectable()
@@ -25,19 +25,19 @@ export class InspectionService {
     }).limit(parseInt(limit)).exec();
   }
 
-  async create(inspectionDto: InspectionDto): Promise<Inspection> {
-    const createdInspection = new this.inspectionModel(inspectionDto);
+  async create(createInspectionDto: CreateInspectionDto): Promise<Inspection> {
+    const createdInspection = new this.inspectionModel(createInspectionDto);
     return createdInspection.save();
   }
 
   async update(
     id: string,
-    inspectionDto: InspectionDto,
+    createInspectionDto: CreateInspectionDto,
   ): Promise<Inspection> {
     return this.inspectionModel
       .findByIdAndUpdate(id, {
         $set: {
-          ...inspectionDto,
+          ...createInspectionDto,
         },
       })
       .exec();
