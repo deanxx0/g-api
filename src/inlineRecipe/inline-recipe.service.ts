@@ -31,6 +31,16 @@ export class InlineRecipeService {
     return this.inlineRecipeModel.findById(id).exec();
   }
 
+  async findByVehicle(
+    model: string,
+    color: string,
+  ): Promise<InlineRecipeDocument> {
+    return this.inlineRecipeModel
+      .findOne({ vehicleModel: model, vehicleColor: color })
+      .populate('recipe')
+      .exec();
+  }
+
   async update(
     id: string,
     createInlineRecipeDto: CreateInlineRecipeDto,

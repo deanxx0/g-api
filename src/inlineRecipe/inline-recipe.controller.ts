@@ -35,6 +35,14 @@ export class InlineRecipeController {
     return this.inlineRecipeService.find(id);
   }
 
+  @Get('/:model/:color')
+  async findByVehicle(
+    @Param('model') model: string,
+    @Param('color') color: string,
+  ): Promise<InlineRecipeDocument> {
+    return this.inlineRecipeService.findByVehicle(model, color);
+  }
+
   @Put(':id')
   async update(
     @Param('id') id: string,
