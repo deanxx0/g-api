@@ -7,7 +7,7 @@ export type RecipeDocument = Recipe & Document;
 export class Recipe {
   @Prop()
   name: string;
-  
+
   @Prop(
     raw([
       {

@@ -6,7 +6,7 @@ import {
   Body,
   Put,
   Delete,
-  Query
+  Query,
 } from '@nestjs/common';
 import { CreateInspectionDto } from './dto/create-inspection.dto';
 import { PostInspectionDto } from './dto/post-inspection.dto';
@@ -60,13 +60,15 @@ export class InspectionController {
     this.inspectionService.delete(id);
   }
 
-  private toCreateDto(postInspectionDto: PostInspectionDto): CreateInspectionDto {
+  private toCreateDto(
+    postInspectionDto: PostInspectionDto,
+  ): CreateInspectionDto {
     return {
       inspectionNo: postInspectionDto.inspectionNo,
       vehicle: postInspectionDto.vehicle,
       recipe: postInspectionDto.recipe,
       status: postInspectionDto.status,
       inferenceResults: postInspectionDto.inferenceResults,
-    }
+    };
   }
 }

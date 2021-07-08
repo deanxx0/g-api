@@ -20,13 +20,20 @@ export class InspectionService {
   }
 
   async findAfterId(id: string, limit: string): Promise<Inspection[]> {
-    return this.inspectionModel.find({ _id: { $gt: id } }).limit(parseInt(limit)).exec();
+    return this.inspectionModel
+      .find({
+        _id: { $gt: id },
+      })
+      .limit(parseInt(limit))
+      .exec();
   }
 
   async findPeriod(from: string, to: string): Promise<Inspection[]> {
     const fromDate = new Date(new Date(from).getTime());
     const toDate = new Date(new Date(to).getTime());
-    return this.inspectionModel.find({ createdAt: { $gt: fromDate, $lt: toDate } }).exec();
+    return this.inspectionModel
+      .find({ createdAt: { $gt: fromDate, $lt: toDate } })
+      .exec();
   }
 
   async findLatest(): Promise<Inspection> {
