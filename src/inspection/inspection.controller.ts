@@ -22,8 +22,13 @@ export class InspectionController {
   }
 
   @Get('gt')
-  async findInspectionsWithLimit(@Query() query: any): Promise<Inspection[]> {
-    return this.inspectionService.findInspectionsWithLimit(query.id, query.limit);
+  async findInspectionsAfterId(@Query() query: any): Promise<Inspection[]> {
+    return this.inspectionService.findInspectionsAfterId(query.id, query.limit);
+  }
+
+  @Get('inference-results')
+  async findInferenceResults(@Query() query: any): Promise<Inspection[]> {
+    return this.inspectionService.findInferenceResults(query.id, query.limit);
   }
 
   @Get(':id')

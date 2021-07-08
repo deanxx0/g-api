@@ -19,9 +19,15 @@ export class InspectionService {
     return this.inspectionModel.findById(id).exec();
   }
 
-  async findInspectionsWithLimit(id: string, limit: string): Promise<Inspection[]> {
+  async findInspectionsAfterId(id: string, limit: string): Promise<Inspection[]> {
     return this.inspectionModel.find({
       '_id': {$gt: id}
+    }).limit(parseInt(limit)).exec();
+  }
+
+  async findInferenceResults(id: string, limit: string): Promise<Inspection[]> {
+    return this.inspectionModel.find({
+      '_id': {$gt: id},
     }).limit(parseInt(limit)).exec();
   }
 
