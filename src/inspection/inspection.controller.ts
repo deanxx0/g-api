@@ -26,11 +26,6 @@ export class InspectionController {
     return this.inspectionService.findInspectionsAfterId(query.id, query.limit);
   }
 
-  @Get('inference-results')
-  async findInferenceResults(@Query() query: any): Promise<Inspection[]> {
-    return this.inspectionService.findInferenceResults(query.id, query.limit);
-  }
-
   @Get(':id')
   async findInspection(@Param('id') id: string): Promise<Inspection> {
     return this.inspectionService.findInspection(id);
