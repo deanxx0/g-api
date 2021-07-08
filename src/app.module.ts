@@ -7,6 +7,7 @@ import { CameraModule } from './camera/camera.module';
 import { ConfigModule } from '@nestjs/config';
 import { LightModule } from './light/light.module';
 import { InlineRecipeModule } from './inlineRecipe/inline-recipe.module';
+import { SensorModule } from './sensor/sensor.module';
 
 @Module({
   imports: [
@@ -20,6 +21,7 @@ import { InlineRecipeModule } from './inlineRecipe/inline-recipe.module';
     CameraModule,
     LightModule,
     InlineRecipeModule,
+    SensorModule,
   ],
 })
 export class AppModule {}
