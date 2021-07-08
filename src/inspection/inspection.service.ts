@@ -11,26 +11,26 @@ export class InspectionService {
     private inspectionModel: Model<InspectionDocument>,
   ) {}
 
-  async findAllInspection(): Promise<Inspection[]> {
+  async findAll(): Promise<Inspection[]> {
     return this.inspectionModel.find().exec();
   }
 
-  async findInspection(id: string): Promise<Inspection> {
+  async find(id: string): Promise<Inspection> {
     return this.inspectionModel.findById(id).exec();
   }
 
-  async findInspectionsAfterId(id: string, limit: string): Promise<Inspection[]> {
+  async findAfterId(id: string, limit: string): Promise<Inspection[]> {
     return this.inspectionModel.find({
       '_id': {$gt: id}
     }).limit(parseInt(limit)).exec();
   }
 
-  async createInspection(inspectionDto: InspectionDto): Promise<Inspection> {
+  async create(inspectionDto: InspectionDto): Promise<Inspection> {
     const createdInspection = new this.inspectionModel(inspectionDto);
     return createdInspection.save();
   }
 
-  async updateInspection(
+  async update(
     id: string,
     inspectionDto: InspectionDto,
   ): Promise<Inspection> {
@@ -43,7 +43,7 @@ export class InspectionService {
       .exec();
   }
 
-  async deleteInspection(id: string) {
+  async delete(id: string) {
     this.inspectionModel.deleteOne({ _id: id }).exec();
   }
 }

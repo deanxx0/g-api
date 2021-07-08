@@ -18,22 +18,22 @@ export class InspectionController {
 
   @Get()
   async findAll(): Promise<Inspection[]> {
-    return this.inspectionService.findAllInspection();
+    return this.inspectionService.findAll();
   }
 
   @Get('after')
   async findAfterId(@Query() query: any): Promise<Inspection[]> {
-    return this.inspectionService.findInspectionsAfterId(query.id, query.limit);
+    return this.inspectionService.findAfterId(query.id, query.limit);
   }
 
   @Get(':id')
   async find(@Param('id') id: string): Promise<Inspection> {
-    return this.inspectionService.findInspection(id);
+    return this.inspectionService.find(id);
   }
 
   @Post()
   async create(@Body() inspectionDto: InspectionDto) {
-    this.inspectionService.createInspection(inspectionDto);
+    this.inspectionService.create(inspectionDto);
   }
 
   @Put(':id')
@@ -41,11 +41,11 @@ export class InspectionController {
     @Param('id') id: string,
     @Body() inspectionDto: InspectionDto,
   ) {
-    this.inspectionService.updateInspection(id, inspectionDto);
+    this.inspectionService.update(id, inspectionDto);
   }
 
   @Delete(':id')
   async delete(@Param('id') id: string) {
-    this.inspectionService.deleteInspection(id);
+    this.inspectionService.delete(id);
   }
 }
