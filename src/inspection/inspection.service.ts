@@ -25,6 +25,10 @@ export class InspectionService {
     }).limit(parseInt(limit)).exec();
   }
 
+  async findLatest(): Promise<Inspection[]> {
+    return this.inspectionModel.find().sort( { _id: -1 }).limit(1).exec();
+  }
+
   async create(createInspectionDto: CreateInspectionDto): Promise<Inspection> {
     const createdInspection = new this.inspectionModel(createInspectionDto);
     return createdInspection.save();
