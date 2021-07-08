@@ -4,11 +4,9 @@ export class VehicleDto {
   properties: {
     width: number;
     height: number;
-    Length: number;
-    Model: string;
-    Color: String;
+    length: number;
+    model: string;
+    color: String;
   };
   options: String[];
-  createdAt: string;
-  updatedAt: string;
 }

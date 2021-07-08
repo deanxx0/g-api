@@ -16,6 +16,7 @@ export class Vehicle {
       width: { type: Number },
       height: { type: Number },
       length: { type: Number },
+      model: { type: String },
       color: { type: String },
     }),
   )
@@ -23,12 +24,6 @@ export class Vehicle {
 
   @Prop()
   options: String[];
-
-  @Prop()
-  createdAt: String;
-
-  @Prop()
-  updatedAt: String;
 }
 
 export const VehicleSchema = SchemaFactory.createForClass(Vehicle);
