@@ -8,6 +8,9 @@ export type InspectionDocument = Inspection & Document;
 @Schema({ timestamps: true })
 export class Inspection {
   @Prop()
+  inspectionNo: number;
+
+  @Prop()
   vehicle: Vehicle;
 
   @Prop()

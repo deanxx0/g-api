@@ -2,6 +2,7 @@ import { RecipeDto } from 'src/recipe/dto/recipe.dto';
 import { VehicleDto } from 'src/vehicle/dto/vehicle.dto';
 
 export class InspectionDto {
+  inspectionNo: number;
   vehicle: VehicleDto;
   recipe: RecipeDto;
   status: string;
