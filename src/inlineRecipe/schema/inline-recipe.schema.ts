@@ -7,7 +7,7 @@ export type InlineRecipeDocument = InlineRecipe & Document;
 @Schema({ timestamps: true })
 export class InlineRecipe {
   @Prop({ type: mongoose.Schema.Types.ObjectId, ref: 'Recipe', required: true })
-  recipe: Recipe;
+  recipe: string;
 
   @Prop({ required: true })
   vehicleModel: string;
