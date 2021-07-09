@@ -1,14 +1,19 @@
-import { Injectable } from '@nestjs/common';
+import { Inject, Injectable } from '@nestjs/common';
 import { InjectModel } from '@nestjs/mongoose';
+import { KafkaService } from '@rob3000/nestjs-kafka';
 import { Model } from 'mongoose';
+import { InspectionStatus } from 'src/connector/enum/inspection-status';
 import { CreateInspectionDto } from './dto/create-inspection.dto';
 import { Inspection, InspectionDocument } from './schema/inspection.schema';
+
+const topicInspectionCreated = 'glovis.fct.inspectionCreated';
 
 @Injectable()
 export class InspectionService {
   constructor(
     @InjectModel(Inspection.name)
     private inspectionModel: Model<InspectionDocument>,
+    @Inject('KAFKA-CONNECTOR') private kafkaService: KafkaService,
   ) {}
 
   async findAll(): Promise<Inspection[]> {
@@ -42,7 +47,13 @@ export class InspectionService {
 
   async create(createInspectionDto: CreateInspectionDto): Promise<Inspection> {
     const createdInspection = new this.inspectionModel(createInspectionDto);
-    return createdInspection.save();
+
+    createdInspection.status = InspectionStatus.PreInspection;
+    const createdDoc = createdInspection.save();
+
+    this.sendCreatedInspection(await createdDoc);
+
+    return createdDoc;
   }
 
   async update(
@@ -60,5 +71,17 @@ export class InspectionService {
 
   async delete(id: string) {
     this.inspectionModel.deleteOne({ _id: id }).exec();
+  }
+
+  async sendCreatedInspection(inspection: InspectionDocument) {
+    await this.kafkaService.send({
+      topic: topicInspectionCreated,
+      messages: [
+        {
+          key: null,
+          value: inspection.toJSON(),
+        },
+      ],
+    });
   }
 }

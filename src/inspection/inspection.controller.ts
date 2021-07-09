@@ -44,7 +44,7 @@ export class InspectionController {
 
   @Post()
   async create(@Body() postInspectionDto: PostInspectionDto) {
-    this.inspectionService.create(this.toCreateDto(postInspectionDto));
+    return this.inspectionService.create(this.toCreateDto(postInspectionDto));
   }
 
   @Put(':id')
