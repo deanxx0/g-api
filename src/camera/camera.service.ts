@@ -23,8 +23,8 @@ export class CameraService {
     return this.cameraModel.findById(id).exec();
   }
 
-  async findByGroup(group: string): Promise<CameraDocument[]> {
-    return this.cameraModel.find({ group: group }).exec();
+  async findByGroups(groups: Array<string>): Promise<CameraDocument[]> {
+    return this.cameraModel.find({ groups: { $all: groups } }).exec();
   }
 
   async findBySerial(serial: string): Promise<CameraDocument> {

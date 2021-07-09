@@ -31,15 +31,16 @@ export class CameraController {
     return this.cameraService.findBySerial(serial);
   }
 
+  @Get('groups/:groups')
+  async findByGroups(@Param('groups') groups: string): Promise<CameraDocument[]> {
+    const arrGroups = groups.split(',');
+    return this.cameraService.findByGroups(arrGroups);
+  }
+
   @Get(':id')
   async find(@Param('id') id: string): Promise<Camera> {
     return this.cameraService.find(id);
-  }
-
-  @Get('group/:group')
-  async findByGroup(@Param('group') group: string): Promise<CameraDocument[]> {
-    return this.cameraService.findByGroup(group);
-  }
+  }  
 
   @Put(':id')
   async update(
