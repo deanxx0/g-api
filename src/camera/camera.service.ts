@@ -27,7 +27,7 @@ export class CameraService {
     return this.cameraModel.find({ group: group }).exec();
   }
 
-  async findBySerial(serial: string): Promise<Camera> {
+  async findBySerial(serial: string): Promise<CameraDocument> {
     return this.cameraModel.findOne({ serial: serial }).exec();
   }
 
