@@ -41,7 +41,7 @@ export class Recipe {
           okPath: { type: String },
           ngPath: { type: String },
         },
-        inferenceStretegy: {
+        inferenceStrategy: {
           models: [
             {
               seq: { type: Number },

@@ -33,7 +33,7 @@ export class RecipeDto {
         okPath: string;
         ngPath: string;
       };
-      inferenceStretegy: {
+      inferenceStrategy: {
         models: [
           {
             seq: number;
