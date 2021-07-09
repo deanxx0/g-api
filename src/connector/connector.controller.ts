@@ -3,7 +3,6 @@ import { KafkaService, SubscribeTo } from '@rob3000/nestjs-kafka';
 import { ConnectorService } from './connector.service';
 import { InspectionStatus } from './enum/inspection-status';
 
-const topicInspectionCreated = 'glovis.fct.inspectionCreated';
 const topicBeginInspection = 'glovis.fct.beginInspection';
 
 @Controller()
