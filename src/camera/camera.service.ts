@@ -27,6 +27,10 @@ export class CameraService {
     return this.cameraModel.find({ group: group }).exec();
   }
 
+  async findBySerial(serial: string): Promise<Camera> {
+    return this.cameraModel.findOne({ serial: serial }).exec();
+  }
+
   async update(id: string, createCameraDto: CreateCameraDto): Promise<Camera> {
     return this.cameraModel
       .findByIdAndUpdate(id, { $set: { ...createCameraDto } }, { new: true })

@@ -26,6 +26,11 @@ export class CameraController {
     return this.cameraService.findAll();
   }
 
+  @Get('serial/:serial')
+  async findBySerial(@Param('serial') serial: string): Promise<Camera> {
+    return this.cameraService.findBySerial(serial);
+  }
+
   @Get(':id')
   async find(@Param('id') id: string): Promise<Camera> {
     return this.cameraService.find(id);
