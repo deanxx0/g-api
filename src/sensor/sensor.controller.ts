@@ -47,7 +47,7 @@ export class SensorController {
   private toCreateDto(postSensorDto: PostSensorDto): CreateSensorDto {
     return {
       name: postSensorDto.name,
-      group: postSensorDto.group,
+      groups: postSensorDto.groups,
       status: postSensorDto.status,
     };
   }

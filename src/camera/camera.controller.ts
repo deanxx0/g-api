@@ -57,7 +57,7 @@ export class CameraController {
   private toCreateDto(postCameraDto: PostCameraDto): CreateCameraDto {
     return {
       name: postCameraDto.name,
-      group: postCameraDto.group,
+      groups: postCameraDto.groups,
       status: postCameraDto.status,
       serial: postCameraDto.serial,
       workingFolderPath: postCameraDto.workingFolderPath,

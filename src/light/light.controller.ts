@@ -47,7 +47,7 @@ export class LightController {
   private toCreateDto(postLightDto: PostLightDto): CreateLightDto {
     return {
       name: postLightDto.name,
-      group: postLightDto.group,
+      groups: postLightDto.groups,
       status: postLightDto.status,
       workingFolderPath: postLightDto.workingFolderPath,
       serverIp: postLightDto.serverIp,
