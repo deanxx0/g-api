@@ -5,6 +5,7 @@ import {
   Inspection,
   InspectionDocument,
 } from 'src/inspection/schema/inspection.schema';
+import { CreateInferenceResultDto } from './dto/create-inference-result.dto';
 
 @Injectable()
 export class ConnectorService {
@@ -14,9 +15,20 @@ export class ConnectorService {
   ) {}
 
   async updateInspectionStatus(id: string, status: string) {
-    console.log(`Update ${id} __ ${status} requested.`);
     this.inspectionModel
       .updateOne({ _id: id }, { $set: { status: status } })
+      .exec();
+  }
+
+  async updateInspectionInferenceResult(
+    id: string,
+    createInferenceResult: CreateInferenceResultDto,
+  ) {
+    this.inspectionModel
+      .updateOne(
+        { _id: id },
+        { $push: { inferenceResults: createInferenceResult } },
+      )
       .exec();
   }
 }
