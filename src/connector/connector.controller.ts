@@ -7,6 +7,7 @@ import { InspectionStatus } from './enum/inspection-status';
 
 const topicBeginInspection = 'glovis.fct.beginInspection';
 const topicInferenceResult = 'glovis.fct.inferenceResult';
+const topicEndInspection = 'glovis.fct.endInspection';
 
 @Controller()
 export class ConnectorController {
@@ -18,6 +19,7 @@ export class ConnectorController {
   onModuleInit(): void {
     this.kafkaService.subscribeToResponseOf(topicBeginInspection, this);
     this.kafkaService.subscribeToResponseOf(topicInferenceResult, this);
+    this.kafkaService.subscribeToResponseOf(topicEndInspection, this);
   }
 
   @SubscribeTo(topicBeginInspection)
@@ -53,6 +55,21 @@ export class ConnectorController {
     this.connectorService.updateInspectionInferenceResult(
       data.inspection,
       this.toCreateInferenceResultDto(data),
+    );
+  }
+
+  @SubscribeTo(topicEndInspection)
+  async getEndInspection(
+    data: any,
+    key: any,
+    offset: number,
+    timestamp: number,
+  ) {
+    console.log(`[${offset}]${key} : ${data} : ${timestamp}`);
+    data = JSON.parse(data);
+    this.connectorService.updateInspectionStatus(
+      data.inspection,
+      InspectionStatus.EndInspection,
     );
   }
 
