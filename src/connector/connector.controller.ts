@@ -8,6 +8,9 @@ import { InspectionStatus } from './enum/inspection-status';
 const topicBeginInspection = 'glovis.fct.beginInspection';
 const topicInferenceResult = 'glovis.fct.inferenceResult';
 const topicEndInspection = 'glovis.fct.endInspection';
+const topicSensorStatus = 'glovis.fct.sensorStatus';
+const topicCameraStatus = 'glovis.fct.cameraStatus';
+const topicLightStatus = 'glovis.fct.lightStatus';
 
 @Controller()
 export class ConnectorController {
@@ -20,6 +23,54 @@ export class ConnectorController {
     this.kafkaService.subscribeToResponseOf(topicBeginInspection, this);
     this.kafkaService.subscribeToResponseOf(topicInferenceResult, this);
     this.kafkaService.subscribeToResponseOf(topicEndInspection, this);
+    this.kafkaService.subscribeToResponseOf(topicSensorStatus, this);
+    this.kafkaService.subscribeToResponseOf(topicCameraStatus, this);
+    this.kafkaService.subscribeToResponseOf(topicLightStatus, this);
+  }
+
+  @SubscribeTo(topicLightStatus)
+  async getLightStatus(
+    data: any,
+    key: any,
+    offset: number,
+    timestamp: number,
+  ) {
+    console.log(`[${offset}]${key} : ${data} : ${timestamp}`);
+    data = JSON.parse(data);
+    this.connectorService.updateLightStatus(
+      data.light,
+      data.status,
+    );
+  }
+
+  @SubscribeTo(topicCameraStatus)
+  async getCameraStatus(
+    data: any,
+    key: any,
+    offset: number,
+    timestamp: number,
+  ) {
+    console.log(`[${offset}]${key} : ${data} : ${timestamp}`);
+    data = JSON.parse(data);
+    this.connectorService.updateCameraStatus(
+      data.camera,
+      data.status,
+    );
+  }
+
+  @SubscribeTo(topicSensorStatus)
+  async getSensorStatus(
+    data: any,
+    key: any,
+    offset: number,
+    timestamp: number,
+  ) {
+    console.log(`[${offset}]${key} : ${data} : ${timestamp}`);
+    data = JSON.parse(data);
+    this.connectorService.updateSensorStatus(
+      data.sensor,
+      data.status,
+    );
   }
 
   @SubscribeTo(topicBeginInspection)
