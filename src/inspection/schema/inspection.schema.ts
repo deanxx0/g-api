@@ -31,7 +31,9 @@ export class Inspection {
           {
             x: { type: Number },
             y: { type: Number },
-            resultCode: { type: Number },
+            width: { type: Number },
+            height: { type: Number },
+            code: { type: Number },
           },
         ],
       },

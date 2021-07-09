@@ -17,7 +17,9 @@ export class CreateInspectionDto {
         {
           x: number;
           y: number;
-          resultCode: number;
+          width: number;
+          height: number;
+          code: number;
         },
       ];
     },
