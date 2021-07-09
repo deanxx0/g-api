@@ -1,5 +1,5 @@
 export class PostSensorDto {
   name: string;
-  group: string[];
+  groups: string[];
   status: string;
 }

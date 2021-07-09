@@ -1,6 +1,6 @@
 export class CreateCameraDto {
   name: string;
-  group: string[];
+  groups: string[];
   status: string;
   serial: string;
   workingFolderPath: string;

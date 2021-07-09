@@ -1,6 +1,6 @@
 export class CreateLightDto {
   name: string;
-  group: string[];
+  groups: string[];
   status: string;
   workingFolderPath: string;
   serverIp: string;

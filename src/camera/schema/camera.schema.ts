@@ -8,7 +8,7 @@ export class Camera {
   name: string;
 
   @Prop([String])
-  group: string[];
+  groups: string[];
 
   @Prop()
   status: string;

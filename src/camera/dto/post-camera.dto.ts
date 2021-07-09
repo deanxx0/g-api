@@ -1,6 +1,6 @@
 export class PostCameraDto {
   name: string;
-  group: string[];
+  groups: string[];
   status: string;
   serial: string;
   workingFolderPath: string; //로컬 저장 경로
