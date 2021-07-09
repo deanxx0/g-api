@@ -3,10 +3,18 @@ import { KafkaModule } from '@rob3000/nestjs-kafka';
 import { ConnectorController } from './connector.controller';
 import { ConnectorService } from './connector.service';
 import { ConfigModule } from '@nestjs/config';
+import { MongooseModule } from '@nestjs/mongoose';
+import {
+  Inspection,
+  InspectionSchema,
+} from 'src/inspection/schema/inspection.schema';
 
 @Module({
   imports: [
     ConfigModule.forRoot(),
+    MongooseModule.forFeature([
+      { name: Inspection.name, schema: InspectionSchema },
+    ]),
     KafkaModule.register([
       {
         name: 'KAFKA-CONNECTOR',
