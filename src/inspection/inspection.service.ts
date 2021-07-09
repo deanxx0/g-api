@@ -37,7 +37,7 @@ export class InspectionService {
   }
 
   async findLatest(): Promise<Inspection> {
-    return this.inspectionModel.findOne().sort( { _id: -1 } ).limit(1).exec();
+    return this.inspectionModel.findOne().sort({ _id: -1 }).limit(1).exec();
   }
 
   async create(createInspectionDto: CreateInspectionDto): Promise<Inspection> {
