@@ -44,7 +44,7 @@ export class Recipe {
         inferenceStretegy: {
           models: [
             {
-              seg: { type: Number },
+              seq: { type: Number },
               path: { type: String },
             },
           ],

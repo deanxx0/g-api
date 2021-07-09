@@ -36,7 +36,7 @@ export class RecipeDto {
       inferenceStretegy: {
         models: [
           {
-            seg: number;
+            seq: number;
             path: string;
           },
         ];
