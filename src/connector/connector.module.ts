@@ -8,12 +8,18 @@ import {
   Inspection,
   InspectionSchema,
 } from 'src/inspection/schema/inspection.schema';
+import { Sensor, SensorSchema } from 'src/sensor/schema/sensor.schema';
+import { Camera, CameraSchema } from 'src/camera/schema/camera.schema';
+import { Light, LightSchema } from 'src/light/schema/light.schema';
 
 @Module({
   imports: [
     ConfigModule.forRoot(),
     MongooseModule.forFeature([
       { name: Inspection.name, schema: InspectionSchema },
+      { name: Sensor.name, schema: SensorSchema },
+      { name: Camera.name, schema: CameraSchema },
+      { name: Light.name, schema: LightSchema },
     ]),
     KafkaModule.register([
       {
