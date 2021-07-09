@@ -27,7 +27,7 @@ export class ConnectorService {
     this.inspectionModel
       .updateOne(
         { _id: id },
-        { $push: { inferenceResults: createInferenceResult } },
+        { $push: { inferenceResults: new Object(createInferenceResult) } },
       )
       .exec();
   }

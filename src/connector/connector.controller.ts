@@ -51,7 +51,7 @@ export class ConnectorController {
     );
 
     this.connectorService.updateInspectionInferenceResult(
-      data.id,
+      data.inspection,
       this.toCreateInferenceResultDto(data),
     );
   }
