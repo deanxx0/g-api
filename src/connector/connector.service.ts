@@ -24,9 +24,7 @@ export class ConnectorService {
   ) {}
 
   async updateLightStatus(id: string, status: string) {
-    this.lightModel
-      .updateOne({ _id: id }, { $set: { status: status } })
-      .exec();
+    this.lightModel.updateOne({ _id: id }, { $set: { status: status } }).exec();
   }
 
   async updateCameraStatus(id: string, status: string) {

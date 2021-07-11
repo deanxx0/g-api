@@ -32,7 +32,9 @@ export class CameraController {
   }
 
   @Get('groups/:groups')
-  async findByGroups(@Param('groups') groups: string): Promise<CameraDocument[]> {
+  async findByGroups(
+    @Param('groups') groups: string,
+  ): Promise<CameraDocument[]> {
     const arrGroups = groups.split(',');
     return this.cameraService.findByGroups(arrGroups);
   }
@@ -40,7 +42,7 @@ export class CameraController {
   @Get(':id')
   async find(@Param('id') id: string): Promise<Camera> {
     return this.cameraService.find(id);
-  }  
+  }
 
   @Put(':id')
   async update(

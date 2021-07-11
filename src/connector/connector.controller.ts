@@ -29,18 +29,10 @@ export class ConnectorController {
   }
 
   @SubscribeTo(topicLightStatus)
-  async getLightStatus(
-    data: any,
-    key: any,
-    offset: number,
-    timestamp: number,
-  ) {
+  async getLightStatus(data: any, key: any, offset: number, timestamp: number) {
     console.log(`[${offset}]${key} : ${data} : ${timestamp}`);
     data = JSON.parse(data);
-    this.connectorService.updateLightStatus(
-      data.light,
-      data.status,
-    );
+    this.connectorService.updateLightStatus(data.light, data.status);
   }
 
   @SubscribeTo(topicCameraStatus)
@@ -52,10 +44,7 @@ export class ConnectorController {
   ) {
     console.log(`[${offset}]${key} : ${data} : ${timestamp}`);
     data = JSON.parse(data);
-    this.connectorService.updateCameraStatus(
-      data.camera,
-      data.status,
-    );
+    this.connectorService.updateCameraStatus(data.camera, data.status);
   }
 
   @SubscribeTo(topicSensorStatus)
@@ -67,10 +56,7 @@ export class ConnectorController {
   ) {
     console.log(`[${offset}]${key} : ${data} : ${timestamp}`);
     data = JSON.parse(data);
-    this.connectorService.updateSensorStatus(
-      data.sensor,
-      data.status,
-    );
+    this.connectorService.updateSensorStatus(data.sensor, data.status);
   }
 
   @SubscribeTo(topicBeginInspection)
