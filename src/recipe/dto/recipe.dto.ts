@@ -40,7 +40,12 @@ export class RecipeDto {
             path: string;
           },
         ];
-        ruleBase: string[];
+        ruleBases: [
+          {
+            seq: number;
+            path: string;
+          },
+        ];
       };
     },
   ];

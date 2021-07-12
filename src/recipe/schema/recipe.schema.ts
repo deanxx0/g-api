@@ -48,7 +48,12 @@ export class Recipe {
               path: { type: String },
             },
           ],
-          ruleBase: { type: Array<String>() },
+          ruleBases: [
+            {
+              seq: { type: Number },
+              path: { type: String },
+            }
+          ],
         },
       },
     ]),
