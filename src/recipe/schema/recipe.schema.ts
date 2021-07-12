@@ -52,7 +52,7 @@ export class Recipe {
             {
               seq: { type: Number },
               path: { type: String },
-            }
+            },
           ],
         },
       },
