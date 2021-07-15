@@ -17,7 +17,19 @@ export class InspectionService {
   ) {}
 
   async findAll(): Promise<Inspection[]> {
-    return this.inspectionModel.find({}, { inspectionNo: 1, vehicle: 1, recipe: 1, status: 1 }).exec();
+    return this.inspectionModel
+      .find(
+        {},
+        {
+          inspectionNo: 1,
+          vehicle: 1,
+          recipe: 1,
+          status: 1,
+          createdAt: 1,
+          updatedAt: 1,
+        },
+      )
+      .exec();
   }
 
   async find(id: string): Promise<Inspection> {
@@ -26,9 +38,19 @@ export class InspectionService {
 
   async findAfterId(id: string, limit: string): Promise<Inspection[]> {
     return this.inspectionModel
-      .find({
-        _id: { $gt: id },
-      }, { inspectionNo: 1, vehicle: 1, recipe: 1, status: 1 })
+      .find(
+        {
+          _id: { $gt: id },
+        },
+        {
+          inspectionNo: 1,
+          vehicle: 1,
+          recipe: 1,
+          status: 1,
+          createdAt: 1,
+          updatedAt: 1,
+        },
+      )
       .limit(parseInt(limit))
       .exec();
   }
@@ -37,7 +59,17 @@ export class InspectionService {
     const fromDate = new Date(new Date(from).getTime());
     const toDate = new Date(new Date(to).getTime());
     return this.inspectionModel
-      .find({ createdAt: { $gt: fromDate, $lt: toDate } }, { inspectionNo: 1, vehicle: 1, recipe: 1, status: 1 })
+      .find(
+        { createdAt: { $gt: fromDate, $lt: toDate } },
+        {
+          inspectionNo: 1,
+          vehicle: 1,
+          recipe: 1,
+          status: 1,
+          createdAt: 1,
+          updatedAt: 1,
+        },
+      )
       .exec();
   }
 
