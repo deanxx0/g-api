@@ -1,5 +1,5 @@
 import { Module } from '@nestjs/common';
-import { KafkaModule } from '@rob3000/nestjs-kafka';
+import { KafkaModule } from '@dean/nestjs-kafka';
 import { ConnectorController } from './connector.controller';
 import { ConnectorService } from './connector.service';
 import { ConfigModule } from '@nestjs/config';

@@ -1,7 +1,7 @@
 import { Module } from '@nestjs/common';
 import { ConfigModule } from '@nestjs/config';
 import { MongooseModule } from '@nestjs/mongoose';
-import { KafkaModule } from '@rob3000/nestjs-kafka';
+import { KafkaModule } from '@dean/nestjs-kafka';
 import { InspectionController } from './inspection.controller';
 import { InspectionService } from './inspection.service';
 import { Inspection, InspectionSchema } from './schema/inspection.schema';

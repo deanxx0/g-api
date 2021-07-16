@@ -1,6 +1,6 @@
 import { Inject, Injectable } from '@nestjs/common';
 import { InjectModel } from '@nestjs/mongoose';
-import { KafkaService } from '@rob3000/nestjs-kafka';
+import { KafkaService } from '@dean/nestjs-kafka';
 import { Model } from 'mongoose';
 import { InspectionStatus } from 'src/connector/enum/inspection-status';
 import { CreateInspectionDto } from './dto/create-inspection.dto';
@@ -23,7 +23,7 @@ export class InspectionService {
       )
       .exec();
   }
-  
+
   async findAllEI(): Promise<Inspection[]> {
     return this.inspectionModel
       .find(

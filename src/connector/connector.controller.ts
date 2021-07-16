@@ -1,5 +1,5 @@
 import { Controller, Inject } from '@nestjs/common';
-import { KafkaService, SubscribeTo } from '@rob3000/nestjs-kafka';
+import { KafkaService, SubscribeTo } from '@dean/nestjs-kafka';
 import { ConnectorService } from './connector.service';
 import { CreateInferenceResultDto } from './dto/create-inference-result.dto';
 import { PostInferenceResultDto } from './dto/post-inference-result.dto';
