@@ -6,7 +6,7 @@ COPY .npmrc .
 COPY package.json .
 COPY package-lock.json .
 
-RUN npm ci --only=prod
+RUN npm ci
 RUN rm -f .npmrc
 
 COPY . .
