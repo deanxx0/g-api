@@ -32,6 +32,21 @@ export class InspectionController {
     return this.inspectionService.findPeriod(query.from, query.to);
   }
 
+  @Get('exceptInferenceResult')
+  async findAllEI(): Promise<Inspection[]> {
+    return this.inspectionService.findAllEI();
+  }
+
+  @Get('after/exceptInferenceResult')
+  async findAfterIdEI(@Query() query: any): Promise<Inspection[]> {
+    return this.inspectionService.findAfterIdEI(query.id, query.limit);
+  }
+
+  @Get('period/exceptInferenceResult')
+  async findPeriodEI(@Query() query: any): Promise<Inspection[]> {
+    return this.inspectionService.findPeriodEI(query.from, query.to);
+  }
+
   @Get('latest')
   async findLatest(): Promise<Inspection> {
     return this.inspectionService.findLatest();

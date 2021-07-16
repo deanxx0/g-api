@@ -19,6 +19,14 @@ export class InspectionService {
   async findAll(): Promise<Inspection[]> {
     return this.inspectionModel
       .find(
+        {}
+      )
+      .exec();
+  }
+  
+  async findAllEI(): Promise<Inspection[]> {
+    return this.inspectionModel
+      .find(
         {},
         {
           inspectionNo: 1,
@@ -41,6 +49,17 @@ export class InspectionService {
       .find(
         {
           _id: { $gt: id },
+        }
+      )
+      .limit(parseInt(limit))
+      .exec();
+  }
+
+  async findAfterIdEI(id: string, limit: string): Promise<Inspection[]> {
+    return this.inspectionModel
+      .find(
+        {
+          _id: { $gt: id },
         },
         {
           inspectionNo: 1,
@@ -56,6 +75,16 @@ export class InspectionService {
   }
 
   async findPeriod(from: string, to: string): Promise<Inspection[]> {
+    const fromDate = new Date(new Date(from).getTime());
+    const toDate = new Date(new Date(to).getTime());
+    return this.inspectionModel
+      .find(
+        { createdAt: { $gt: fromDate, $lt: toDate } }
+      )
+      .exec();
+  }
+
+  async findPeriodEI(from: string, to: string): Promise<Inspection[]> {
     const fromDate = new Date(new Date(from).getTime());
     const toDate = new Date(new Date(to).getTime());
     return this.inspectionModel
