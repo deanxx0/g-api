@@ -17,11 +17,7 @@ export class InspectionService {
   ) {}
 
   async findAll(): Promise<Inspection[]> {
-    return this.inspectionModel
-      .find(
-        {}
-      )
-      .exec();
+    return this.inspectionModel.find({}).exec();
   }
 
   async findAllEI(): Promise<Inspection[]> {
@@ -46,11 +42,9 @@ export class InspectionService {
 
   async findAfterId(id: string, limit: string): Promise<Inspection[]> {
     return this.inspectionModel
-      .find(
-        {
-          _id: { $gt: id },
-        }
-      )
+      .find({
+        _id: { $gt: id },
+      })
       .limit(parseInt(limit))
       .exec();
   }
@@ -78,9 +72,7 @@ export class InspectionService {
     const fromDate = new Date(new Date(from).getTime());
     const toDate = new Date(new Date(to).getTime());
     return this.inspectionModel
-      .find(
-        { createdAt: { $gt: fromDate, $lt: toDate } }
-      )
+      .find({ createdAt: { $gt: fromDate, $lt: toDate } })
       .exec();
   }
 
