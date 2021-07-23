@@ -22,6 +22,11 @@ export class InspectionController {
     return this.inspectionService.findAll();
   }
 
+  @Get('limit')
+  async findAllLimit(@Query() query: any): Promise<Inspection[]> {
+    return this.inspectionService.findAllLimit(query.limit);
+  }
+
   @Get('after')
   async findAfterId(@Query() query: any): Promise<Inspection[]> {
     return this.inspectionService.findAfterId(query.id, query.limit);

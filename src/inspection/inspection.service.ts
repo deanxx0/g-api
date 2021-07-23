@@ -20,6 +20,14 @@ export class InspectionService {
     return this.inspectionModel.find({}).exec();
   }
 
+  async findAllLimit(limit: string): Promise<Inspection[]> {
+    return this.inspectionModel
+      .find({})
+      .sort({ _id: -1 })
+      .limit(parseInt(limit))
+      .exec();
+  }
+
   async findAllEI(): Promise<Inspection[]> {
     return this.inspectionModel
       .find(
