@@ -5,6 +5,8 @@ import { Model } from 'mongoose';
 import { InspectionStatus } from 'src/connector/enum/inspection-status';
 import { CreateInspectionDto } from './dto/create-inspection.dto';
 import { Inspection, InspectionDocument } from './schema/inspection.schema';
+import { InspectionLog, InspectionLogDocument } from './schema/inspection-log.schema';
+import { CreateInspectionLogDto } from './dto/create-inspection-log.dto';
 
 const topicInspectionCreated = 'glovis.fct.inspectionCreated';
 
@@ -13,6 +15,8 @@ export class InspectionService {
   constructor(
     @InjectModel(Inspection.name)
     private inspectionModel: Model<InspectionDocument>,
+    @InjectModel(InspectionLog.name)
+    private inspectionLogModel: Model<InspectionLogDocument>,
     @Inject('KAFKA-CONNECTOR') private kafkaService: KafkaService,
   ) {}
 
@@ -110,11 +114,29 @@ export class InspectionService {
     const createdInspection = new this.inspectionModel(createInspectionDto);
 
     createdInspection.status = InspectionStatus.PreInspection;
-    const createdDoc = createdInspection.save();
 
+    this.createInspectionLog(createdInspection);
+
+    const createdDoc = createdInspection.save();
     this.sendCreatedInspection(await createdDoc);
 
     return createdDoc;
+  }
+
+  async createInspectionLog(createdInspection: InspectionDocument): Promise<InspectionLogDocument> {
+    let createdInspectionLogDto: CreateInspectionLogDto;
+    let createdInspectionLog = new this.inspectionLogModel(
+      createdInspectionLogDto,
+    );
+
+    createdInspectionLog.inspectionNo = createdInspection.inspectionNo;
+    createdInspectionLog.vehicleModel =
+      createdInspection.vehicle.properties.model;
+    createdInspectionLog.vehicleColor =
+      createdInspection.vehicle.properties.color;
+    createdInspectionLog.inspectionStatus = InspectionStatus.PreInspection;
+
+    return createdInspectionLog.save();
   }
 
   async update(

@@ -5,12 +5,14 @@ import { KafkaModule } from '@dean/nestjs-kafka';
 import { InspectionController } from './inspection.controller';
 import { InspectionService } from './inspection.service';
 import { Inspection, InspectionSchema } from './schema/inspection.schema';
+import { InspectionLog, InspectionLogSchema } from './schema/inspection-log.schema';
 
 @Module({
   imports: [
     ConfigModule.forRoot(),
     MongooseModule.forFeature([
       { name: Inspection.name, schema: InspectionSchema },
+      { name: InspectionLog.name, schema: InspectionLogSchema },
     ]),
     KafkaModule.register([
       {
