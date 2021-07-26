@@ -89,8 +89,8 @@ export class InspectionService {
   }
 
   async findPeriodEI(from: string, to: string): Promise<Inspection[]> {
-    const fromDate = new Date(new Date(from).getTime());
-    const toDate = new Date(new Date(to).getTime());
+    const fromDate = new Date(new Date(`${from}T00:00:00`).getTime());
+    const toDate = new Date(new Date(`${to}T11:59:00`).getTime());
     return this.inspectionModel
       .find(
         { createdAt: { $gt: fromDate, $lt: toDate } },
