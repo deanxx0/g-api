@@ -6,6 +6,7 @@ import { InspectionController } from './inspection.controller';
 import { InspectionService } from './inspection.service';
 import { Inspection, InspectionSchema } from './schema/inspection.schema';
 import { InspectionLog, InspectionLogSchema } from './schema/inspection-log.schema';
+import { ResultInfo, ResultInfoSchema } from './schema/result-info.schema';
 
 @Module({
   imports: [
@@ -13,6 +14,7 @@ import { InspectionLog, InspectionLogSchema } from './schema/inspection-log.sche
     MongooseModule.forFeature([
       { name: Inspection.name, schema: InspectionSchema },
       { name: InspectionLog.name, schema: InspectionLogSchema },
+      { name: ResultInfo.name, schema: ResultInfoSchema },
     ]),
     KafkaModule.register([
       {

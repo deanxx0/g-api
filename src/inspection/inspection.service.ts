@@ -7,6 +7,9 @@ import { CreateInspectionDto } from './dto/create-inspection.dto';
 import { Inspection, InspectionDocument } from './schema/inspection.schema';
 import { InspectionLog, InspectionLogDocument } from './schema/inspection-log.schema';
 import { CreateInspectionLogDto } from './dto/create-inspection-log.dto';
+import { ResultInfo, ResultInfoDocument } from './schema/result-info.schema';
+import { CreateResultInfoDto } from './dto/create-result-info.dto';
+import { FinalResult } from './enum/final-result';
 
 const topicInspectionCreated = 'glovis.fct.inspectionCreated';
 
@@ -17,6 +20,8 @@ export class InspectionService {
     private inspectionModel: Model<InspectionDocument>,
     @InjectModel(InspectionLog.name)
     private inspectionLogModel: Model<InspectionLogDocument>,
+    @InjectModel(ResultInfo.name)
+    private resultInfoModel: Model<ResultInfoDocument>,
     @Inject('KAFKA-CONNECTOR') private kafkaService: KafkaService,
   ) {}
 
@@ -120,7 +125,28 @@ export class InspectionService {
     const createdDoc = createdInspection.save();
     this.sendCreatedInspection(await createdDoc);
 
+    this.createResultInfo(createdDoc);
+
     return createdDoc;
+  }
+
+  async createResultInfo(createdDoc): Promise<ResultInfoDocument> {
+    let createdResultInfoDto: CreateResultInfoDto;
+    let createdResultInfo = new this.resultInfoModel(createdResultInfoDto);
+
+    createdResultInfo.inspectionNo = createdDoc.inspectionNo;
+    createdResultInfo.startTime = createdDoc.createdAt;
+    createdResultInfo.endTime = createdDoc.updatedAt;
+    createdResultInfo.elapseTime = new Date(createdDoc.createdAt - createdDoc.updatedAt);
+    createdResultInfo.vehicleModel = createdDoc.vehicle.properties.model;
+    createdResultInfo.vehicleColor = createdDoc.vehicle.properties.color;
+    createdResultInfo.vinCode = createdDoc.vehicle.vincode;
+    createdResultInfo.totalDefects = 0;
+    createdResultInfo.totalSpecialDefects = 0;
+    createdResultInfo.totalGapDefects = 0;
+    createdResultInfo.finalResult = FinalResult.READY;
+    createdResultInfo.inspectionStatus = createdDoc.status;
+    return createdResultInfo.save();
   }
 
   async createInspectionLog(createdInspection: InspectionDocument): Promise<InspectionLogDocument> {
