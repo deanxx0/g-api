@@ -148,7 +148,7 @@ export class InspectionService {
     createdResultInfo.elapseTime = 0;
     createdResultInfo.vehicleModel = createdDoc.vehicle.properties.model;
     createdResultInfo.vehicleColor = createdDoc.vehicle.properties.color;
-    createdResultInfo.vinCode = createdDoc.vehicle.vincode;
+    createdResultInfo.vinCode = createdDoc.vehicle.vinCode;
     createdResultInfo.totalDefects = 0;
     createdResultInfo.totalSpecialDefects = 0;
     createdResultInfo.totalGapDefects = 0;
