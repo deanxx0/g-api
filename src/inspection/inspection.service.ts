@@ -145,7 +145,7 @@ export class InspectionService {
     createdResultInfo.inspectionNo = createdDoc.inspectionNo;
     createdResultInfo.startTime = createdDoc.createdAt;
     createdResultInfo.endTime = createdDoc.updatedAt;
-    createdResultInfo.elapseTime = 0;
+    createdResultInfo.elapseTime = '00:00:00';
     createdResultInfo.vehicleModel = createdDoc.vehicle.properties.model;
     createdResultInfo.vehicleColor = createdDoc.vehicle.properties.color;
     createdResultInfo.vinCode = createdDoc.vehicle.vinCode;
@@ -203,11 +203,12 @@ export class InspectionService {
       .reduce((tot: number, el: number) => tot + el, 0);
 
     updatedResultInfo.endTime = updatedInspection.updatedAt;
-    updatedResultInfo.elapseTime = Math.floor(
+    const elapseSec = Math.floor(
       (updatedInspection.updatedAt.getTime() -
         updatedInspection.createdAt.getTime()) /
         1000,
     );
+    updatedResultInfo.elapseTime = await this.toTime(elapseSec);
     updatedResultInfo.totalDefects = await totalDefects;
     updatedResultInfo.totalSpecialDefects = 0;
     updatedResultInfo.totalGapDefects = 0;
@@ -244,5 +245,9 @@ export class InspectionService {
         },
       ],
     });
+  }
+
+  async toTime(sec: number): Promise<string> {
+    return new Date(sec * 1000).toISOString().substr(11, 8)
   }
 }
