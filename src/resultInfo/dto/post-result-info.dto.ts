@@ -1,10 +1,10 @@
-import { FinalResult } from '../enum/final-result';
+import { FinalResult } from "../enum/final-result";
 
-export class CreateResultInfoDto {
+export class PostResultInfoDto {
   inspectionNo: number;
   startTime: Date;
   endTime: Date;
-  elapseTime: Date;
+  elapseTime: number;
   vehicleModel: String;
   vehicleColor: String;
   vinCode: String;
