@@ -1,4 +1,4 @@
-import { FinalResult } from "../enum/final-result";
+import { FinalResult } from '../enum/final-result';
 
 export class PostResultInfoDto {
   inspectionNo: number;

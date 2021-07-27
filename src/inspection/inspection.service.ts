@@ -10,7 +10,10 @@ import {
   InspectionLogDocument,
 } from './schema/inspection-log.schema';
 import { CreateInspectionLogDto } from './dto/create-inspection-log.dto';
-import { ResultInfo, ResultInfoDocument } from '../resultInfo/schema/result-info.schema';
+import {
+  ResultInfo,
+  ResultInfoDocument,
+} from '../resultInfo/schema/result-info.schema';
 import { CreateResultInfoDto } from '../resultInfo/dto/create-result-info.dto';
 import { FinalResult } from '../resultInfo/enum/final-result';
 import { PostResultInfoDto } from 'src/resultInfo/dto/post-result-info.dto';
@@ -189,9 +192,7 @@ export class InspectionService {
     return await updatedInspection;
   }
 
-  async updateResultInfo(
-    updatedInspection,
-  ): Promise<ResultInfoDocument> {
+  async updateResultInfo(updatedInspection): Promise<ResultInfoDocument> {
     let updatedResultInfoDto: PostResultInfoDto;
     let updatedResultInfo = new this.resultInfoModel(updatedResultInfoDto);
 
@@ -200,13 +201,18 @@ export class InspectionService {
       .reduce((tot: number, el: number) => tot + el, 0);
 
     updatedResultInfo.endTime = updatedInspection.updatedAt;
-    updatedResultInfo.elapseTime = Math.floor((updatedInspection.updatedAt.getTime() - updatedInspection.createdAt.getTime())/1000);
+    updatedResultInfo.elapseTime = Math.floor(
+      (updatedInspection.updatedAt.getTime() -
+        updatedInspection.createdAt.getTime()) /
+        1000,
+    );
     updatedResultInfo.totalDefects = await totalDefects;
     updatedResultInfo.totalSpecialDefects = 0;
     updatedResultInfo.totalGapDefects = 0;
-    updatedResultInfo.finalResult = await totalDefects == 0 ? FinalResult.OK : FinalResult.NG;
+    updatedResultInfo.finalResult =
+      (await totalDefects) == 0 ? FinalResult.OK : FinalResult.NG;
     updatedResultInfo.inspectionStatus = updatedInspection.status;
-    
+
     return await this.resultInfoModel
       .findByIdAndUpdate(updatedInspection._id, {
         $set: {
@@ -216,7 +222,7 @@ export class InspectionService {
           totalSpecialDefects: updatedResultInfo.totalSpecialDefects,
           totalGapDefects: updatedResultInfo.totalGapDefects,
           finalResult: updatedResultInfo.finalResult,
-          inspectionStatus: updatedResultInfo.inspectionStatus
+          inspectionStatus: updatedResultInfo.inspectionStatus,
         },
       })
       .exec();

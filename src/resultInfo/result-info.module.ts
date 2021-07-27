@@ -6,7 +6,9 @@ import { ResultInfo, ResultInfoSchema } from './schema/result-info.schema';
 
 @Module({
   imports: [
-    MongooseModule.forFeature([{ name: ResultInfo.name, schema: ResultInfoSchema }]),
+    MongooseModule.forFeature([
+      { name: ResultInfo.name, schema: ResultInfoSchema },
+    ]),
   ],
   controllers: [ResultInfoController],
   providers: [ResultInfoService],

@@ -6,7 +6,8 @@ import { ResultInfo, ResultInfoDocument } from './schema/result-info.schema';
 @Injectable()
 export class ResultInfoService {
   constructor(
-    @InjectModel(ResultInfo.name) private resultInfoModel: Model<ResultInfoDocument>,
+    @InjectModel(ResultInfo.name)
+    private resultInfoModel: Model<ResultInfoDocument>,
   ) {}
 
   async findAll(): Promise<ResultInfoDocument[]> {
