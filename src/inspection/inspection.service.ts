@@ -179,15 +179,17 @@ export class InspectionService {
     id: string,
     createInspectionDto: CreateInspectionDto,
   ): Promise<Inspection> {
-    const updatedInspection: Promise<InspectionDocument> = this.inspectionModel
+    const inspectionDoc: Promise<InspectionDocument> = this.inspectionModel
       .findByIdAndUpdate(id, {
         $set: {
           ...createInspectionDto,
         },
       })
       .exec();
-
-    await this.updateResultInfo(await updatedInspection);
+    
+    const updatedInspection = this.inspectionModel.findById((await inspectionDoc)._id).exec();
+    
+    this.updateResultInfo(await updatedInspection);
 
     return await updatedInspection;
   }
