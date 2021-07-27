@@ -17,13 +17,13 @@ export class ResultInfo {
 
   @Prop()
   elapseTime: Date;
-  
+
   @Prop()
   vehicleModel: String;
-  
+
   @Prop()
   vehicleColor: String;
-  
+
   @Prop()
   vinCode: String;
 

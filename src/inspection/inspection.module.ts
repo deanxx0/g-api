@@ -5,7 +5,10 @@ import { KafkaModule } from '@dean/nestjs-kafka';
 import { InspectionController } from './inspection.controller';
 import { InspectionService } from './inspection.service';
 import { Inspection, InspectionSchema } from './schema/inspection.schema';
-import { InspectionLog, InspectionLogSchema } from './schema/inspection-log.schema';
+import {
+  InspectionLog,
+  InspectionLogSchema,
+} from './schema/inspection-log.schema';
 import { ResultInfo, ResultInfoSchema } from './schema/result-info.schema';
 
 @Module({
