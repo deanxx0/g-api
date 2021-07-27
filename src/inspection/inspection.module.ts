@@ -9,7 +9,7 @@ import {
   InspectionLog,
   InspectionLogSchema,
 } from './schema/inspection-log.schema';
-import { ResultInfo, ResultInfoSchema } from './schema/result-info.schema';
+import { ResultInfo, ResultInfoSchema } from '../resultInfo/schema/result-info.schema';
 
 @Module({
   imports: [

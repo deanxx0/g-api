@@ -10,9 +10,10 @@ import {
   InspectionLogDocument,
 } from './schema/inspection-log.schema';
 import { CreateInspectionLogDto } from './dto/create-inspection-log.dto';
-import { ResultInfo, ResultInfoDocument } from './schema/result-info.schema';
-import { CreateResultInfoDto } from './dto/create-result-info.dto';
-import { FinalResult } from './enum/final-result';
+import { ResultInfo, ResultInfoDocument } from '../resultInfo/schema/result-info.schema';
+import { CreateResultInfoDto } from '../resultInfo/dto/create-result-info.dto';
+import { FinalResult } from '../resultInfo/enum/final-result';
+import { PostResultInfoDto } from 'src/resultInfo/dto/post-result-info.dto';
 
 const topicInspectionCreated = 'glovis.fct.inspectionCreated';
 
@@ -128,7 +129,7 @@ export class InspectionService {
     const createdDoc = createdInspection.save();
     this.sendCreatedInspection(await createdDoc);
 
-    this.createResultInfo(createdDoc);
+    this.createResultInfo(await createdDoc);
 
     return createdDoc;
   }
@@ -137,12 +138,11 @@ export class InspectionService {
     let createdResultInfoDto: CreateResultInfoDto;
     let createdResultInfo = new this.resultInfoModel(createdResultInfoDto);
 
+    createdResultInfo._id = createdDoc._id;
     createdResultInfo.inspectionNo = createdDoc.inspectionNo;
     createdResultInfo.startTime = createdDoc.createdAt;
     createdResultInfo.endTime = createdDoc.updatedAt;
-    createdResultInfo.elapseTime = new Date(
-      createdDoc.createdAt - createdDoc.updatedAt,
-    );
+    createdResultInfo.elapseTime = 0;
     createdResultInfo.vehicleModel = createdDoc.vehicle.properties.model;
     createdResultInfo.vehicleColor = createdDoc.vehicle.properties.color;
     createdResultInfo.vinCode = createdDoc.vehicle.vincode;
@@ -184,33 +184,42 @@ export class InspectionService {
       })
       .exec();
 
-    this.updateResultInfo(id, updatedInspection);
+    await this.updateResultInfo(await updatedInspection);
 
-    return updatedInspection;
+    return await updatedInspection;
   }
 
   async updateResultInfo(
-    id: string,
     updatedInspection,
   ): Promise<ResultInfoDocument> {
-    let createdResultInfoDto: CreateResultInfoDto;
-    let createdResultInfo = new this.resultInfoModel(createdResultInfoDto);
+    let updatedResultInfoDto: PostResultInfoDto;
+    let updatedResultInfo = new this.resultInfoModel(updatedResultInfoDto);
 
     const totalDefects = updatedInspection.inferenceResults
       .map((x) => x.defects.length)
       .reduce((tot: number, el: number) => tot + el, 0);
 
-    createdResultInfo.startTime = updatedInspection.createdAt;
-    createdResultInfo.endTime = updatedInspection.updatedAt;
-    createdResultInfo.elapseTime = new Date(
-      updatedInspection.createdAt - updatedInspection.updatedAt,
-    );
-    createdResultInfo.totalDefects = 0;
-    createdResultInfo.totalSpecialDefects = 0;
-    createdResultInfo.totalGapDefects = 0;
-    createdResultInfo.finalResult = FinalResult.READY;
-    createdResultInfo.inspectionStatus = updatedInspection.status;
-    return createdResultInfo.save();
+    updatedResultInfo.endTime = updatedInspection.updatedAt;
+    updatedResultInfo.elapseTime = Math.floor((updatedInspection.updatedAt.getTime() - updatedInspection.createdAt.getTime())/1000);
+    updatedResultInfo.totalDefects = await totalDefects;
+    updatedResultInfo.totalSpecialDefects = 0;
+    updatedResultInfo.totalGapDefects = 0;
+    updatedResultInfo.finalResult = await totalDefects == 0 ? FinalResult.OK : FinalResult.NG;
+    updatedResultInfo.inspectionStatus = updatedInspection.status;
+    
+    return await this.resultInfoModel
+      .findByIdAndUpdate(updatedInspection._id, {
+        $set: {
+          endTime: updatedResultInfo.endTime,
+          elapseTime: updatedResultInfo.elapseTime,
+          totalDefects: updatedResultInfo.totalDefects,
+          totalSpecialDefects: updatedResultInfo.totalSpecialDefects,
+          totalGapDefects: updatedResultInfo.totalGapDefects,
+          finalResult: updatedResultInfo.finalResult,
+          inspectionStatus: updatedResultInfo.inspectionStatus
+        },
+      })
+      .exec();
   }
 
   async delete(id: string) {
