@@ -16,7 +16,7 @@ export class ResultInfo {
   endTime: Date;
 
   @Prop()
-  elapseTime: number;
+  elapseTime: string;
 
   @Prop()
   vehicleModel: String;

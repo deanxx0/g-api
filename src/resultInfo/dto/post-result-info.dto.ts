@@ -4,7 +4,7 @@ export class PostResultInfoDto {
   inspectionNo: number;
   startTime: Date;
   endTime: Date;
-  elapseTime: number;
+  elapseTime: string;
   vehicleModel: String;
   vehicleColor: String;
   vinCode: String;
