@@ -11,6 +11,7 @@ import {
 import { Sensor, SensorSchema } from 'src/sensor/schema/sensor.schema';
 import { Camera, CameraSchema } from 'src/camera/schema/camera.schema';
 import { Light, LightSchema } from 'src/light/schema/light.schema';
+import { ResultInfo, ResultInfoSchema } from 'src/resultInfo/schema/result-info.schema';
 
 @Module({
   imports: [
@@ -20,6 +21,7 @@ import { Light, LightSchema } from 'src/light/schema/light.schema';
       { name: Sensor.name, schema: SensorSchema },
       { name: Camera.name, schema: CameraSchema },
       { name: Light.name, schema: LightSchema },
+      { name: ResultInfo.name, schema: ResultInfoSchema },
     ]),
     KafkaModule.register([
       {
