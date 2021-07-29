@@ -48,59 +48,61 @@ export class ConnectorService {
     this.inspectionModel
       .updateOne({ _id: id }, { $set: { status: status } })
       .exec();
+
+    this.resultInfoModel.findByIdAndUpdate( id, { $set: { inspectionStatus: status } }).exec();
   }
 
   async updateInspectionInferenceResult(
     id: string,
     createInferenceResult: CreateInferenceResultDto,
   ) {
-    this.inspectionModel
+    await this.inspectionModel
       .updateOne(
         { _id: id },
         { $push: { inferenceResults: new Object(createInferenceResult) } },
       )
       .exec();
 
-      const updatedInspection = this.inspectionModel.findById(id).exec();
-      this.updateResultInfo(await updatedInspection);
+      // const updatedInspection = this.inspectionModel.findById(id).exec();
+      // await this.updateResultInfo(await updatedInspection);
   }
 
-  async updateResultInfo(updatedInspection): Promise<ResultInfoDocument> {
-    let updatedResultInfoDto: PostResultInfoDto;
-    let updatedResultInfo = new this.resultInfoModel(updatedResultInfoDto);
+  // async updateResultInfo(updatedInspection): Promise<ResultInfoDocument> {
+  //   let updatedResultInfoDto: PostResultInfoDto;
+  //   let updatedResultInfo = new this.resultInfoModel(updatedResultInfoDto);
 
-    const totalDefects = updatedInspection.inferenceResults
-      .map((x) => x.defects.length)
-      .reduce((tot: number, el: number) => tot + el, 0);
+  //   const totalDefects = updatedInspection.inferenceResults
+  //     .map((x) => x.defects.length)
+  //     .reduce((tot: number, el: number) => tot + el, 0);
 
-    updatedResultInfo.endTime = updatedInspection.updatedAt;
-    const elapseSec = Math.floor(
-      (updatedInspection.updatedAt.getTime() -
-        updatedInspection.createdAt.getTime()) /
-        1000,
-    );
-    updatedResultInfo.elapseTime = await this.toTime(elapseSec);
-    updatedResultInfo.totalDefects = await totalDefects;
-    updatedResultInfo.totalSpecialDefects = 0;
-    updatedResultInfo.totalGapDefects = 0;
-    updatedResultInfo.finalResult =
-      (await totalDefects) == 0 ? FinalResult.OK : FinalResult.NG;
-    updatedResultInfo.inspectionStatus = updatedInspection.status;
+  //   updatedResultInfo.endTime = updatedInspection.updatedAt;
+  //   const elapseSec = Math.floor(
+  //     (updatedInspection.updatedAt.getTime() -
+  //       updatedInspection.createdAt.getTime()) /
+  //       1000,
+  //   );
+  //   updatedResultInfo.elapseTime = await this.toTime(elapseSec);
+  //   updatedResultInfo.totalDefects = await totalDefects;
+  //   updatedResultInfo.totalSpecialDefects = 0;
+  //   updatedResultInfo.totalGapDefects = 0;
+  //   updatedResultInfo.finalResult =
+  //     (await totalDefects) == 0 ? FinalResult.OK : FinalResult.NG;
+  //   updatedResultInfo.inspectionStatus = updatedInspection.status;
 
-    return await this.resultInfoModel
-      .findByIdAndUpdate(updatedInspection._id, {
-        $set: {
-          endTime: updatedResultInfo.endTime,
-          elapseTime: updatedResultInfo.elapseTime,
-          totalDefects: updatedResultInfo.totalDefects,
-          totalSpecialDefects: updatedResultInfo.totalSpecialDefects,
-          totalGapDefects: updatedResultInfo.totalGapDefects,
-          finalResult: updatedResultInfo.finalResult,
-          inspectionStatus: updatedResultInfo.inspectionStatus,
-        },
-      })
-      .exec();
-  }
+  //   return await this.resultInfoModel
+  //     .findByIdAndUpdate(updatedInspection._id, {
+  //       $set: {
+  //         endTime: updatedResultInfo.endTime,
+  //         elapseTime: updatedResultInfo.elapseTime,
+  //         totalDefects: updatedResultInfo.totalDefects,
+  //         totalSpecialDefects: updatedResultInfo.totalSpecialDefects,
+  //         totalGapDefects: updatedResultInfo.totalGapDefects,
+  //         finalResult: updatedResultInfo.finalResult,
+  //         inspectionStatus: updatedResultInfo.inspectionStatus,
+  //       },
+  //     })
+  //     .exec();
+  // }
 
   async toTime(sec: number): Promise<string> {
     return new Date(sec * 1000).toISOString().substr(11, 8)
