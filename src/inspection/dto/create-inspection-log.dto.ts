@@ -3,5 +3,5 @@ export class CreateInspectionLogDto {
   vinCode: String;
   vehicleModel: String;
   vehicleColor: String;
-  inspectionStatus: String;
+  status: String;
 }

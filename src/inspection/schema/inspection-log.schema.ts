@@ -18,7 +18,7 @@ export class InspectionLog {
   vehicleColor: String;
 
   @Prop()
-  inspectionStatus: String;
+  status: String;
 }
 
 export const InspectionLogSchema = SchemaFactory.createForClass(InspectionLog);

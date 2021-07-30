@@ -1,13 +1,14 @@
 import { Prop, Schema, SchemaFactory } from '@nestjs/mongoose';
-import { Document, ObjectId } from 'mongoose';
+import { Document } from 'mongoose';
 import { FinalResult } from '../enum/final-result';
 
 export type InspectionResultDocument = InspectionResult & Document;
 
 @Schema({ timestamps: true })
 export class InspectionResult {
+  
   @Prop()
-  insepctionId: ObjectId;
+  inspectionId: string;
 
   @Prop()
   inspectionNo: number;
@@ -43,7 +44,7 @@ export class InspectionResult {
   finalResult: FinalResult;
 
   @Prop()
-  inspectionStatus: String;
+  status: String;
 }
 
 export const InspectionResultSchema = SchemaFactory.createForClass(InspectionResult);
