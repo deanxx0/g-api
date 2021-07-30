@@ -12,6 +12,7 @@ import { InspectionResult, InspectionResultDocument } from 'src/inspectionResult
 import { Sensor, SensorDocument } from 'src/sensor/schema/sensor.schema';
 import { CreateInferenceResultDto } from './dto/create-inference-result.dto';
 import { Timetest, TimetestDocument } from './timetest/timetest.schema';
+import { InspectionLog, InspectionLogDocument } from 'src/inspection/schema/inspection-log.schema';
 
 @Injectable()
 export class ConnectorService {
@@ -26,6 +27,8 @@ export class ConnectorService {
     private lightModel: Model<LightDocument>,
     @InjectModel(InspectionResult.name)
     private inspectionResultModel: Model<InspectionResultDocument>,
+    @InjectModel(InspectionLog.name)
+    private inspectionLogModel: Model<InspectionLogDocument>,
     @InjectModel(Timetest.name)
     private timetestModel: Model<TimetestDocument>,
   ) {}
@@ -61,6 +64,10 @@ export class ConnectorService {
     this.inspectionResultModel
       .updateOne({ inspectionId: id }, { $set: { status: status } })
       .exec();
+  }
+
+  async updateInspectionLogStatus(id: string, status: string) {
+    this.inspectionLogModel.updateOne({ inspectionId: id }, { $set: { status: status } }).exec();
   }
 
   async updateInspectionInferenceResult(

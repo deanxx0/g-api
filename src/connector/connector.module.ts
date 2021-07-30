@@ -13,6 +13,7 @@ import { Camera, CameraSchema } from 'src/camera/schema/camera.schema';
 import { Light, LightSchema } from 'src/light/schema/light.schema';
 import { InspectionResult, InspectionResultSchema } from 'src/inspectionResult/schema/inspection-result.schema';
 import { Timetest, TimetestSchema } from './timetest/timetest.schema';
+import { InspectionLog, InspectionLogSchema } from 'src/inspection/schema/inspection-log.schema';
 
 @Module({
   imports: [
@@ -23,6 +24,7 @@ import { Timetest, TimetestSchema } from './timetest/timetest.schema';
       { name: Camera.name, schema: CameraSchema },
       { name: Light.name, schema: LightSchema },
       { name: InspectionResult.name, schema: InspectionResultSchema },
+      { name: InspectionLog.name, schema: InspectionLogSchema },
       { name: Timetest.name, schema: TimetestSchema },
     ]),
     KafkaModule.register([

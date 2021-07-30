@@ -21,6 +21,7 @@ import {
       { name: Inspection.name, schema: InspectionSchema },
       { name: InspectionLog.name, schema: InspectionLogSchema },
       { name: InspectionResult.name, schema: InspectionResultSchema },
+      { name: InspectionLog.name, schema: InspectionLogSchema },
     ]),
     KafkaModule.register([
       {

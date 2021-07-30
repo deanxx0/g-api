@@ -86,6 +86,11 @@ export class ConnectorController {
       data.inspection,
       InspectionStatus.BeginInspection,
     );
+
+    await this.connectorService.updateInspectionLogStatus(
+      data.inspection,
+      InspectionStatus.BeginInspection,
+    );
   }
 
   @SubscribeTo(topicInferenceResult)
@@ -124,6 +129,11 @@ export class ConnectorController {
     );
 
     await this.connectorService.updateInspectionResultStatus(
+      data.inspection,
+      InspectionStatus.EndInspection,
+    );
+
+    await this.connectorService.updateInspectionLogStatus(
       data.inspection,
       InspectionStatus.EndInspection,
     );
