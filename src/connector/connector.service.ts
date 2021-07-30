@@ -20,6 +20,7 @@ import {
   InspectionLogDocument,
 } from 'src/inspection/schema/inspection-log.schema';
 import { CreateInspectionLogDto } from 'src/inspection/dto/create-inspection-log.dto';
+import { InferenceResult, InferenceResultDocument } from './schema/inference-result.schema';
 
 @Injectable()
 export class ConnectorService {
@@ -36,6 +37,8 @@ export class ConnectorService {
     private inspectionResultModel: Model<InspectionResultDocument>,
     @InjectModel(InspectionLog.name)
     private inspectionLogModel: Model<InspectionLogDocument>,
+    @InjectModel(InferenceResult.name)
+    private inferenceResultModel: Model<InferenceResultDocument>,
     @InjectModel(Timetest.name)
     private timetestModel: Model<TimetestDocument>,
   ) {}
@@ -92,16 +95,18 @@ export class ConnectorService {
     return createdInspectionLog.save();
   }
 
-  async updateInspectionInferenceResult(
-    id: string,
-    createInferenceResult: CreateInferenceResultDto,
+  async createInferenceResult(
+    createInferenceResultDto: CreateInferenceResultDto,
   ) {
-    await this.inspectionModel
-      .updateOne(
-        { _id: id },
-        { $push: { inferenceResults: new Object(createInferenceResult) } },
-      )
-      .exec();
+    const inferenceResultDoc = new this.inferenceResultModel(createInferenceResultDto);
+    return await inferenceResultDoc.save()
+
+    // await this.inspectionModel
+    //   .updateOne(
+    //     { _id: id },
+    //     { $push: { inferenceResults: new Object(createInferenceResult) } },
+    //   )
+    //   .exec();
 
     // const updatedInspection = this.inspectionModel.findById(id).exec();
     // await this.updateResultInfo(await updatedInspection);

@@ -20,6 +20,7 @@ import {
   InspectionLog,
   InspectionLogSchema,
 } from 'src/inspection/schema/inspection-log.schema';
+import { InferenceResult, InferenceResultSchema } from './schema/inference-result.schema';
 
 @Module({
   imports: [
@@ -31,6 +32,7 @@ import {
       { name: Light.name, schema: LightSchema },
       { name: InspectionResult.name, schema: InspectionResultSchema },
       { name: InspectionLog.name, schema: InspectionLogSchema },
+      { name: InferenceResult.name, schema: InferenceResultSchema },
       { name: Timetest.name, schema: TimetestSchema },
     ]),
     KafkaModule.register([

@@ -93,27 +93,6 @@ export class ConnectorController {
     );
   }
 
-  @SubscribeTo(topicInferenceResult)
-  async getInferenceResult(
-    data: any,
-    key: any,
-    offset: number,
-    timestamp: number,
-  ) {
-    //console.log(`get InferenceResult [${offset}]${key} : ${data} : ${timestamp}`);
-    data = JSON.parse(data);
-
-    this.connectorService.updateInspectionStatus(
-      data.inspection,
-      InspectionStatus.Inspecting,
-    );
-
-    this.connectorService.updateInspectionInferenceResult(
-      data.inspection,
-      this.toCreateInferenceResultDto(data),
-    );
-  }
-
   @SubscribeTo(topicEndInspection)
   async getEndInspection(
     data: any,
@@ -139,10 +118,31 @@ export class ConnectorController {
     );
   }
 
+  @SubscribeTo(topicInferenceResult)
+  async getInferenceResult(
+    data: any,
+    key: any,
+    offset: number,
+    timestamp: number,
+  ) {
+    //console.log(`get InferenceResult [${offset}]${key} : ${data} : ${timestamp}`);
+    data = JSON.parse(data);
+
+    this.connectorService.updateInspectionStatus(
+      data.inspection,
+      InspectionStatus.Inspecting,
+    );
+
+    this.connectorService.createInferenceResult(
+      this.toCreateInferenceResultDto(data),
+    );
+  }
+
   private toCreateInferenceResultDto(
     PostInferenceResultDto: PostInferenceResultDto,
   ): CreateInferenceResultDto {
     return {
+      inspectionId: PostInferenceResultDto.inspection,
       camera: PostInferenceResultDto.camera,
       grab: PostInferenceResultDto.grab,
       defects: PostInferenceResultDto.defects,
