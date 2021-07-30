@@ -1,8 +1,8 @@
 import { ObjectId } from 'mongoose';
 import { FinalResult } from '../enum/final-result';
 
-export class CreateResultInfoDto {
-  _id: ObjectId;
+export class PostInspectionResultDto {
+  insepctionId: ObjectId;
   inspectionNo: number;
   startTime: Date;
   endTime: Date;

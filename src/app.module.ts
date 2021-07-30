@@ -9,7 +9,7 @@ import { LightModule } from './light/light.module';
 import { InlineRecipeModule } from './inlineRecipe/inline-recipe.module';
 import { SensorModule } from './sensor/sensor.module';
 import { ConnectorModule } from './connector/connector.module';
-import { ResultInfoModule } from './resultInfo/result-info.module';
+import { InspectionResultModule } from './resultInfo/inspection-result.module';
 
 @Module({
   imports: [
@@ -25,7 +25,7 @@ import { ResultInfoModule } from './resultInfo/result-info.module';
     InlineRecipeModule,
     SensorModule,
     ConnectorModule,
-    ResultInfoModule,
+    InspectionResultModule,
   ],
 })
 export class AppModule {}
