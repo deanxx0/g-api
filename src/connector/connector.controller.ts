@@ -87,7 +87,7 @@ export class ConnectorController {
       InspectionStatus.BeginInspection,
     );
 
-    await this.connectorService.updateInspectionLogStatus(
+    await this.connectorService.createInspectionLog(
       data.inspection,
       InspectionStatus.BeginInspection,
     );
@@ -133,7 +133,7 @@ export class ConnectorController {
       InspectionStatus.EndInspection,
     );
 
-    await this.connectorService.updateInspectionLogStatus(
+    await this.connectorService.createInspectionLog(
       data.inspection,
       InspectionStatus.EndInspection,
     );

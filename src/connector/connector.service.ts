@@ -13,6 +13,7 @@ import { Sensor, SensorDocument } from 'src/sensor/schema/sensor.schema';
 import { CreateInferenceResultDto } from './dto/create-inference-result.dto';
 import { Timetest, TimetestDocument } from './timetest/timetest.schema';
 import { InspectionLog, InspectionLogDocument } from 'src/inspection/schema/inspection-log.schema';
+import { CreateInspectionLogDto } from 'src/inspection/dto/create-inspection-log.dto';
 
 @Injectable()
 export class ConnectorService {
@@ -66,8 +67,23 @@ export class ConnectorService {
       .exec();
   }
 
-  async updateInspectionLogStatus(id: string, status: string) {
-    this.inspectionLogModel.updateOne({ inspectionId: id }, { $set: { status: status } }).exec();
+  // ing
+  async createInspectionLog(inspectionId: string, status: string) {
+    //this.inspectionLogModel.updateOne({ inspectionId: id }, { $set: { status: status } }).exec();
+    const inspectionDoc: InspectionDocument = await this.inspectionModel.findOne({ _id: inspectionId }).exec();
+
+    let createdInspectionLogDto: CreateInspectionLogDto;
+    let createdInspectionLog = new this.inspectionLogModel(
+      createdInspectionLogDto,
+    );
+
+    createdInspectionLog.inspectionId = inspectionDoc._id;
+    createdInspectionLog.inspectionNo = inspectionDoc.inspectionNo;
+    createdInspectionLog.vehicleModel = inspectionDoc.vehicle.properties.model;
+    createdInspectionLog.vehicleColor = inspectionDoc.vehicle.properties.color;
+    createdInspectionLog.status = status;
+
+    return createdInspectionLog.save();
   }
 
   async updateInspectionInferenceResult(
