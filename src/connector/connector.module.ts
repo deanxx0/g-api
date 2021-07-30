@@ -11,7 +11,7 @@ import {
 import { Sensor, SensorSchema } from 'src/sensor/schema/sensor.schema';
 import { Camera, CameraSchema } from 'src/camera/schema/camera.schema';
 import { Light, LightSchema } from 'src/light/schema/light.schema';
-import { ResultInfo, ResultInfoSchema } from 'src/resultInfo/schema/result-info.schema';
+import { InspectionResult, InspectionResultSchema } from 'src/resultInfo/schema/inspection-result.schema';
 import { Timetest, TimetestSchema } from './timetest/timetest.schema';
 
 @Module({
@@ -22,7 +22,7 @@ import { Timetest, TimetestSchema } from './timetest/timetest.schema';
       { name: Sensor.name, schema: SensorSchema },
       { name: Camera.name, schema: CameraSchema },
       { name: Light.name, schema: LightSchema },
-      { name: ResultInfo.name, schema: ResultInfoSchema },
+      { name: InspectionResult.name, schema: InspectionResultSchema },
       { name: Timetest.name, schema: TimetestSchema },
     ]),
     KafkaModule.register([

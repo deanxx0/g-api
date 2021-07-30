@@ -7,9 +7,9 @@ import {
   InspectionDocument,
 } from 'src/inspection/schema/inspection.schema';
 import { Light, LightDocument } from 'src/light/schema/light.schema';
-import { PostResultInfoDto } from 'src/resultInfo/dto/post-result-info.dto';
+import {  } from 'src/resultInfo/dto/post-inspection-result.dto';
 import { FinalResult } from 'src/resultInfo/enum/final-result';
-import { ResultInfo, ResultInfoDocument } from 'src/resultInfo/schema/result-info.schema';
+import { InspectionResult, InspectionResultDocument } from 'src/resultInfo/schema/inspection-result.schema';
 import { Sensor, SensorDocument } from 'src/sensor/schema/sensor.schema';
 import { CreateInferenceResultDto } from './dto/create-inference-result.dto';
 import { Timetest, TimetestDocument } from './timetest/timetest.schema';
@@ -25,8 +25,8 @@ export class ConnectorService {
     private cameraModel: Model<CameraDocument>,
     @InjectModel(Light.name)
     private lightModel: Model<LightDocument>,
-    @InjectModel(ResultInfo.name)
-    private resultInfoModel: Model<ResultInfoDocument>,
+    @InjectModel(InspectionResult.name)
+    private resultInfoModel: Model<InspectionResultDocument>,
     @InjectModel(Timetest.name)
     private timetestModel: Model<TimetestDocument>,
   ) {}

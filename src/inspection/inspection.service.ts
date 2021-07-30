@@ -10,11 +10,8 @@ import {
   InspectionLogDocument,
 } from './schema/inspection-log.schema';
 import { CreateInspectionLogDto } from './dto/create-inspection-log.dto';
-import {
-  ResultInfo,
-  ResultInfoDocument,
-} from '../resultInfo/schema/result-info.schema';
-import { CreateResultInfoDto } from '../resultInfo/dto/create-result-info.dto';
+import { InspectionResult, InspectionResultDocument } from '../resultInfo/schema/inspection-result.schema';
+import { CreateInspectionResultDto } from '../resultInfo/dto/create-inspection-result.dto';
 import { FinalResult } from '../resultInfo/enum/final-result';
 
 const topicInspectionCreated = 'glovis.fct.inspectionCreated';
@@ -26,8 +23,8 @@ export class InspectionService {
     private inspectionModel: Model<InspectionDocument>,
     @InjectModel(InspectionLog.name)
     private inspectionLogModel: Model<InspectionLogDocument>,
-    @InjectModel(ResultInfo.name)
-    private resultInfoModel: Model<ResultInfoDocument>,
+    @InjectModel(InspectionResult.name)
+    private inspectionResultModel: Model<InspectionResultDocument>,
     @Inject('KAFKA-CONNECTOR') private kafkaService: KafkaService,
   ) {}
 
@@ -136,24 +133,24 @@ export class InspectionService {
     return createdDoc;
   }
 
-  async createResultInfo(createdDoc): Promise<ResultInfoDocument> {
-    let createdResultInfoDto: CreateResultInfoDto;
-    let createdResultInfo = new this.resultInfoModel(createdResultInfoDto);
+  async createResultInfo(createdDoc): Promise<InspectionResultDocument> {
+    let createdInspectionResultDto: CreateInspectionResultDto;
+    let createdInspectionResult = new this.inspectionResultModel(createdInspectionResultDto);
 
-    createdResultInfo._id = createdDoc._id;
-    createdResultInfo.inspectionNo = createdDoc.inspectionNo;
-    createdResultInfo.startTime = createdDoc.createdAt;
-    createdResultInfo.endTime = createdDoc.updatedAt;
-    createdResultInfo.elapseTime = '00:00:00';
-    createdResultInfo.vehicleModel = createdDoc.vehicle.properties.model;
-    createdResultInfo.vehicleColor = createdDoc.vehicle.properties.color;
-    createdResultInfo.vinCode = createdDoc.vehicle.vinCode;
-    createdResultInfo.totalDefects = 0;
-    createdResultInfo.totalSpecialDefects = 0;
-    createdResultInfo.totalGapDefects = 0;
-    createdResultInfo.finalResult = FinalResult.READY;
-    createdResultInfo.inspectionStatus = createdDoc.status;
-    return createdResultInfo.save();
+    createdInspectionResult.insepctionId = createdDoc._id;
+    createdInspectionResult.inspectionNo = createdDoc.inspectionNo;
+    createdInspectionResult.startTime = createdDoc.createdAt;
+    createdInspectionResult.endTime = createdDoc.updatedAt;
+    createdInspectionResult.elapseTime = '00:00:00';
+    createdInspectionResult.vehicleModel = createdDoc.vehicle.properties.model;
+    createdInspectionResult.vehicleColor = createdDoc.vehicle.properties.color;
+    createdInspectionResult.vinCode = createdDoc.vehicle.vinCode;
+    createdInspectionResult.totalDefects = 0;
+    createdInspectionResult.totalSpecialDefects = 0;
+    createdInspectionResult.totalGapDefects = 0;
+    createdInspectionResult.finalResult = FinalResult.READY;
+    createdInspectionResult.inspectionStatus = createdDoc.status;
+    return createdInspectionResult.save();
   }
 
   async createInspectionLog(

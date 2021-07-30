@@ -10,9 +10,9 @@ import {
   InspectionLogSchema,
 } from './schema/inspection-log.schema';
 import {
-  ResultInfo,
-  ResultInfoSchema,
-} from '../resultInfo/schema/result-info.schema';
+  InspectionResult,
+  InspectionResultSchema,
+} from '../resultInfo/schema/inspection-result.schema';
 
 @Module({
   imports: [
@@ -20,7 +20,7 @@ import {
     MongooseModule.forFeature([
       { name: Inspection.name, schema: InspectionSchema },
       { name: InspectionLog.name, schema: InspectionLogSchema },
-      { name: ResultInfo.name, schema: ResultInfoSchema },
+      { name: InspectionResult.name, schema: InspectionResultSchema },
     ]),
     KafkaModule.register([
       {
