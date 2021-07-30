@@ -9,7 +9,7 @@ import { LightModule } from './light/light.module';
 import { InlineRecipeModule } from './inlineRecipe/inline-recipe.module';
 import { SensorModule } from './sensor/sensor.module';
 import { ConnectorModule } from './connector/connector.module';
-import { InspectionResultModule } from './resultInfo/inspection-result.module';
+import { InspectionResultModule } from './inspectionResult/inspection-result.module';
 
 @Module({
   imports: [

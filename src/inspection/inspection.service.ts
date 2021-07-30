@@ -10,9 +10,9 @@ import {
   InspectionLogDocument,
 } from './schema/inspection-log.schema';
 import { CreateInspectionLogDto } from './dto/create-inspection-log.dto';
-import { InspectionResult, InspectionResultDocument } from '../resultInfo/schema/inspection-result.schema';
-import { CreateInspectionResultDto } from '../resultInfo/dto/create-inspection-result.dto';
-import { FinalResult } from '../resultInfo/enum/final-result';
+import { InspectionResult, InspectionResultDocument } from '../inspectionResult/schema/inspection-result.schema';
+import { CreateInspectionResultDto } from '../inspectionResult/dto/create-inspection-result.dto';
+import { FinalResult } from '../inspectionResult/enum/final-result';
 
 const topicInspectionCreated = 'glovis.fct.inspectionCreated';
 
@@ -120,24 +120,21 @@ export class InspectionService {
 
   async create(createInspectionDto: CreateInspectionDto): Promise<Inspection> {
     const createdInspection = new this.inspectionModel(createInspectionDto);
-
     createdInspection.status = InspectionStatus.PreInspection;
-
-    this.createInspectionLog(createdInspection);
 
     const createdDoc = createdInspection.save();
     this.sendCreatedInspection(await createdDoc);
-
-    this.createResultInfo(await createdDoc);
+    this.createInspectionResult(await createdDoc);
+    this.createInspectionLog(await createdDoc);
 
     return createdDoc;
   }
 
-  async createResultInfo(createdDoc): Promise<InspectionResultDocument> {
+  async createInspectionResult(createdDoc): Promise<InspectionResultDocument> {
     let createdInspectionResultDto: CreateInspectionResultDto;
     let createdInspectionResult = new this.inspectionResultModel(createdInspectionResultDto);
 
-    createdInspectionResult.insepctionId = createdDoc._id;
+    createdInspectionResult.inspectionId = createdDoc._id;
     createdInspectionResult.inspectionNo = createdDoc.inspectionNo;
     createdInspectionResult.startTime = createdDoc.createdAt;
     createdInspectionResult.endTime = createdDoc.updatedAt;
@@ -149,7 +146,8 @@ export class InspectionService {
     createdInspectionResult.totalSpecialDefects = 0;
     createdInspectionResult.totalGapDefects = 0;
     createdInspectionResult.finalResult = FinalResult.READY;
-    createdInspectionResult.inspectionStatus = createdDoc.status;
+    createdInspectionResult.status = createdDoc.status;
+
     return createdInspectionResult.save();
   }
 
@@ -166,7 +164,7 @@ export class InspectionService {
       createdInspection.vehicle.properties.model;
     createdInspectionLog.vehicleColor =
       createdInspection.vehicle.properties.color;
-    createdInspectionLog.inspectionStatus = InspectionStatus.PreInspection;
+    createdInspectionLog.status = InspectionStatus.PreInspection;
 
     return createdInspectionLog.save();
   }

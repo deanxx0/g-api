@@ -7,9 +7,8 @@ import {
   InspectionDocument,
 } from 'src/inspection/schema/inspection.schema';
 import { Light, LightDocument } from 'src/light/schema/light.schema';
-import {  } from 'src/resultInfo/dto/post-inspection-result.dto';
-import { FinalResult } from 'src/resultInfo/enum/final-result';
-import { InspectionResult, InspectionResultDocument } from 'src/resultInfo/schema/inspection-result.schema';
+import { FinalResult } from 'src/inspectionResult/enum/final-result';
+import { InspectionResult, InspectionResultDocument } from 'src/inspectionResult/schema/inspection-result.schema';
 import { Sensor, SensorDocument } from 'src/sensor/schema/sensor.schema';
 import { CreateInferenceResultDto } from './dto/create-inference-result.dto';
 import { Timetest, TimetestDocument } from './timetest/timetest.schema';
@@ -26,7 +25,7 @@ export class ConnectorService {
     @InjectModel(Light.name)
     private lightModel: Model<LightDocument>,
     @InjectModel(InspectionResult.name)
-    private resultInfoModel: Model<InspectionResultDocument>,
+    private inspectionResultModel: Model<InspectionResultDocument>,
     @InjectModel(Timetest.name)
     private timetestModel: Model<TimetestDocument>,
   ) {}
@@ -56,8 +55,12 @@ export class ConnectorService {
     this.inspectionModel
       .updateOne({ _id: id }, { $set: { status: status } })
       .exec();
+  }
 
-    this.resultInfoModel.findByIdAndUpdate( id, { $set: { inspectionStatus: status } }).exec();
+  async updateInspectionResultStatus(id: string, status: string) {
+    this.inspectionResultModel
+      .updateOne({ inspectionId: id }, { $set: { status: status } })
+      .exec();
   }
 
   async updateInspectionInferenceResult(

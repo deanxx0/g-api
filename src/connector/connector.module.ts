@@ -11,7 +11,7 @@ import {
 import { Sensor, SensorSchema } from 'src/sensor/schema/sensor.schema';
 import { Camera, CameraSchema } from 'src/camera/schema/camera.schema';
 import { Light, LightSchema } from 'src/light/schema/light.schema';
-import { InspectionResult, InspectionResultSchema } from 'src/resultInfo/schema/inspection-result.schema';
+import { InspectionResult, InspectionResultSchema } from 'src/inspectionResult/schema/inspection-result.schema';
 import { Timetest, TimetestSchema } from './timetest/timetest.schema';
 
 @Module({

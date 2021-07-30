@@ -12,7 +12,7 @@ import {
 import {
   InspectionResult,
   InspectionResultSchema,
-} from '../resultInfo/schema/inspection-result.schema';
+} from '../inspectionResult/schema/inspection-result.schema';
 
 @Module({
   imports: [

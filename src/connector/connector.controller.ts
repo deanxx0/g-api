@@ -77,7 +77,12 @@ export class ConnectorController {
   ) {
     console.log(`Begin inspection[${offset}]${key} : ${data} : ${timestamp}`);
     data = JSON.parse(data);
-    this.connectorService.updateInspectionStatus(
+    await this.connectorService.updateInspectionStatus(
+      data.inspection,
+      InspectionStatus.BeginInspection,
+    );
+
+    await this.connectorService.updateInspectionResultStatus(
       data.inspection,
       InspectionStatus.BeginInspection,
     );
@@ -114,6 +119,11 @@ export class ConnectorController {
     console.log(`End inspection [${offset}]${key} : ${data} : ${timestamp}`);
     data = JSON.parse(data);
     await this.connectorService.updateInspectionStatus(
+      data.inspection,
+      InspectionStatus.EndInspection,
+    );
+
+    await this.connectorService.updateInspectionResultStatus(
       data.inspection,
       InspectionStatus.EndInspection,
     );
