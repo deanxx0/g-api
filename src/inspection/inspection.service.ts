@@ -159,6 +159,7 @@ export class InspectionService {
       createdInspectionLogDto,
     );
 
+    createdInspectionLog.inspectionId = createdInspection._id;
     createdInspectionLog.inspectionNo = createdInspection.inspectionNo;
     createdInspectionLog.vehicleModel =
       createdInspection.vehicle.properties.model;

@@ -6,6 +6,9 @@ export type InspectionLogDocument = InspectionLog & Document;
 @Schema({ timestamps: true })
 export class InspectionLog {
   @Prop()
+  inspectionId: string;
+  
+  @Prop()
   inspectionNo: number;
 
   @Prop()
