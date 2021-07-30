@@ -1,7 +1,10 @@
 import { Injectable } from '@nestjs/common';
 import { InjectModel } from '@nestjs/mongoose';
 import { Model } from 'mongoose';
-import { InspectionResult, InspectionResultDocument } from './schema/inspection-result.schema';
+import {
+  InspectionResult,
+  InspectionResultDocument,
+} from './schema/inspection-result.schema';
 
 @Injectable()
 export class InspectionResultService {

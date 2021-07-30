@@ -6,7 +6,6 @@ export type InspectionResultDocument = InspectionResult & Document;
 
 @Schema({ timestamps: true })
 export class InspectionResult {
-  
   @Prop()
   inspectionId: string;
 
@@ -47,4 +46,5 @@ export class InspectionResult {
   status: String;
 }
 
-export const InspectionResultSchema = SchemaFactory.createForClass(InspectionResult);
+export const InspectionResultSchema =
+  SchemaFactory.createForClass(InspectionResult);

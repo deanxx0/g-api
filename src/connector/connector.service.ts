@@ -8,11 +8,17 @@ import {
 } from 'src/inspection/schema/inspection.schema';
 import { Light, LightDocument } from 'src/light/schema/light.schema';
 import { FinalResult } from 'src/inspectionResult/enum/final-result';
-import { InspectionResult, InspectionResultDocument } from 'src/inspectionResult/schema/inspection-result.schema';
+import {
+  InspectionResult,
+  InspectionResultDocument,
+} from 'src/inspectionResult/schema/inspection-result.schema';
 import { Sensor, SensorDocument } from 'src/sensor/schema/sensor.schema';
 import { CreateInferenceResultDto } from './dto/create-inference-result.dto';
 import { Timetest, TimetestDocument } from './timetest/timetest.schema';
-import { InspectionLog, InspectionLogDocument } from 'src/inspection/schema/inspection-log.schema';
+import {
+  InspectionLog,
+  InspectionLogDocument,
+} from 'src/inspection/schema/inspection-log.schema';
 import { CreateInspectionLogDto } from 'src/inspection/dto/create-inspection-log.dto';
 
 @Injectable()
@@ -67,10 +73,10 @@ export class ConnectorService {
       .exec();
   }
 
-  // ing
   async createInspectionLog(inspectionId: string, status: string) {
-    //this.inspectionLogModel.updateOne({ inspectionId: id }, { $set: { status: status } }).exec();
-    const inspectionDoc: InspectionDocument = await this.inspectionModel.findOne({ _id: inspectionId }).exec();
+    const inspectionDoc: InspectionDocument = await this.inspectionModel
+      .findOne({ _id: inspectionId })
+      .exec();
 
     let createdInspectionLogDto: CreateInspectionLogDto;
     let createdInspectionLog = new this.inspectionLogModel(
@@ -97,8 +103,8 @@ export class ConnectorService {
       )
       .exec();
 
-      // const updatedInspection = this.inspectionModel.findById(id).exec();
-      // await this.updateResultInfo(await updatedInspection);
+    // const updatedInspection = this.inspectionModel.findById(id).exec();
+    // await this.updateResultInfo(await updatedInspection);
   }
 
   // async updateResultInfo(updatedInspection): Promise<ResultInfoDocument> {
@@ -138,7 +144,7 @@ export class ConnectorService {
   //     .exec();
   // }
 
-  async toTime(sec: number): Promise<string> {
-    return new Date(sec * 1000).toISOString().substr(11, 8)
-  }
+  // async toTime(sec: number): Promise<string> {
+  //   return new Date(sec * 1000).toISOString().substr(11, 8)
+  // }
 }

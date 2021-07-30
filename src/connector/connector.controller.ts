@@ -100,7 +100,7 @@ export class ConnectorController {
     offset: number,
     timestamp: number,
   ) {
-    console.log(`get InferenceResult [${offset}]${key} : ${data} : ${timestamp}`);
+    //console.log(`get InferenceResult [${offset}]${key} : ${data} : ${timestamp}`);
     data = JSON.parse(data);
 
     this.connectorService.updateInspectionStatus(

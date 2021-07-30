@@ -10,7 +10,10 @@ import {
   InspectionLogDocument,
 } from './schema/inspection-log.schema';
 import { CreateInspectionLogDto } from './dto/create-inspection-log.dto';
-import { InspectionResult, InspectionResultDocument } from '../inspectionResult/schema/inspection-result.schema';
+import {
+  InspectionResult,
+  InspectionResultDocument,
+} from '../inspectionResult/schema/inspection-result.schema';
 import { CreateInspectionResultDto } from '../inspectionResult/dto/create-inspection-result.dto';
 import { FinalResult } from '../inspectionResult/enum/final-result';
 
@@ -132,7 +135,9 @@ export class InspectionService {
 
   async createInspectionResult(createdDoc): Promise<InspectionResultDocument> {
     let createdInspectionResultDto: CreateInspectionResultDto;
-    let createdInspectionResult = new this.inspectionResultModel(createdInspectionResultDto);
+    let createdInspectionResult = new this.inspectionResultModel(
+      createdInspectionResultDto,
+    );
 
     createdInspectionResult.inspectionId = createdDoc._id;
     createdInspectionResult.inspectionNo = createdDoc.inspectionNo;

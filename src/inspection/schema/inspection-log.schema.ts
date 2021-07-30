@@ -7,7 +7,7 @@ export type InspectionLogDocument = InspectionLog & Document;
 export class InspectionLog {
   @Prop()
   inspectionId: string;
-  
+
   @Prop()
   inspectionNo: number;
 

@@ -64,6 +64,9 @@ export class InspectionController {
 
   @Post()
   async create(@Body() postInspectionDto: PostInspectionDto) {
+    console.log(
+      `Create inspection [inspectionNo: ${postInspectionDto.inspectionNo}]`,
+    );
     return this.inspectionService.create(this.toCreateDto(postInspectionDto));
   }
 
