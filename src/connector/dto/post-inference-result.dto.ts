@@ -1,5 +1,5 @@
 export class PostInferenceResultDto {
-  inspection: number;
+  inspection: string;
   camera: string;
   grab: {
     seq: number;

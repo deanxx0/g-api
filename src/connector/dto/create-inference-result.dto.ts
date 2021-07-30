@@ -1,4 +1,5 @@
 export class CreateInferenceResultDto {
+  inspectionId: string;
   camera: string;
   grab: {
     seq: number;
