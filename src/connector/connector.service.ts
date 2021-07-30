@@ -92,14 +92,14 @@ export class ConnectorService {
     createdInspectionLog.vehicleColor = inspectionDoc.vehicle.properties.color;
     createdInspectionLog.status = status;
 
-    return createdInspectionLog.save();
+    createdInspectionLog.save();
   }
 
   async createInferenceResult(
     createInferenceResultDto: CreateInferenceResultDto,
   ) {
     const inferenceResultDoc = new this.inferenceResultModel(createInferenceResultDto);
-    return await inferenceResultDoc.save()
+    inferenceResultDoc.save()
 
     // await this.inspectionModel
     //   .updateOne(
