@@ -20,7 +20,10 @@ import {
   InspectionLogDocument,
 } from 'src/inspection/schema/inspection-log.schema';
 import { CreateInspectionLogDto } from 'src/inspection/dto/create-inspection-log.dto';
-import { InferenceResult, InferenceResultDocument } from './schema/inference-result.schema';
+import {
+  InferenceResult,
+  InferenceResultDocument,
+} from './schema/inference-result.schema';
 
 @Injectable()
 export class ConnectorService {
@@ -98,8 +101,13 @@ export class ConnectorService {
   async createInferenceResult(
     createInferenceResultDto: CreateInferenceResultDto,
   ) {
-    const inferenceResultDoc = new this.inferenceResultModel(createInferenceResultDto);
-    inferenceResultDoc.save()
+    const inferenceResultDoc = new this.inferenceResultModel(
+      createInferenceResultDto,
+    );
+    inferenceResultDoc.save(); // insertMany 쿼리로 대체해서 모아 올릴 방법찾자
+    // insertMany에는 추가할 객체들의 배열만 넣으면 되니까 배열 하나 만들어서 거기에 컨슘된 inferenceResult들을 박아두다가
+    // 일정 개수가 모이거나 일정 시간마다 그 배열을 넣고 insertMany 하면 되지않을까
+    // 그 일정 개수와 일정 시간을 어떻게 알수 있을까..
 
     // await this.inspectionModel
     //   .updateOne(

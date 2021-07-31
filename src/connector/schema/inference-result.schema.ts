@@ -32,4 +32,5 @@ export class InferenceResult {
   defects: Record<string, any>;
 }
 
-export const InferenceResultSchema = SchemaFactory.createForClass(InferenceResult);
+export const InferenceResultSchema =
+  SchemaFactory.createForClass(InferenceResult);

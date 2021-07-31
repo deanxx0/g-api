@@ -20,7 +20,10 @@ import {
   InspectionLog,
   InspectionLogSchema,
 } from 'src/inspection/schema/inspection-log.schema';
-import { InferenceResult, InferenceResultSchema } from './schema/inference-result.schema';
+import {
+  InferenceResult,
+  InferenceResultSchema,
+} from './schema/inference-result.schema';
 
 @Module({
   imports: [
