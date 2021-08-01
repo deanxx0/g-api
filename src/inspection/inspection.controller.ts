@@ -91,7 +91,7 @@ export class InspectionController {
       vehicle: postInspectionDto.vehicle,
       recipe: postInspectionDto.recipe,
       status: postInspectionDto.status,
-      inferenceResults: postInspectionDto.inferenceResults,
+      // inferenceResults: postInspectionDto.inferenceResults,
     };
   }
 }
