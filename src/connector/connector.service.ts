@@ -125,8 +125,7 @@ export class ConnectorService {
   }
 
   async createInferenceResult() {
-    if (this.inferencResultCache.length == 0)
-      return;
+    if (this.inferencResultCache.length == 0) return;
     this.inferenceResultModel.insertMany(this.inferencResultCache);
     this.inferencResultCache = [];
     // console.log(`insertMany at interval...`);
