@@ -102,14 +102,15 @@ export class ConnectorService {
   async createInferenceResult(
     createInferenceResultDto: CreateInferenceResultDto,
   ) {
-    // insertMany 시도: 일정 개수 차면 create
+    // insertMany: 일정 개수 차면 create
     console.log('_______before pushed array:');
     this.arr.map((a) => console.log(a));
     this.arr.push(createInferenceResultDto);
     console.log('_______after pushed array:');
     this.arr.map((a) => console.log(a));
-    if (this.arr.length >= 3) {
-      console.log(`arr length >= 3 : inside if`);
+    const bulkCount = 3;
+    if (this.arr.length >= bulkCount) {
+      console.log(`inside if bulk count: ${bulkCount}`);
       this.inferenceResultModel.insertMany(this.arr);
       console.log(`insert many!!! ${this.arr}`);
       this.arr = [];
