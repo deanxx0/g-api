@@ -4,6 +4,7 @@ import { ConnectorService } from './connector.service';
 import { CreateInferenceResultDto } from './dto/create-inference-result.dto';
 import { PostInferenceResultDto } from './dto/post-inference-result.dto';
 import { InspectionStatus } from './enum/inspection-status';
+import { Interval } from '@nestjs/schedule';
 
 const topicBeginInspection = 'glovis.fct.beginInspection';
 const topicInferenceResult = 'glovis.fct.inferenceResult';
@@ -140,9 +141,14 @@ export class ConnectorController {
     //   InspectionStatus.Inspecting,
     // );
 
-    await this.connectorService.createInferenceResult(
+    await this.connectorService.pushInferenceResult(
       this.toCreateInferenceResultDto(await data),
     );
+  }
+
+  @Interval(1000)
+  async handleInterval() {
+    this.connectorService.createInferenceResult();
   }
 
   private toCreateInferenceResultDto(

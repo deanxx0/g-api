@@ -98,23 +98,23 @@ export class ConnectorService {
     createdInspectionLog.save();
   }
 
-  private arr: Array<CreateInferenceResultDto> = [];
-  async createInferenceResult(
+  private inferencResultCache: Array<CreateInferenceResultDto> = [];
+  async pushInferenceResult(
     createInferenceResultDto: CreateInferenceResultDto,
   ) {
     // insertMany: 일정 개수 차면 create
     // console.log('_______before pushed array:');
     // this.arr.map((a) => console.log(a));
-    this.arr.push(createInferenceResultDto);
+    this.inferencResultCache.push(createInferenceResultDto);
     // console.log('_______after pushed array:');
     // this.arr.map((a) => console.log(a));
-    const bulkCount = 3;
-    if (this.arr.length >= bulkCount) {
-      // console.log(`inside if bulk count: ${bulkCount}`);
-      this.inferenceResultModel.insertMany(this.arr);
-      // console.log(`insert many!!! ${this.arr}`);
-      this.arr = [];
-    }
+    // const bulkCount = 3;
+    // if (this.arr.length >= bulkCount) {
+    //   // console.log(`inside if bulk count: ${bulkCount}`);
+    //   this.inferenceResultModel.insertMany(this.arr);
+    //   // console.log(`insert many!!! ${this.arr}`);
+    //   this.arr = [];
+    // }
 
     // 하나씩 create
     // console.log(`create inference result!!! at service`)
@@ -122,6 +122,14 @@ export class ConnectorService {
     //   createInferenceResultDto,
     // );
     // return await inferenceResultDoc.save();
+  }
+
+  async createInferenceResult() {
+    if (this.inferencResultCache.length == 0)
+      return;
+    this.inferenceResultModel.insertMany(this.inferencResultCache);
+    this.inferencResultCache = [];
+    // console.log(`insertMany at interval...`);
   }
 
   // await this.inspectionModel

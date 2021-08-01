@@ -24,10 +24,12 @@ import {
   InferenceResult,
   InferenceResultSchema,
 } from './schema/inference-result.schema';
+import { ScheduleModule } from '@nestjs/schedule';
 
 @Module({
   imports: [
     ConfigModule.forRoot(),
+    ScheduleModule.forRoot(),
     MongooseModule.forFeature([
       { name: Inspection.name, schema: InspectionSchema },
       { name: Sensor.name, schema: SensorSchema },
