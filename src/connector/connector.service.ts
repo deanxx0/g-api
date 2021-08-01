@@ -98,27 +98,44 @@ export class ConnectorService {
     createdInspectionLog.save();
   }
 
+  private arr: Array<CreateInferenceResultDto> = [];
   async createInferenceResult(
     createInferenceResultDto: CreateInferenceResultDto,
   ) {
-    const inferenceResultDoc = new this.inferenceResultModel(
-      createInferenceResultDto,
-    );
-    inferenceResultDoc.save(); // insertMany 쿼리로 대체해서 모아 올릴 방법찾자
-    // insertMany에는 추가할 객체들의 배열만 넣으면 되니까 배열 하나 만들어서 거기에 컨슘된 inferenceResult들을 박아두다가
-    // 일정 개수가 모이거나 일정 시간마다 그 배열을 넣고 insertMany 하면 되지않을까
-    // 그 일정 개수와 일정 시간을 어떻게 알수 있을까..
+    // insertMany 시도: 일정 개수 차면 create
+    console.log('_______before pushed array:');
+    this.arr.map((a) => console.log(a));
+    this.arr.push(createInferenceResultDto);
+    console.log('_______after pushed array:');
+    this.arr.map((a) => console.log(a));
+    if (this.arr.length >= 3) {
+      console.log(`arr length >= 3 : inside if`);
+      this.inferenceResultModel.insertMany(this.arr);
+      console.log(`insert many!!! ${this.arr}`);
+      this.arr = [];
+    }
 
-    // await this.inspectionModel
-    //   .updateOne(
-    //     { _id: id },
-    //     { $push: { inferenceResults: new Object(createInferenceResult) } },
-    //   )
-    //   .exec();
-
-    // const updatedInspection = this.inspectionModel.findById(id).exec();
-    // await this.updateResultInfo(await updatedInspection);
+    // 하나씩 create
+    // console.log(`create inference result!!! at service`)
+    // const inferenceResultDoc = new this.inferenceResultModel(
+    //   createInferenceResultDto,
+    // );
+    // return await inferenceResultDoc.save();
   }
+  // insertMany 쿼리로 대체해서 모아 올릴 방법찾자
+  // insertMany에는 추가할 객체들의 배열만 넣으면 되니까 배열 하나 만들어서 거기에 컨슘된 inferenceResult들을 박아두다가
+  // 일정 개수가 모이거나 일정 시간마다 그 배열을 넣고 insertMany 하면 되지않을까
+  // 그 일정 개수와 일정 시간을 어떻게 알수 있을까..
+
+  // await this.inspectionModel
+  //   .updateOne(
+  //     { _id: id },
+  //     { $push: { inferenceResults: new Object(createInferenceResult) } },
+  //   )
+  //   .exec();
+
+  // const updatedInspection = this.inspectionModel.findById(id).exec();
+  // await this.updateResultInfo(await updatedInspection);
 
   // async updateResultInfo(updatedInspection): Promise<ResultInfoDocument> {
   //   let updatedResultInfoDto: PostResultInfoDto;

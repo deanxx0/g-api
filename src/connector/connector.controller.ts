@@ -75,7 +75,10 @@ export class ConnectorController {
     offset: number,
     timestamp: number,
   ) {
-    console.log(`Begin inspection[${offset}]${key} : ${data} : ${timestamp}`);
+    // console.log(`Begin inspection[${offset}]${key} : ${data} : ${timestamp}`);
+    console.log(
+      `Begin inspection[ offset: ${offset}, key: ${key}, data: ${data}, timestamp: ${timestamp} ]`,
+    );
     data = JSON.parse(data);
     await this.connectorService.updateInspectionStatus(
       data.inspection,
@@ -100,7 +103,10 @@ export class ConnectorController {
     offset: number,
     timestamp: number,
   ) {
-    console.log(`End inspection [${offset}]${key} : ${data} : ${timestamp}`);
+    // console.log(`End inspection [${offset}]${key} : ${data} : ${timestamp}`);
+    console.log(
+      `End inspection[ offset: ${offset}, key: ${key}, data: ${data}, timestamp: ${timestamp} ]`,
+    );
     data = JSON.parse(data);
     await this.connectorService.updateInspectionStatus(
       data.inspection,
@@ -125,16 +131,17 @@ export class ConnectorController {
     offset: number,
     timestamp: number,
   ) {
-    //console.log(`get InferenceResult [${offset}]${key} : ${data} : ${timestamp}`);
+    // console.log(`inference result consumed[ offset: ${offset}, key: ${key}, data: ${data}, timestamp: ${timestamp} ]`);
     data = JSON.parse(data);
 
-    this.connectorService.updateInspectionStatus(
-      data.inspection,
-      InspectionStatus.Inspecting,
-    );
+    // inspecting status update 안한다.
+    // this.connectorService.updateInspectionStatus(
+    //   data.inspection,
+    //   InspectionStatus.Inspecting,
+    // );
 
-    this.connectorService.createInferenceResult(
-      this.toCreateInferenceResultDto(data),
+    await this.connectorService.createInferenceResult(
+      this.toCreateInferenceResultDto(await data),
     );
   }
 
