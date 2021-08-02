@@ -1,7 +1,10 @@
 import { Injectable } from '@nestjs/common';
 import { InjectModel } from '@nestjs/mongoose';
 import { Model } from 'mongoose';
-import { InferenceResult, InferenceResultDocument } from 'src/connector/schema/inference-result.schema';
+import {
+  InferenceResult,
+  InferenceResultDocument,
+} from 'src/connector/schema/inference-result.schema';
 
 @Injectable()
 export class InferenceResultService {
@@ -14,8 +17,13 @@ export class InferenceResultService {
     return this.inferenceResultModel.find({ inspectionId: id }).exec();
   }
 
-  async findByInspectionIdAndCamera(inspectionId: string, cameraId: string): Promise<InferenceResultDocument[]> {
-    return this.inferenceResultModel.find({ inspectionId: inspectionId, camera: cameraId }).exec();
+  async findByInspectionIdAndCamera(
+    inspectionId: string,
+    cameraId: string,
+  ): Promise<InferenceResultDocument[]> {
+    return this.inferenceResultModel
+      .find({ inspectionId: inspectionId, camera: cameraId })
+      .exec();
   }
 
   async findAll(): Promise<InferenceResultDocument[]> {

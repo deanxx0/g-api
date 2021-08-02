@@ -27,7 +27,7 @@ import { inferenceResultModule } from './inferenceResult/inference-result.module
     SensorModule,
     ConnectorModule,
     InspectionResultModule,
-    inferenceResultModule
+    inferenceResultModule,
   ],
 })
 export class AppModule {}

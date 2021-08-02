@@ -16,13 +16,20 @@ export class InferenceResultController {
   constructor(private inferenceResultService: InferenceResultService) {}
 
   @Get('inspection-id')
-  async findByInspectionId(@Query() query: any): Promise<InferenceResultDocument[]> {
+  async findByInspectionId(
+    @Query() query: any,
+  ): Promise<InferenceResultDocument[]> {
     return this.inferenceResultService.findByInspectionId(query.id);
   }
 
   @Get('inspection-id/camera')
-  async findByInspectionIdAndCamera(@Query() query: any): Promise<InferenceResultDocument[]> {
-    return this.inferenceResultService.findByInspectionIdAndCamera(query.id, query.camera);
+  async findByInspectionIdAndCamera(
+    @Query() query: any,
+  ): Promise<InferenceResultDocument[]> {
+    return this.inferenceResultService.findByInspectionIdAndCamera(
+      query.id,
+      query.camera,
+    );
   }
 
   @Get()
