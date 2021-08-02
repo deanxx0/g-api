@@ -6,6 +6,7 @@ import {
   Param,
   Post,
   Put,
+  Query,
 } from '@nestjs/common';
 import { InspectionResultService } from './inspection-result.service';
 import { InspectionResultDocument } from './schema/inspection-result.schema';
@@ -19,9 +20,26 @@ export class InspectionResultController {
     return this.inspectionResultService.findAll();
   }
 
+  @Get('limit')
+  async findAllLimit(@Query() query: any): Promise<InspectionResultDocument[]> {
+    return this.inspectionResultService.findAllLimit(query.limit);
+  }
+
+  @Get('period')
+  async findPeriod(@Query() query: any): Promise<InspectionResultDocument[]> {
+    return this.inspectionResultService.findPeriod(query.from, query.to);
+  }
+
+  @Get('latest')
+  async findLatest(): Promise<InspectionResultDocument> {
+    return this.inspectionResultService.findLatest();
+  }
+
   @Get(':id')
-  async find(@Param('id') id: string): Promise<InspectionResultDocument> {
-    return this.inspectionResultService.find(id);
+  async findByInspectionId(
+    @Param('id') id: string,
+  ): Promise<InspectionResultDocument[]> {
+    return this.inspectionResultService.findByInspectionId(id);
   }
 
   @Delete(':id')
