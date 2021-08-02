@@ -19,27 +19,27 @@ export class Inspection {
   @Prop()
   status: string;
 
-  // @Prop(
-  //   raw([
-  //     {
-  //       camera: { type: String },
-  //       grab: {
-  //         seq: { type: Number },
-  //         distance: { type: Number },
-  //       },
-  //       defects: [
-  //         {
-  //           x: { type: Number },
-  //           y: { type: Number },
-  //           width: { type: Number },
-  //           height: { type: Number },
-  //           code: { type: Number },
-  //         },
-  //       ],
-  //     },
-  //   ]),
-  // )
-  // inferenceResults: Record<string, any>;
+  @Prop(
+    raw([
+      {
+        camera: { type: String },
+        grab: {
+          seq: { type: Number },
+          distance: { type: Number },
+        },
+        defects: [
+          {
+            x: { type: Number },
+            y: { type: Number },
+            width: { type: Number },
+            height: { type: Number },
+            code: { type: Number },
+          },
+        ],
+      },
+    ]),
+  )
+  inferenceResults: Record<string, any>;
 }
 
 export const InspectionSchema = SchemaFactory.createForClass(Inspection);

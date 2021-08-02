@@ -77,6 +77,7 @@ export class ConnectorService {
     this.inspectionResultModel
       .updateOne({ inspectionId: id }, { $set: { status: status } })
       .exec();
+    // EndInspection 업데이트 시 inspectionResult 문서의 endtime과 elapsetime 업데이트 해야한다.
   }
 
   async createInspectionLog(inspectionId: string, status: string) {
@@ -99,9 +100,32 @@ export class ConnectorService {
   }
 
   private inferencResultCache: Array<CreateInferenceResultDto> = [];
+  private defectsCache = {
+    inspectionId: "",
+    defects: 0,
+    specialDefects: 0,
+    gapDefects: 0
+  }
+  // defectsCache들이 들어올 큐가 필요
+  // 이 큐에다 inspectionId가 다른게 4개 들어오면 첫번들어온걸 pop해버리는걸로 메모리쌓이는거 방지
   async pushInferenceResult(
     createInferenceResultDto: CreateInferenceResultDto,
   ) {
+    // 문서가 들어올때마다 해당 defect들의 개수를 캐시해두자
+    const specialDefectsCode = 10;
+    const gapDefectsCode = 100;
+    const defectsTemp = {
+      inspectionId: createInferenceResultDto.inspectionId,
+      defects: createInferenceResultDto.defects.length,
+      specialDefects: createInferenceResultDto.defects.map(obj => {
+        if(obj.code == specialDefectsCode) return obj; 
+      }).length,
+      gapDefects: createInferenceResultDto.defects.map(obj => {
+        if(obj.code == gapDefectsCode) return obj; 
+      }).length
+    };
+
+
     // insertMany: 일정 개수 차면 create
     // console.log('_______before pushed array:');
     // this.arr.map((a) => console.log(a));
@@ -131,15 +155,16 @@ export class ConnectorService {
     // console.log(`insertMany at interval...`);
   }
 
-  // await this.inspectionModel
-  //   .updateOne(
-  //     { _id: id },
-  //     { $push: { inferenceResults: new Object(createInferenceResult) } },
-  //   )
-  //   .exec();
+  async updateInspectionResult() {
+    // 각 결함 수를 구해야한다
+    // pushInferenceResult 함수에서 하나 받을때마다 해당 inspection의 디펙 정보들을 캐시해두고 가져오기만하자.
+    // 전역 큐가 있을건데 그 큐의 객체들 정보 전부 업뎃
+    this.inspectionResultModel
+      .updateOne({ inspectionId: id }, { $set: { totalDefects: defects, totalSpecialDefects: specialDefects, totalGapDefects: gapDefects } })
+      .exec();
+  }
 
-  // const updatedInspection = this.inspectionModel.findById(id).exec();
-  // await this.updateResultInfo(await updatedInspection);
+
 
   // async updateResultInfo(updatedInspection): Promise<ResultInfoDocument> {
   //   let updatedResultInfoDto: PostResultInfoDto;
