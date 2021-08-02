@@ -11,6 +11,7 @@ import { SensorModule } from './sensor/sensor.module';
 import { ConnectorModule } from './connector/connector.module';
 import { InspectionResultModule } from './inspectionResult/inspection-result.module';
 import { inferenceResultModule } from './inferenceResult/inference-result.module';
+import { InspectionLogModule } from './inspectionLog/inspection-log.module';
 
 @Module({
   imports: [
@@ -28,6 +29,7 @@ import { inferenceResultModule } from './inferenceResult/inference-result.module
     ConnectorModule,
     InspectionResultModule,
     inferenceResultModule,
+    InspectionLogModule,
   ],
 })
 export class AppModule {}
