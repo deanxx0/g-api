@@ -13,7 +13,7 @@ import {
   InspectionResultDocument,
 } from 'src/inspectionResult/schema/inspection-result.schema';
 import { Sensor, SensorDocument } from 'src/sensor/schema/sensor.schema';
-import { CreateInferenceResultDto } from './dto/create-inference-result.dto';
+import { CreateInferenceResultDto } from '../inferenceResult/dto/create-inference-result.dto';
 import { Timetest, TimetestDocument } from './timetest/timetest.schema';
 import {
   InspectionLog,
@@ -23,7 +23,7 @@ import { CreateInspectionLogDto } from 'src/inspection/dto/create-inspection-log
 import {
   InferenceResult,
   InferenceResultDocument,
-} from './schema/inference-result.schema';
+} from 'src/inferenceResult/schema/inference-result.schema';
 
 @Injectable()
 export class ConnectorService {

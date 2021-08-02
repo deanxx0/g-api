@@ -1,8 +1,8 @@
 import { Controller, Inject } from '@nestjs/common';
 import { KafkaService, SubscribeTo } from '@dean/nestjs-kafka';
 import { ConnectorService } from './connector.service';
-import { CreateInferenceResultDto } from './dto/create-inference-result.dto';
-import { PostInferenceResultDto } from './dto/post-inference-result.dto';
+import { CreateInferenceResultDto } from '../inferenceResult/dto/create-inference-result.dto';
+import { PostInferenceResultDto } from '../inferenceResult/dto/post-inference-result.dto';
 import { InspectionStatus } from './enum/inspection-status';
 import { Interval } from '@nestjs/schedule';
 

@@ -8,8 +8,8 @@ import {
   Put,
   Query,
 } from '@nestjs/common';
-import { InferenceResultDocument } from 'src/connector/schema/inference-result.schema';
 import { InferenceResultService } from './inference-result.service';
+import { InferenceResultDocument } from './schema/inference-result.schema';
 
 @Controller('inference-result')
 export class InferenceResultController {
