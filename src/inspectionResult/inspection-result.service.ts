@@ -44,8 +44,8 @@ export class InspectionResultService {
       .exec();
   }
 
-  async findByInspectionId(id: string): Promise<InspectionResultDocument[]> {
-    return this.inspectionResultModel.find({ inspectionId: id }).exec();
+  async findByInspectionId(id: string): Promise<InspectionResultDocument> {
+    return this.inspectionResultModel.findOne({ inspectionId: id }).exec();
   }
 
   async delete(id: string): Promise<InspectionResultDocument> {

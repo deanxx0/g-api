@@ -38,7 +38,7 @@ export class InspectionResultController {
   @Get(':id')
   async findByInspectionId(
     @Param('id') id: string,
-  ): Promise<InspectionResultDocument[]> {
+  ): Promise<InspectionResultDocument> {
     return this.inspectionResultService.findByInspectionId(id);
   }
 
