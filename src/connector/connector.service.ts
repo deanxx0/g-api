@@ -79,6 +79,17 @@ export class ConnectorService {
       .exec();
   }
 
+  async updateInspectionResultFinalResult(id: string) {
+    const inspectionResultDoc = await this.inspectionResultModel
+      .findOne({ _id: id })
+      .exec();
+    const finalResult =
+      inspectionResultDoc.totalDefects == 0 ? FinalResult.OK : FinalResult.NG;
+    this.inspectionResultModel
+      .updateOne({ inspectionId: id }, { $set: { finalResult: finalResult } })
+      .exec();
+  }
+
   async updateInspectionResultTime(id: string) {
     const inspectionDoc: any = await this.inspectionModel
       .findOne({ _id: id })
@@ -176,7 +187,7 @@ export class ConnectorService {
     // return await inferenceResultDoc.save();
   }
 
-  async updateInspectionResult() {
+  async updateInspectionResultDefects() {
     // 각 결함 수를 구해야한다
     // pushInferenceResult 함수에서 하나 받을때마다 해당 inspection의 디펙 정보들을 캐시해두고 가져오기만하자.
     // 전역 큐가 있을건데 그 큐의 객체들 정보 전부 업뎃
