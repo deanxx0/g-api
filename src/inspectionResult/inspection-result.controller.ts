@@ -10,7 +10,7 @@ import {
 import { InspectionResultService } from './inspection-result.service';
 import { InspectionResultDocument } from './schema/inspection-result.schema';
 
-@Controller('result-info')
+@Controller('inspection-result')
 export class InspectionResultController {
   constructor(private inspectionResultService: InspectionResultService) {}
 
