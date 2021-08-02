@@ -99,6 +99,13 @@ export class ConnectorService {
     createdInspectionLog.save();
   }
 
+  async createInferenceResult() {
+    if (this.inferencResultCache.length == 0) return;
+    this.inferenceResultModel.insertMany(this.inferencResultCache);
+    this.inferencResultCache = [];
+    // console.log(`insertMany at interval...`);
+  }
+
   private inferencResultCache: Array<CreateInferenceResultDto> = [];
   private defectsCache = {
     inspectionId: "",
@@ -125,7 +132,6 @@ export class ConnectorService {
       }).length
     };
 
-
     // insertMany: 일정 개수 차면 create
     // console.log('_______before pushed array:');
     // this.arr.map((a) => console.log(a));
@@ -148,20 +154,15 @@ export class ConnectorService {
     // return await inferenceResultDoc.save();
   }
 
-  async createInferenceResult() {
-    if (this.inferencResultCache.length == 0) return;
-    this.inferenceResultModel.insertMany(this.inferencResultCache);
-    this.inferencResultCache = [];
-    // console.log(`insertMany at interval...`);
-  }
+  
 
   async updateInspectionResult() {
     // 각 결함 수를 구해야한다
     // pushInferenceResult 함수에서 하나 받을때마다 해당 inspection의 디펙 정보들을 캐시해두고 가져오기만하자.
     // 전역 큐가 있을건데 그 큐의 객체들 정보 전부 업뎃
-    this.inspectionResultModel
-      .updateOne({ inspectionId: id }, { $set: { totalDefects: defects, totalSpecialDefects: specialDefects, totalGapDefects: gapDefects } })
-      .exec();
+    // this.inspectionResultModel
+    //   .updateOne({ inspectionId: id }, { $set: { totalDefects: defects, totalSpecialDefects: specialDefects, totalGapDefects: gapDefects } })
+    //   .exec();
   }
 
 

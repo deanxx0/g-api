@@ -149,6 +149,7 @@ export class ConnectorController {
   @Interval(1000)
   async handleInterval() {
     this.connectorService.createInferenceResult();
+    this.connectorService.updateInspectionResult();
   }
 
   private toCreateInferenceResultDto(
