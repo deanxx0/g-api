@@ -77,7 +77,28 @@ export class ConnectorService {
     this.inspectionResultModel
       .updateOne({ inspectionId: id }, { $set: { status: status } })
       .exec();
-    // EndInspection 업데이트 시 inspectionResult 문서의 endtime과 elapsetime 업데이트 해야한다.
+  }
+
+  async updateInspectionResultTime(id: string) {
+    const inspectionDoc: any = await this.inspectionModel
+      .findOne({ _id: id })
+      .exec();
+    const endTime = await inspectionDoc.updatedAt;
+    const elapseTimeSec = Math.floor(
+      (endTime.getTime() - inspectionDoc.createdAt.getTime()) / 1000,
+    );
+    const elapseTime: string = await this.toTime(elapseTimeSec);
+
+    this.inspectionResultModel
+      .updateOne(
+        { inspectionId: id },
+        { $set: { endTime: endTime, elapseTime: elapseTime } },
+      )
+      .exec();
+  }
+
+  async toTime(sec: number): Promise<string> {
+    return new Date(sec * 1000).toISOString().substr(11, 8);
   }
 
   async createInspectionLog(inspectionId: string, status: string) {
@@ -199,9 +220,5 @@ export class ConnectorService {
   //       },
   //     })
   //     .exec();
-  // }
-
-  // async toTime(sec: number): Promise<string> {
-  //   return new Date(sec * 1000).toISOString().substr(11, 8)
   // }
 }

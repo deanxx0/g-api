@@ -119,6 +119,8 @@ export class ConnectorController {
       InspectionStatus.EndInspection,
     );
 
+    await this.connectorService.updateInspectionResultTime(data.inspection);
+
     await this.connectorService.createInspectionLog(
       data.inspection,
       InspectionStatus.EndInspection,
