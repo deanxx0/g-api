@@ -4,7 +4,7 @@ import { Model } from 'mongoose';
 import {
   InferenceResult,
   InferenceResultDocument,
-} from 'src/connector/schema/inference-result.schema';
+} from './schema/inference-result.schema';
 
 @Injectable()
 export class InferenceResultService {

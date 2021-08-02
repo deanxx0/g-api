@@ -20,11 +20,12 @@ import {
   InspectionLog,
   InspectionLogSchema,
 } from 'src/inspection/schema/inspection-log.schema';
+
+import { ScheduleModule } from '@nestjs/schedule';
 import {
   InferenceResult,
   InferenceResultSchema,
-} from './schema/inference-result.schema';
-import { ScheduleModule } from '@nestjs/schedule';
+} from 'src/inferenceResult/schema/inference-result.schema';
 
 @Module({
   imports: [
