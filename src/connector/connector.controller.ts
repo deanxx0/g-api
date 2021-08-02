@@ -157,7 +157,9 @@ export class ConnectorController {
   ): CreateInferenceResultDto {
     return {
       inspectionId: PostInferenceResultDto.inspection,
+      inspectionNo: PostInferenceResultDto.inspectionNo,
       camera: PostInferenceResultDto.camera,
+      cameraName: PostInferenceResultDto.cameraName,
       grab: PostInferenceResultDto.grab,
       defects: PostInferenceResultDto.defects,
     };

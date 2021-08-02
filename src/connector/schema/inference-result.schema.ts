@@ -8,7 +8,13 @@ export class InferenceResult {
   inspectionId: string;
 
   @Prop()
+  inspectionNo: number;
+
+  @Prop()
   camera: string;
+
+  @Prop()
+  cameraName: string;
 
   @Prop(
     raw({

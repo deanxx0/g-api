@@ -99,6 +99,8 @@ export class ConnectorService {
     createdInspectionLog.save();
   }
 
+  private inferencResultCache: Array<CreateInferenceResultDto> = [];
+
   async createInferenceResult() {
     if (this.inferencResultCache.length == 0) return;
     this.inferenceResultModel.insertMany(this.inferencResultCache);
@@ -106,7 +108,6 @@ export class ConnectorService {
     // console.log(`insertMany at interval...`);
   }
 
-  private inferencResultCache: Array<CreateInferenceResultDto> = [];
   private defectsCache = {
     inspectionId: "",
     defects: 0,
