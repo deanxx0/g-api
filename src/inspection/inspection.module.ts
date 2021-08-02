@@ -8,7 +8,7 @@ import { Inspection, InspectionSchema } from './schema/inspection.schema';
 import {
   InspectionLog,
   InspectionLogSchema,
-} from './schema/inspection-log.schema';
+} from '../inspectionLog/schema/inspection-log.schema';
 import {
   InspectionResult,
   InspectionResultSchema,

@@ -19,7 +19,7 @@ import { Timetest, TimetestSchema } from './timetest/timetest.schema';
 import {
   InspectionLog,
   InspectionLogSchema,
-} from 'src/inspection/schema/inspection-log.schema';
+} from 'src/inspectionLog/schema/inspection-log.schema';
 
 import { ScheduleModule } from '@nestjs/schedule';
 import {

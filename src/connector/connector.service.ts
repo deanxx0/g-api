@@ -18,8 +18,8 @@ import { Timetest, TimetestDocument } from './timetest/timetest.schema';
 import {
   InspectionLog,
   InspectionLogDocument,
-} from 'src/inspection/schema/inspection-log.schema';
-import { CreateInspectionLogDto } from 'src/inspection/dto/create-inspection-log.dto';
+} from 'src/inspectionLog/schema/inspection-log.schema';
+import { CreateInspectionLogDto } from 'src/inspectionLog/dto/create-inspection-log.dto';
 import {
   InferenceResult,
   InferenceResultDocument,

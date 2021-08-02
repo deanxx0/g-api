@@ -8,8 +8,8 @@ import { Inspection, InspectionDocument } from './schema/inspection.schema';
 import {
   InspectionLog,
   InspectionLogDocument,
-} from './schema/inspection-log.schema';
-import { CreateInspectionLogDto } from './dto/create-inspection-log.dto';
+} from '../inspectionLog/schema/inspection-log.schema';
+import { CreateInspectionLogDto } from '../inspectionLog/dto/create-inspection-log.dto';
 import {
   InspectionResult,
   InspectionResultDocument,
