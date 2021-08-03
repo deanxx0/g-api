@@ -119,6 +119,8 @@ export class ConnectorController {
       InspectionStatus.EndInspection,
     );
 
+    await this.connectorService.updateInspectionResultDefects(data.inspection);
+
     await this.connectorService.updateInspectionResultTime(data.inspection);
 
     await this.connectorService.updateInspectionResultFinalResult(
@@ -155,7 +157,6 @@ export class ConnectorController {
   @Interval(1000)
   async handleInterval() {
     this.connectorService.createInferenceResult();
-    this.connectorService.updateInspectionResultDefects();
   }
 
   private toCreateInferenceResultDto(
