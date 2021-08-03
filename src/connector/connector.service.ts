@@ -80,14 +80,14 @@ export class ConnectorService {
   }
 
   async updateInspectionResultFinalResult(id: string) {
-    const inspectionResultDoc = await this.inspectionResultModel
-      .findOne({ _id: id })
-      .exec();
-    const finalResult =
-      inspectionResultDoc.totalDefects == 0 ? FinalResult.OK : FinalResult.NG;
-    this.inspectionResultModel
-      .updateOne({ inspectionId: id }, { $set: { finalResult: finalResult } })
-      .exec();
+    // const inspectionResultDoc = await this.inspectionResultModel
+    //   .findOne({ _id: id })
+    //   .exec();
+    // const finalResult =
+    //   inspectionResultDoc.totalDefects == 0 ? FinalResult.OK : FinalResult.NG;
+    // this.inspectionResultModel
+    //   .updateOne({ inspectionId: id }, { $set: { finalResult: finalResult } })
+    //   .exec();
   }
 
   async updateInspectionResultTime(id: string) {
