@@ -10,7 +10,7 @@ export class PostInspectionResultDto {
   vehicleColor: String;
   vinCode: String;
   totalDefects: number;
-  totalSpecialDefects: number;
+  totalColorDefects: number;
   totalGapDefects: number;
   finalResult: FinalResult;
   status: String;

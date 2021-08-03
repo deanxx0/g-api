@@ -144,11 +144,11 @@ export class ConnectorService {
   }
 
   async updateInspectionResultDefects(inspectionId: string) {
-    const specialCode = 10;
+    const colorCode = 10;
     const gapCode = 100;
 
     let totalDefects = 0;
-    let totalSpecialDefects = 0;
+    let totalColorDefects = 0;
     let totalGapDefects = 0;
 
     const inferDocs: InferenceResult[] = await this.inferenceResultModel
@@ -158,7 +158,7 @@ export class ConnectorService {
     inferDocs.forEach((inferDoc) => {
       totalDefects += inferDoc.defects.length;
       inferDoc.defects.forEach((defect) => {
-        if (defect.code == specialCode) totalSpecialDefects++;
+        if (defect.code == colorCode) totalColorDefects++;
         if (defect.code == gapCode) totalGapDefects++;
       });
     });
@@ -168,7 +168,7 @@ export class ConnectorService {
         { inspectionId: inspectionId },
         {
           totalDefects: totalDefects,
-          totalSpecialDefects: totalSpecialDefects,
+          totalColorDefects: totalColorDefects,
           totalGapDefects: totalGapDefects,
         },
       )

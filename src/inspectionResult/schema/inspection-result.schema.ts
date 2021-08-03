@@ -34,7 +34,7 @@ export class InspectionResult {
   totalDefects: number;
 
   @Prop()
-  totalSpecialDefects: number;
+  totalColorDefects: number;
 
   @Prop()
   totalGapDefects: number;
