@@ -1,6 +1,7 @@
 import { Injectable } from '@nestjs/common';
 import { InjectModel } from '@nestjs/mongoose';
 import { Model } from 'mongoose';
+import { CreateInferenceResultDto } from './dto/create-inference-result.dto';
 import {
   InferenceResult,
   InferenceResultDocument,
@@ -15,6 +16,28 @@ export class InferenceResultService {
 
   async findByInspectionId(id: string): Promise<InferenceResultDocument[]> {
     return this.inferenceResultModel.find({ inspectionId: id }).exec();
+  }
+
+  async getDefectsByInspectionId(inspectionId: string): Promise<InferenceResultDocument[]> {
+    const inferDocs: InferenceResult[]= await this.inferenceResultModel.find({ inspectionId: inspectionId }).exec();
+
+    let inferDocsPerDefect = [];
+    
+    inferDocs.forEach( inferDoc => {
+      inferDoc.defects.forEach( defect => {
+        const dividedInferDoc = {
+          inspectionId: inferDoc.inspectionId,
+          inspectionNo: inferDoc.inspectionNo,
+          camera: inferDoc.camera,
+          cameraName: inferDoc.cameraName,
+          grab: inferDoc.grab,
+          defects: [ defect ]
+        };
+        inferDocsPerDefect.push(dividedInferDoc);
+      })
+    })
+
+    return inferDocsPerDefect;
   }
 
   async findByInspectionIdAndCamera(
