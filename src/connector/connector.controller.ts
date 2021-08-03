@@ -143,12 +143,6 @@ export class ConnectorController {
     // console.log(`inference result consumed[ offset: ${offset}, key: ${key}, data: ${data}, timestamp: ${timestamp} ]`);
     data = JSON.parse(data);
 
-    // inspecting status update 안한다.
-    // this.connectorService.updateInspectionStatus(
-    //   data.inspection,
-    //   InspectionStatus.Inspecting,
-    // );
-
     await this.connectorService.pushInferenceResult(
       this.toCreateInferenceResultDto(await data),
     );
