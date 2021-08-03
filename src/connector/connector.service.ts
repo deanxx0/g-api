@@ -122,12 +122,9 @@ export class ConnectorService {
       createdInspectionLogDto,
     );
 
-    createdInspectionLog.inspectionId = inspectionDoc._id;
-    createdInspectionLog.inspectionNo = inspectionDoc.inspectionNo;
-    createdInspectionLog.vinCode = inspectionDoc.vehicle.vinCode;
-    createdInspectionLog.vehicleModel = inspectionDoc.vehicle.properties.model;
-    createdInspectionLog.vehicleColor = inspectionDoc.vehicle.properties.color;
-    createdInspectionLog.status = status;
+    createdInspectionLog.system = 'MASTER';
+    createdInspectionLog.type = 'INFO';
+    createdInspectionLog.description = `InspectionNO: ${inspectionDoc.inspectionNo}, Status: ${status}, Vincode: ${inspectionDoc.vehicle.vinCode}, Model: ${inspectionDoc.vehicle.properties.model}, Color: ${inspectionDoc.vehicle.properties.color}`;
 
     createdInspectionLog.save();
   }

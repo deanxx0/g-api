@@ -164,13 +164,9 @@ export class InspectionService {
       createdInspectionLogDto,
     );
 
-    createdInspectionLog.inspectionId = createdInspection._id;
-    createdInspectionLog.inspectionNo = createdInspection.inspectionNo;
-    createdInspectionLog.vehicleModel =
-      createdInspection.vehicle.properties.model;
-    createdInspectionLog.vehicleColor =
-      createdInspection.vehicle.properties.color;
-    createdInspectionLog.status = InspectionStatus.PreInspection;
+    createdInspectionLog.system = 'MASTER';
+    createdInspectionLog.type = 'INFO';
+    createdInspectionLog.description = `InspectionNO: ${createdInspection.inspectionNo}, Status: ${InspectionStatus.PreInspection}, Vincode: ${createdInspection.vehicle.vinCode}, Model: ${createdInspection.vehicle.properties.model}, Color: ${createdInspection.vehicle.properties.color}`;
 
     return createdInspectionLog.save();
   }

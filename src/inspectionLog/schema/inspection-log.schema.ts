@@ -6,22 +6,13 @@ export type InspectionLogDocument = InspectionLog & Document;
 @Schema({ timestamps: true })
 export class InspectionLog {
   @Prop()
-  inspectionId: string;
+  system: string;
 
   @Prop()
-  inspectionNo: number;
+  type: string;
 
   @Prop()
-  vinCode: String;
-
-  @Prop()
-  vehicleModel: String;
-
-  @Prop()
-  vehicleColor: String;
-
-  @Prop()
-  status: String;
+  description: string;
 }
 
 export const InspectionLogSchema = SchemaFactory.createForClass(InspectionLog);
