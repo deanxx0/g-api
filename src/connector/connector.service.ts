@@ -124,6 +124,7 @@ export class ConnectorService {
 
     createdInspectionLog.inspectionId = inspectionDoc._id;
     createdInspectionLog.inspectionNo = inspectionDoc.inspectionNo;
+    createdInspectionLog.vinCode = inspectionDoc.vehicle.vinCode;
     createdInspectionLog.vehicleModel = inspectionDoc.vehicle.properties.model;
     createdInspectionLog.vehicleColor = inspectionDoc.vehicle.properties.color;
     createdInspectionLog.status = status;
