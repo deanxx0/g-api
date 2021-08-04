@@ -13,6 +13,16 @@ export class InspectionResultService {
     private inspectionResultModel: Model<InspectionResultDocument>,
   ) {}
 
+  async getInspectionIdByVincode(vincode: string): Promise<String> {
+    console.log(`vincode: ${vincode}`);
+    return (
+      await this.inspectionResultModel.findOne(
+        { vinCode: vincode },
+        { inspectionId: 1 },
+      )
+    ).inspectionId;
+  }
+
   async findFilter(
     from: string,
     to: string,

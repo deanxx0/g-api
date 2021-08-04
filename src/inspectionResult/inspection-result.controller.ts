@@ -15,6 +15,11 @@ import { InspectionResultDocument } from './schema/inspection-result.schema';
 export class InspectionResultController {
   constructor(private inspectionResultService: InspectionResultService) {}
 
+  @Get('inspection-id')
+  async getInspectionIdByVincode(@Query() query: any): Promise<String> {
+    return this.inspectionResultService.getInspectionIdByVincode(query.vincode);
+  }
+
   @Get('filter')
   async findFilter(@Query() query: any): Promise<InspectionResultDocument[]> {
     return this.inspectionResultService.findFilter(
