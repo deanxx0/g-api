@@ -15,6 +15,11 @@ import { InspectionResultDocument } from './schema/inspection-result.schema';
 export class InspectionResultController {
   constructor(private inspectionResultService: InspectionResultService) {}
 
+  @Get('model-color-list')
+  async getModelColorList(): Promise<object> {
+    return this.inspectionResultService.getModelColorList();
+  }
+
   @Get('inspection-id')
   async getInspectionIdByVincode(@Query() query: any): Promise<String> {
     return this.inspectionResultService.getInspectionIdByVincode(query.vincode);

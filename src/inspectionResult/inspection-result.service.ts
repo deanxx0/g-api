@@ -13,8 +13,32 @@ export class InspectionResultService {
     private inspectionResultModel: Model<InspectionResultDocument>,
   ) {}
 
+  async getModelColorList(): Promise<object> {
+    let modelSet = new Set<String>();
+    let colorSet = new Set<String>();
+    modelSet.add('all');
+    colorSet.add('all');
+
+    const docs = await this.inspectionResultModel.find(
+      {},
+      { vehicleModel: 1, vehicleColor: 1 },
+    );
+
+    docs.forEach((doc) => {
+      modelSet.add(doc.vehicleModel);
+      colorSet.add(doc.vehicleColor);
+    });
+
+    const models: Array<String> = [...modelSet];
+    const colors: Array<String> = [...colorSet];
+
+    return {
+      models,
+      colors,
+    };
+  }
+
   async getInspectionIdByVincode(vincode: string): Promise<String> {
-    console.log(`vincode: ${vincode}`);
     return (
       await this.inspectionResultModel.findOne(
         { vinCode: vincode },
