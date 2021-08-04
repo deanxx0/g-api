@@ -13,6 +13,44 @@ export class InspectionResultService {
     private inspectionResultModel: Model<InspectionResultDocument>,
   ) {}
 
+  async findFilter(
+    from: string,
+    to: string,
+    model: string,
+    color: string,
+  ): Promise<InspectionResultDocument[]> {
+    const fromDate = new Date(new Date(`${from}T00:00:00`).getTime());
+    const toDate = new Date(new Date(`${to}T11:59:00`).getTime());
+
+    if (model == 'all' && color == 'all') {
+      return this.inspectionResultModel
+        .find({ createdAt: { $gt: fromDate, $lt: toDate } })
+        .exec();
+    } else if (color == 'all') {
+      return this.inspectionResultModel
+        .find({
+          createdAt: { $gt: fromDate, $lt: toDate },
+          vehicleModel: model,
+        })
+        .exec();
+    } else if (model == 'all') {
+      return this.inspectionResultModel
+        .find({
+          createdAt: { $gt: fromDate, $lt: toDate },
+          vehicleColor: color,
+        })
+        .exec();
+    } else {
+      return this.inspectionResultModel
+        .find({
+          createdAt: { $gt: fromDate, $lt: toDate },
+          vehicleModel: model,
+          vehicleColor: color,
+        })
+        .exec();
+    }
+  }
+
   async findAll(): Promise<InspectionResultDocument[]> {
     return this.inspectionResultModel.find().exec();
   }

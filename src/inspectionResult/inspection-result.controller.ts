@@ -15,6 +15,16 @@ import { InspectionResultDocument } from './schema/inspection-result.schema';
 export class InspectionResultController {
   constructor(private inspectionResultService: InspectionResultService) {}
 
+  @Get('filter')
+  async findFilter(@Query() query: any): Promise<InspectionResultDocument[]> {
+    return this.inspectionResultService.findFilter(
+      query.from,
+      query.to,
+      query.model,
+      query.color,
+    );
+  }
+
   @Get()
   async findAll(): Promise<InspectionResultDocument[]> {
     return this.inspectionResultService.findAll();
