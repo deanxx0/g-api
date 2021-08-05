@@ -54,31 +54,31 @@ export class InspectionResultService {
     color: string,
   ): Promise<InspectionResultDocument[]> {
     const KR_TIME_DIFF = 9 * 60 * 60 * 1000; // 9 hours
-    const fromDate = new Date(new Date(`${from}T00:00:00`).getTime());
-    const toDate = new Date(new Date(`${to}T11:59:00`).getTime());
-
+    const fromDate = new Date(new Date(`${from}T00:00:00.000Z`).getTime() - KR_TIME_DIFF);
+    const toDate = new Date(new Date(`${to}T23:59:59.000Z`).getTime() - KR_TIME_DIFF);
+    
     if (model == 'all' && color == 'all') {
       return this.inspectionResultModel
-        .find({ createdAt: { $gt: fromDate, $lt: toDate } })
+        .find({ createdAt: { $gte: fromDate, $lte: toDate } })
         .exec();
     } else if (color == 'all') {
       return this.inspectionResultModel
         .find({
-          createdAt: { $gt: fromDate, $lt: toDate },
+          createdAt: { $gte: fromDate, $lte: toDate },
           vehicleModel: model,
         })
         .exec();
     } else if (model == 'all') {
       return this.inspectionResultModel
         .find({
-          createdAt: { $gt: fromDate, $lt: toDate },
+          createdAt: { $gte: fromDate, $lte: toDate },
           vehicleColor: color,
         })
         .exec();
     } else {
       return this.inspectionResultModel
         .find({
-          createdAt: { $gt: fromDate, $lt: toDate },
+          createdAt: { $gte: fromDate, $lte: toDate },
           vehicleModel: model,
           vehicleColor: color,
         })
