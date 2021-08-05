@@ -13,10 +13,10 @@ export class InspectionResult {
   inspectionNo: number;
 
   @Prop()
-  startTime: String;
+  startTime: Date;
 
   @Prop()
-  endTime: String;
+  endTime: Date;
 
   @Prop()
   elapseTime: String;

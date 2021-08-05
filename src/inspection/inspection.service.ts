@@ -141,8 +141,8 @@ export class InspectionService {
 
     createdInspectionResult.inspectionId = createdDoc._id;
     createdInspectionResult.inspectionNo = createdDoc.inspectionNo;
-    createdInspectionResult.startTime = new Date().toLocaleString();
-    createdInspectionResult.endTime = '-';
+    createdInspectionResult.startTime = createdDoc.createdAt;
+    createdInspectionResult.endTime = null;
     createdInspectionResult.elapseTime = '-';
     createdInspectionResult.vehicleModel = createdDoc.vehicle.properties.model;
     createdInspectionResult.vehicleColor = createdDoc.vehicle.properties.color;
@@ -164,7 +164,6 @@ export class InspectionService {
       createdInspectionLogDto,
     );
 
-    createdInspectionLog.time = new Date().toLocaleString();
     createdInspectionLog.system = 'MASTER';
     createdInspectionLog.type = 'INFO';
     createdInspectionLog.description = `InspectionNO: ${createdInspection.inspectionNo}, Status: ${InspectionStatus.PreInspection}, Vincode: ${createdInspection.vehicle.vinCode}, Model: ${createdInspection.vehicle.properties.model}, Color: ${createdInspection.vehicle.properties.color}`;

@@ -103,7 +103,7 @@ export class ConnectorService {
     this.inspectionResultModel
       .updateOne(
         { inspectionId: id },
-        { $set: { endTime: new Date(endTime).toLocaleString(), elapseTime: elapseTime } },
+        { $set: { endTime: endTime, elapseTime: elapseTime } },
       )
       .exec();
   }

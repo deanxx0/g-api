@@ -3,8 +3,8 @@ import { FinalResult } from '../enum/final-result';
 export class CreateInspectionResultDto {
   inspectionId: string;
   inspectionNo: number;
-  startTime: String;
-  endTime: String;
+  startTime: Date;
+  endTime: Date;
   elapseTime: String;
   vehicleModel: String;
   vehicleColor: String;
