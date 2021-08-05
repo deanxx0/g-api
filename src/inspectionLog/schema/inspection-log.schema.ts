@@ -6,9 +6,6 @@ export type InspectionLogDocument = InspectionLog & Document;
 @Schema({ timestamps: true })
 export class InspectionLog {
   @Prop()
-  time: string;
-  
-  @Prop()
   system: string;
 
   @Prop()
