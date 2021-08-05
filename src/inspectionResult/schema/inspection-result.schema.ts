@@ -13,13 +13,13 @@ export class InspectionResult {
   inspectionNo: number;
 
   @Prop()
-  startTime: Date;
+  startTime: String;
 
   @Prop()
-  endTime: Date;
+  endTime: String;
 
   @Prop()
-  elapseTime: string;
+  elapseTime: String;
 
   @Prop()
   vehicleModel: String;
