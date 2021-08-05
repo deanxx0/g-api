@@ -109,7 +109,12 @@ export class ConnectorService {
   }
 
   async toTime(sec: number): Promise<string> {
-    return new Date(sec * 1000).toISOString().substr(11, 8);
+    //return new Date(sec * 1000).toISOString().substr(11, 8);
+    const hours = Math.floor(sec / 3600);
+    sec %= 3600;
+    const minutes = Math.floor(sec / 60);
+    const seconds = sec % 60;
+    return `${hours}:${minutes}:${seconds}`;
   }
 
   async createInspectionLog(inspectionId: string, status: string) {
