@@ -47,7 +47,7 @@ export class InspectionResultService {
     ).inspectionId;
   }
 
-  async findFilter(
+  async findByFilter(
     from: string,
     to: string,
     model: string,

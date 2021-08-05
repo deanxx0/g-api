@@ -26,8 +26,8 @@ export class InspectionResultController {
   }
 
   @Get('filter')
-  async findFilter(@Query() query: any): Promise<InspectionResultDocument[]> {
-    return this.inspectionResultService.findFilter(
+  async findByFilter(@Query() query: any): Promise<InspectionResultDocument[]> {
+    return this.inspectionResultService.findByFilter(
       query.from,
       query.to,
       query.model,
