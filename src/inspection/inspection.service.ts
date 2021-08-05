@@ -141,9 +141,9 @@ export class InspectionService {
 
     createdInspectionResult.inspectionId = createdDoc._id;
     createdInspectionResult.inspectionNo = createdDoc.inspectionNo;
-    createdInspectionResult.startTime = createdDoc.createdAt;
-    createdInspectionResult.endTime = createdDoc.updatedAt;
-    createdInspectionResult.elapseTime = '00:00:00';
+    createdInspectionResult.startTime = new Date().toLocaleString();
+    createdInspectionResult.endTime = '-';
+    createdInspectionResult.elapseTime = '-';
     createdInspectionResult.vehicleModel = createdDoc.vehicle.properties.model;
     createdInspectionResult.vehicleColor = createdDoc.vehicle.properties.color;
     createdInspectionResult.vinCode = createdDoc.vehicle.vinCode;
