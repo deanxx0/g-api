@@ -54,9 +54,13 @@ export class InspectionResultService {
     color: string,
   ): Promise<InspectionResultDocument[]> {
     const KR_TIME_DIFF = 9 * 60 * 60 * 1000; // 9 hours
-    const fromDate = new Date(new Date(`${from}T00:00:00.000Z`).getTime() - KR_TIME_DIFF);
-    const toDate = new Date(new Date(`${to}T23:59:59.000Z`).getTime() - KR_TIME_DIFF);
-    
+    const fromDate = new Date(
+      new Date(`${from}T00:00:00.000Z`).getTime() - KR_TIME_DIFF,
+    );
+    const toDate = new Date(
+      new Date(`${to}T23:59:59.000Z`).getTime() - KR_TIME_DIFF,
+    );
+
     if (model == 'all' && color == 'all') {
       return this.inspectionResultModel
         .find({ createdAt: { $gte: fromDate, $lte: toDate } })
