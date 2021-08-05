@@ -53,6 +53,7 @@ export class InspectionResultService {
     model: string,
     color: string,
   ): Promise<InspectionResultDocument[]> {
+    const KR_TIME_DIFF = 9 * 60 * 60 * 1000; // 9 hours
     const fromDate = new Date(new Date(`${from}T00:00:00`).getTime());
     const toDate = new Date(new Date(`${to}T11:59:00`).getTime());
 
