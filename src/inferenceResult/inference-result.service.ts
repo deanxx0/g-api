@@ -34,7 +34,7 @@ export class InferenceResultService {
           cameraName: inferDoc.cameraName,
           grab: inferDoc.grab,
           seq: index,
-          defect: defect,
+          defect: [defect],
         };
         inferDocsPerDefect.push(dividedInferDoc);
       });
