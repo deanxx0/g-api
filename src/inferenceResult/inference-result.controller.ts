@@ -23,9 +23,7 @@ export class InferenceResultController {
   }
 
   @Get('inspection-id/defects')
-  async getDefectsByInspectionId(
-    @Query() query: any,
-  ): Promise<InferenceResultDocument[]> {
+  async getDefectsByInspectionId(@Query() query: any): Promise<object[]> {
     return this.inferenceResultService.getDefectsByInspectionId(query.id);
   }
 

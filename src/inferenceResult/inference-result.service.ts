@@ -18,24 +18,23 @@ export class InferenceResultService {
     return this.inferenceResultModel.find({ inspectionId: id }).exec();
   }
 
-  async getDefectsByInspectionId(
-    inspectionId: string,
-  ): Promise<InferenceResultDocument[]> {
+  async getDefectsByInspectionId(inspectionId: string): Promise<object[]> {
     const inferDocs: InferenceResult[] = await this.inferenceResultModel
       .find({ inspectionId: inspectionId })
       .exec();
 
-    let inferDocsPerDefect = [];
+    let inferDocsPerDefect: Array<object> = [];
 
     inferDocs.forEach((inferDoc) => {
-      inferDoc.defects.forEach((defect) => {
+      inferDoc.defects.forEach((defect, index) => {
         const dividedInferDoc = {
           inspectionId: inferDoc.inspectionId,
           inspectionNo: inferDoc.inspectionNo,
           camera: inferDoc.camera,
           cameraName: inferDoc.cameraName,
           grab: inferDoc.grab,
-          defects: [defect],
+          seq: index,
+          defect: defect,
         };
         inferDocsPerDefect.push(dividedInferDoc);
       });
