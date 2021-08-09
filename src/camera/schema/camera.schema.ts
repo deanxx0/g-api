@@ -30,6 +30,21 @@ export class Camera {
 
   @Prop()
   serverIp: string;
+
+  @Prop()
+  x: number;
+
+  @Prop()
+  y: number;
+
+  @Prop()
+  z: number;
+
+  @Prop()
+  resolution: number;
+
+  @Prop()
+  fov: number;
 }
 
 export const CameraSchema = SchemaFactory.createForClass(Camera);
