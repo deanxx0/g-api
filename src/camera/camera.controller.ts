@@ -72,7 +72,7 @@ export class CameraController {
       y: postCameraDto.y,
       z: postCameraDto.z,
       resolution: postCameraDto.resolution,
-      fov: postCameraDto.fov
+      fov: postCameraDto.fov,
     };
   }
 }
