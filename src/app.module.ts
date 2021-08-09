@@ -13,6 +13,7 @@ import { InspectionResultModule } from './inspectionResult/inspection-result.mod
 import { inferenceResultModule } from './inferenceResult/inference-result.module';
 import { InspectionLogModule } from './inspectionLog/inspection-log.module';
 import { VehicleModelModule } from './vehicleModel/vehicle-model.module';
+import { VehicleColorModule } from './vehicleColor/vehicle-color.module';
 
 @Module({
   imports: [
@@ -32,6 +33,7 @@ import { VehicleModelModule } from './vehicleModel/vehicle-model.module';
     inferenceResultModule,
     InspectionLogModule,
     VehicleModelModule,
+    VehicleColorModule,
   ],
 })
 export class AppModule {}
