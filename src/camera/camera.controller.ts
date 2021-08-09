@@ -68,6 +68,11 @@ export class CameraController {
       ip: postCameraDto.ip,
       nicIp: postCameraDto.nicIp,
       serverIp: postCameraDto.serverIp,
+      x: postCameraDto.x,
+      y: postCameraDto.y,
+      z: postCameraDto.z,
+      resolution: postCameraDto.resolution,
+      fov: postCameraDto.fov
     };
   }
 }
