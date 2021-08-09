@@ -12,4 +12,4 @@ import { ModelSchema } from './schema/model.schema';
   controllers: [ModelController],
   providers: [ModelService],
 })
-export class SensorModule {}
+export class ModelModule {}
