@@ -1,6 +1,11 @@
 import { Injectable } from '@nestjs/common';
 import { InjectModel } from '@nestjs/mongoose';
 import { Model } from 'mongoose';
+import { CreateVehicleColorDto } from 'src/vehicleColor/dto/create-vehicle-color.dto';
+import {
+  VehicleColor,
+  VehicleColorDocument,
+} from 'src/vehicleColor/schema/vehicle-color.schema';
 import { CreateVehicleModelDto } from 'src/vehicleModel/dto/create-vehicle-model.dto';
 import {
   VehicleModel,
@@ -15,6 +20,8 @@ export class VehicleService {
     @InjectModel(Vehicle.name) private vehicleModel: Model<VehicleDocument>,
     @InjectModel(VehicleModel.name)
     private vehicleModelModel: Model<VehicleModelDocument>,
+    @InjectModel(VehicleColor.name)
+    private vehicleColorModel: Model<VehicleColorDocument>,
   ) {}
 
   async findAllVehicles(): Promise<Vehicle[]> {
@@ -36,14 +43,28 @@ export class VehicleService {
       model: createdVehicle.properties.model,
     };
 
+    const vehicleColorDoc: CreateVehicleColorDto = {
+      color: createdVehicle.properties.color,
+    };
+
     const vehicleModelFindResult: VehicleModelDocument[] =
       await this.vehicleModelModel
         .find({ model: { $in: [vehicleModelDoc.model] } })
         .exec();
 
+    const vehicleColorFindResult: VehicleColorDocument[] =
+      await this.vehicleColorModel
+        .find({ color: { $in: [vehicleColorDoc.color] } })
+        .exec();
+
     if (vehicleModelFindResult.length == 0) {
       const createdVehicleModel = new this.vehicleModelModel(vehicleModelDoc);
       createdVehicleModel.save();
+    }
+
+    if (vehicleColorFindResult.length == 0) {
+      const createdVehicleColor = new this.vehicleColorModel(vehicleColorDoc);
+      createdVehicleColor.save();
     }
 
     return createdVehicle.save();

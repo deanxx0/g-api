@@ -1,6 +1,9 @@
 import { Module } from '@nestjs/common';
 import { MongooseModule } from '@nestjs/mongoose';
-import { VehicleColor, VehicleColorSchema } from './schema/vehicle-color.schema';
+import {
+  VehicleColor,
+  VehicleColorSchema,
+} from './schema/vehicle-color.schema';
 import { VehicleColorController } from './vehicle-color.controller';
 import { VehicleColorService } from './vehicle-color.service';
 

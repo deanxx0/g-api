@@ -7,12 +7,19 @@ import {
   VehicleModel,
   VehicleModelSchema,
 } from 'src/vehicleModel/schema/vehicle-model.schema';
+import {
+  VehicleColor,
+  VehicleColorSchema,
+} from 'src/vehicleColor/schema/vehicle-color.schema';
 
 @Module({
   imports: [
     MongooseModule.forFeature([{ name: Vehicle.name, schema: VehicleSchema }]),
     MongooseModule.forFeature([
       { name: VehicleModel.name, schema: VehicleModelSchema },
+    ]),
+    MongooseModule.forFeature([
+      { name: VehicleColor.name, schema: VehicleColorSchema },
     ]),
   ],
   controllers: [VehicleController],
