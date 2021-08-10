@@ -27,14 +27,12 @@ export class InspectionLogService {
     );
 
     if (type == 'all') {
-      console.log(`if type=all`);
       return this.inspectionLogModel
         .find({
           createdAt: { $gte: fromDate, $lte: toDate },
         })
         .exec();
     } else {
-      console.log(`if type=value`);
       return this.inspectionLogModel
         .find({
           createdAt: { $gte: fromDate, $lte: toDate },
