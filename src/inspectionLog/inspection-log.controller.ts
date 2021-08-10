@@ -15,6 +15,16 @@ import { InspectionLogDocument } from './schema/inspection-log.schema';
 export class InspectionLogController {
   constructor(private inspectionLogService: InspectionLogService) {}
 
+  @Get('filter')
+  async findByFilter(@Query() query: any): Promise<InspectionLogDocument[]> {
+    console.log(`from: ${query.from}, to: ${query.to}, type: ${query.type}`);
+    return this.inspectionLogService.findByFilter(
+      query.from,
+      query.to,
+      query.type,
+    );
+  }
+
   @Get()
   async findAll(): Promise<InspectionLogDocument[]> {
     return this.inspectionLogService.findAll();

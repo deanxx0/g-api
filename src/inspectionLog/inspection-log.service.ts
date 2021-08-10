@@ -13,6 +13,37 @@ export class InspectionLogService {
     private inspectionLogModel: Model<InspectionLogDocument>,
   ) {}
 
+  async findByFilter(
+    from: string,
+    to: string,
+    type: string,
+  ): Promise<InspectionLogDocument[]> {
+    const KR_TIME_DIFF = 9 * 60 * 60 * 1000; // 9 hours
+    const fromDate = new Date(
+      new Date(`${from}T00:00:00.000Z`).getTime() - KR_TIME_DIFF,
+    );
+    const toDate = new Date(
+      new Date(`${to}T23:59:59.000Z`).getTime() - KR_TIME_DIFF,
+    );
+
+    if (type == 'all') {
+      console.log(`if type=all`);
+      return this.inspectionLogModel
+        .find({
+          createdAt: { $gte: fromDate, $lte: toDate },
+        })
+        .exec();
+    } else {
+      console.log(`if type=value`);
+      return this.inspectionLogModel
+        .find({
+          createdAt: { $gte: fromDate, $lte: toDate },
+          type: type,
+        })
+        .exec();
+    }
+  }
+
   async findAll(): Promise<InspectionLogDocument[]> {
     return this.inspectionLogModel.find().exec();
   }
