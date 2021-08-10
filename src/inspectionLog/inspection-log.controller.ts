@@ -25,8 +25,10 @@ export class InspectionLogController {
   }
 
   @Get('type-list')
-  async getTypeList(): Promise<String[]> {
-    return ['all', 'INFO', 'WARNING', 'ERROR'];
+  async getTypeList(): Promise<Object> {
+    return {
+      types: ['all', 'INFO', 'WARNING', 'ERROR'],
+    };
   }
 
   @Get()
