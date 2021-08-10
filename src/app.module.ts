@@ -14,6 +14,7 @@ import { inferenceResultModule } from './inferenceResult/inference-result.module
 import { InspectionLogModule } from './inspectionLog/inspection-log.module';
 import { VehicleModelModule } from './vehicleModel/vehicle-model.module';
 import { VehicleColorModule } from './vehicleColor/vehicle-color.module';
+import { DefectMapModule } from './defectMap/defect-map.module';
 
 @Module({
   imports: [
@@ -34,6 +35,7 @@ import { VehicleColorModule } from './vehicleColor/vehicle-color.module';
     InspectionLogModule,
     VehicleModelModule,
     VehicleColorModule,
+    DefectMapModule,
   ],
 })
 export class AppModule {}
