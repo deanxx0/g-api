@@ -17,12 +17,16 @@ export class InspectionLogController {
 
   @Get('filter')
   async findByFilter(@Query() query: any): Promise<InspectionLogDocument[]> {
-    console.log(`from: ${query.from}, to: ${query.to}, type: ${query.type}`);
     return this.inspectionLogService.findByFilter(
       query.from,
       query.to,
       query.type,
     );
+  }
+
+  @Get('type-list')
+  async getTypeList(): Promise<String[]> {
+    return ['all', 'INFO', 'WARNING', 'ERROR'];
   }
 
   @Get()
