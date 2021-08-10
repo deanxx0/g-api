@@ -75,6 +75,8 @@ export class CameraController {
       fov: postCameraDto.fov,
       rotation: postCameraDto.rotation,
       flip: postCameraDto.flip,
+      width: postCameraDto.width,
+      height: postCameraDto.height,
     };
   }
 }
