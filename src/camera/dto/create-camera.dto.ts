@@ -13,4 +13,6 @@ export class CreateCameraDto {
   z: number;
   resolution: number;
   fov: number;
+  rotation: number;
+  flip: Boolean;
 }

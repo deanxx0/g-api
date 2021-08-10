@@ -45,6 +45,12 @@ export class Camera {
 
   @Prop()
   fov: number;
+
+  @Prop()
+  rotation: number;
+
+  @Prop()
+  flip: Boolean;
 }
 
 export const CameraSchema = SchemaFactory.createForClass(Camera);

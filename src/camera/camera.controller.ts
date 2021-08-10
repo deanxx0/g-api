@@ -73,6 +73,8 @@ export class CameraController {
       z: postCameraDto.z,
       resolution: postCameraDto.resolution,
       fov: postCameraDto.fov,
+      rotation: postCameraDto.rotation,
+      flip: postCameraDto.flip,
     };
   }
 }

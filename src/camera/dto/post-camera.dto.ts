@@ -13,4 +13,6 @@ export class PostCameraDto {
   z: number;
   resolution: number;
   fov: number;
+  rotation: number;
+  flip: Boolean;
 }
