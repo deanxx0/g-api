@@ -24,4 +24,9 @@ export class DefectMapController {
   async findById(@Query() query: any): Promise<InferenceResultDocument> {
     return this.defectMapService.findById(query.id);
   }
+
+  @Get('list')
+  async getList(@Query() query: any) {
+    return this.defectMapService.getList(query.inspectionId);
+  }
 }

@@ -1,5 +1,6 @@
 import { Module } from '@nestjs/common';
 import { MongooseModule } from '@nestjs/mongoose';
+import { Camera, CameraSchema } from 'src/camera/schema/camera.schema';
 import {
   InferenceResult,
   InferenceResultSchema,
@@ -11,6 +12,7 @@ import { DefectMapService } from './defect-map.service';
   imports: [
     MongooseModule.forFeature([
       { name: InferenceResult.name, schema: InferenceResultSchema },
+      { name: Camera.name, schema: CameraSchema },
     ]),
   ],
   controllers: [DefectMapController],
