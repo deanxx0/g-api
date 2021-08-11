@@ -6,6 +6,7 @@ import {
   Param,
   Post,
   Put,
+  Query,
 } from '@nestjs/common';
 import { PostCameraDto } from './dto/post-camera.dto';
 import { CameraService } from './camera.service';
@@ -42,6 +43,14 @@ export class CameraController {
   @Get(':id')
   async find(@Param('id') id: string): Promise<Camera> {
     return this.cameraService.find(id);
+  }
+
+  @Put('update-only')
+  async updateOnly(
+    @Query() query: any,
+    @Body() updateOnlyObj,
+  ): Promise<Camera> {
+    return this.cameraService.updateOnly(query.id, updateOnlyObj);
   }
 
   @Put(':id')
