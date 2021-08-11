@@ -114,7 +114,12 @@ export class ConnectorService {
     sec %= 3600;
     const minutes = Math.floor(sec / 60);
     const seconds = sec % 60;
-    return `${hours}:${minutes}:${seconds}`;
+
+    let formatHours = hours < 10 ? `0${hours}` : `${hours}`;
+    let formatMinutes = minutes < 10 ? `0${minutes}` : `${minutes}`;
+    let formatSeconds = seconds < 10 ? `0${seconds}` : `${seconds}`;
+
+    return `${formatHours}:${formatMinutes}:${formatSeconds}`;
   }
 
   async createInspectionLog(inspectionId: string, status: string) {
