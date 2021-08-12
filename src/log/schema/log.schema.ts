@@ -1,10 +1,10 @@
 import { Prop, raw, Schema, SchemaFactory } from '@nestjs/mongoose';
 import { Document } from 'mongoose';
 
-export type InspectionLogDocument = InspectionLog & Document;
+export type LogDocument = Log & Document;
 
 @Schema({ timestamps: true })
-export class InspectionLog {
+export class Log {
   @Prop()
   system: string;
 
@@ -15,4 +15,4 @@ export class InspectionLog {
   description: string;
 }
 
-export const InspectionLogSchema = SchemaFactory.createForClass(InspectionLog);
+export const LogSchema = SchemaFactory.createForClass(Log);

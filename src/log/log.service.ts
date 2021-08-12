@@ -2,22 +2,22 @@ import { Injectable } from '@nestjs/common';
 import { InjectModel } from '@nestjs/mongoose';
 import { Model } from 'mongoose';
 import {
-  InspectionLog,
-  InspectionLogDocument,
-} from './schema/inspection-log.schema';
+  Log,
+  LogDocument,
+} from './schema/log.schema';
 
 @Injectable()
-export class InspectionLogService {
+export class LogService {
   constructor(
-    @InjectModel(InspectionLog.name)
-    private inspectionLogModel: Model<InspectionLogDocument>,
+    @InjectModel(Log.name)
+    private LogModel: Model<LogDocument>,
   ) {}
 
   async findByFilter(
     from: string,
     to: string,
     type: string,
-  ): Promise<InspectionLogDocument[]> {
+  ): Promise<LogDocument[]> {
     const KR_TIME_DIFF = 9 * 60 * 60 * 1000; // 9 hours
     const fromDate = new Date(
       new Date(`${from}T00:00:00.000Z`).getTime() - KR_TIME_DIFF,
@@ -27,13 +27,13 @@ export class InspectionLogService {
     );
 
     if (type == 'all') {
-      return this.inspectionLogModel
+      return this.LogModel
         .find({
           createdAt: { $gte: fromDate, $lte: toDate },
         })
         .exec();
     } else {
-      return this.inspectionLogModel
+      return this.LogModel
         .find({
           createdAt: { $gte: fromDate, $lte: toDate },
           type: type,
@@ -42,19 +42,19 @@ export class InspectionLogService {
     }
   }
 
-  async findAll(): Promise<InspectionLogDocument[]> {
-    return this.inspectionLogModel.find().exec();
+  async findAll(): Promise<LogDocument[]> {
+    return this.LogModel.find().exec();
   }
 
-  async findAllLimitDesc(limit: string): Promise<InspectionLogDocument[]> {
-    return this.inspectionLogModel
+  async findAllLimitDesc(limit: string): Promise<LogDocument[]> {
+    return this.LogModel
       .find({})
       .sort({ _id: -1 })
       .limit(parseInt(limit))
       .exec();
   }
 
-  async findLatest(): Promise<InspectionLogDocument> {
-    return this.inspectionLogModel.findOne().sort({ _id: -1 }).limit(1).exec();
+  async findLatest(): Promise<LogDocument> {
+    return this.LogModel.findOne().sort({ _id: -1 }).limit(1).exec();
   }
 }

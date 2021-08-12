@@ -11,7 +11,7 @@ import { SensorModule } from './sensor/sensor.module';
 import { ConnectorModule } from './connector/connector.module';
 import { InspectionResultModule } from './inspectionResult/inspection-result.module';
 import { inferenceResultModule } from './inferenceResult/inference-result.module';
-import { InspectionLogModule } from './inspectionLog/inspection-log.module';
+import { LogModule } from './log/log.module';
 import { VehicleModelModule } from './vehicleModel/vehicle-model.module';
 import { VehicleColorModule } from './vehicleColor/vehicle-color.module';
 import { DefectMapModule } from './defectMap/defect-map.module';
@@ -32,7 +32,7 @@ import { DefectMapModule } from './defectMap/defect-map.module';
     ConnectorModule,
     InspectionResultModule,
     inferenceResultModule,
-    InspectionLogModule,
+    LogModule,
     VehicleModelModule,
     VehicleColorModule,
     DefectMapModule,
