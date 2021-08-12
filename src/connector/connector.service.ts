@@ -183,6 +183,7 @@ export class ConnectorService {
       .updateOne(
         { inspectionId: inspectionId },
         {
+          totalInferences: inferDocs.length,
           totalDefects: totalDefects,
           totalColorDefects: totalColorDefects,
           totalGapDefects: totalGapDefects,
