@@ -43,7 +43,10 @@ export class DefectMapService {
           let finalX: number = 0;
           let finalY: number = 0;
           if (camera.groups[1] == 'LEFT' && camera.groups[2] == 'SIDE') {
-            finalX = (ir.grab.distance + rotatedPoint.x * camera.resolution) - camera.x * 10;
+            finalX =
+              ir.grab.distance +
+              rotatedPoint.x * camera.resolution -
+              camera.x * 10;
             finalY = camera.z * 10 - rotatedPoint.y * camera.resolution;
           } else if (
             camera.groups[1] == 'RIGHT' &&
@@ -52,7 +55,7 @@ export class DefectMapService {
             finalX = ir.grab.distance - rotatedPoint.x * camera.resolution;
             finalY = 8000 - camera.z * 10 + rotatedPoint.y * camera.resolution;
           } else {
-            finalX = ir.grab.distance + rotatedPoint.x * camera.resolution ;
+            finalX = ir.grab.distance + rotatedPoint.x * camera.resolution;
             finalY = 2666 + camera.y * 10 - rotatedPoint.y * camera.resolution;
           }
 
