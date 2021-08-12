@@ -9,7 +9,10 @@ export class Vehicle {
   name: String;
 
   @Prop()
-  vinCode: String; //차량고유번호 예:시리얼번호
+  vinCode: String;
+
+  @Prop()
+  vinNumber: String;
 
   @Prop(
     raw({
