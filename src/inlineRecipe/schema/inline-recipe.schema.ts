@@ -11,10 +11,10 @@ export class InlineRecipe {
 
   @Prop()
   recipeName: String;
-  
+
   @Prop()
   inspectionRecipe: String;
-  
+
   @Prop()
   inspectionRecipeName: String;
 

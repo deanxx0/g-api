@@ -36,24 +36,24 @@ export class DefectMapService {
         const camera = await this.cameraModel
           .findOne({ name: ir.cameraName })
           .exec();
-        console.log(camera);
+        //console.log(camera);
         for (let i = 0; i < ir.defects.length; i++) {
           const rotatedPoint = await this.rotate(ir.defects[i], camera);
           //console.log(`roX: ${rotatedPoint.x}, roY: ${rotatedPoint.y}`);
           let finalX: number = 0;
           let finalY: number = 0;
           if (camera.groups[1] == 'LEFT' && camera.groups[2] == 'SIDE') {
-            finalX = ir.grab.distance + rotatedPoint.x * camera.resolution;
-            finalY = camera.z - rotatedPoint.y * camera.resolution;
+            finalX = (ir.grab.distance + rotatedPoint.x * camera.resolution) - camera.x * 10;
+            finalY = camera.z * 10 - rotatedPoint.y * camera.resolution;
           } else if (
             camera.groups[1] == 'RIGHT' &&
             camera.groups[2] == 'SIDE'
           ) {
             finalX = ir.grab.distance - rotatedPoint.x * camera.resolution;
-            finalY = 8000 - camera.z + rotatedPoint.y * camera.resolution;
+            finalY = 8000 - camera.z * 10 + rotatedPoint.y * camera.resolution;
           } else {
-            finalX = ir.grab.distance + rotatedPoint.x * camera.resolution;
-            finalY = 2666 + camera.y - rotatedPoint.y * camera.resolution;
+            finalX = ir.grab.distance + rotatedPoint.x * camera.resolution ;
+            finalY = 2666 + camera.y * 10 - rotatedPoint.y * camera.resolution;
           }
 
           finalPoints.push({ x: finalX, y: finalY });
