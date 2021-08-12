@@ -17,9 +17,9 @@ import {
 } from 'src/inspectionResult/schema/inspection-result.schema';
 import { Timetest, TimetestSchema } from './timetest/timetest.schema';
 import {
-  InspectionLog,
-  InspectionLogSchema,
-} from 'src/inspectionLog/schema/inspection-log.schema';
+  Log,
+  LogSchema,
+} from 'src/log/schema/log.schema';
 
 import { ScheduleModule } from '@nestjs/schedule';
 import {
@@ -37,7 +37,7 @@ import {
       { name: Camera.name, schema: CameraSchema },
       { name: Light.name, schema: LightSchema },
       { name: InspectionResult.name, schema: InspectionResultSchema },
-      { name: InspectionLog.name, schema: InspectionLogSchema },
+      { name: Log.name, schema: LogSchema },
       { name: InferenceResult.name, schema: InferenceResultSchema },
       { name: Timetest.name, schema: TimetestSchema },
     ]),

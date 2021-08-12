@@ -16,10 +16,10 @@ import { Sensor, SensorDocument } from 'src/sensor/schema/sensor.schema';
 import { CreateInferenceResultDto } from '../inferenceResult/dto/create-inference-result.dto';
 import { Timetest, TimetestDocument } from './timetest/timetest.schema';
 import {
-  InspectionLog,
-  InspectionLogDocument,
-} from 'src/inspectionLog/schema/inspection-log.schema';
-import { CreateInspectionLogDto } from 'src/inspectionLog/dto/create-inspection-log.dto';
+  Log,
+  LogDocument,
+} from 'src/log/schema/log.schema';
+import { CreateLogDto } from 'src/log/dto/create-log.dto';
 import {
   InferenceResult,
   InferenceResultDocument,
@@ -38,8 +38,8 @@ export class ConnectorService {
     private lightModel: Model<LightDocument>,
     @InjectModel(InspectionResult.name)
     private inspectionResultModel: Model<InspectionResultDocument>,
-    @InjectModel(InspectionLog.name)
-    private inspectionLogModel: Model<InspectionLogDocument>,
+    @InjectModel(Log.name)
+    private logModel: Model<LogDocument>,
     @InjectModel(InferenceResult.name)
     private inferenceResultModel: Model<InferenceResultDocument>,
     @InjectModel(Timetest.name)
@@ -127,16 +127,16 @@ export class ConnectorService {
       .findOne({ _id: inspectionId })
       .exec();
 
-    let createdInspectionLogDto: CreateInspectionLogDto;
-    let createdInspectionLog = new this.inspectionLogModel(
-      createdInspectionLogDto,
+    let createdLogDto: CreateLogDto;
+    let createdLog = new this.logModel(
+      createdLogDto,
     );
 
-    createdInspectionLog.system = 'MASTER';
-    createdInspectionLog.type = 'INFO';
-    createdInspectionLog.description = `InspectionNO: ${inspectionDoc.inspectionNo}, Status: ${status}, Vincode: ${inspectionDoc.vehicle.vinCode}, Model: ${inspectionDoc.vehicle.properties.model}, Color: ${inspectionDoc.vehicle.properties.color}`;
+    createdLog.system = 'MASTER';
+    createdLog.type = 'INFO';
+    createdLog.description = `InspectionNO: ${inspectionDoc.inspectionNo}, Status: ${status}, Vincode: ${inspectionDoc.vehicle.vinCode}, Model: ${inspectionDoc.vehicle.properties.model}, Color: ${inspectionDoc.vehicle.properties.color}`;
 
-    createdInspectionLog.save();
+    createdLog.save();
   }
 
   private inferencResultCache: Array<CreateInferenceResultDto> = [];
