@@ -26,4 +26,5 @@ export class InspectionRecipe {
   differenceColor: Number;
 }
 
-export const InspectionRecipeSchema = SchemaFactory.createForClass(InspectionRecipe);
+export const InspectionRecipeSchema =
+  SchemaFactory.createForClass(InspectionRecipe);

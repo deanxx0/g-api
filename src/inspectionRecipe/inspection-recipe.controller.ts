@@ -17,8 +17,12 @@ export class InspectionRecipeController {
   constructor(private inspectionRecipeService: InspectionRecipeService) {}
 
   @Post()
-  async create(@Body() postInspectionRecipeDto: PostInspectionRecipeDto): Promise<InspectionRecipeDocument> {
-    return this.inspectionRecipeService.create(this.toCreateDto(postInspectionRecipeDto));
+  async create(
+    @Body() postInspectionRecipeDto: PostInspectionRecipeDto,
+  ): Promise<InspectionRecipeDocument> {
+    return this.inspectionRecipeService.create(
+      this.toCreateDto(postInspectionRecipeDto),
+    );
   }
 
   @Get()
@@ -36,7 +40,9 @@ export class InspectionRecipeController {
     return this.inspectionRecipeService.delete(id);
   }
 
-  private toCreateDto(postInspectionRecipeDto: PostInspectionRecipeDto): CreateInspectionRecipeDto {
+  private toCreateDto(
+    postInspectionRecipeDto: PostInspectionRecipeDto,
+  ): CreateInspectionRecipeDto {
     return {
       name: postInspectionRecipeDto.name,
       size: postInspectionRecipeDto.size,
