@@ -9,6 +9,7 @@ export class CreateInspectionResultDto {
   vehicleModel: String;
   vehicleColor: String;
   vinCode: String;
+  vinNumber: String;
   totalInferences: number;
   totalDefects: number;
   totalColorDefects: number;

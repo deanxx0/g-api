@@ -31,6 +31,9 @@ export class InspectionResult {
   vinCode: String;
 
   @Prop()
+  vinNumber: String;
+
+  @Prop()
   totalInferences: number;
 
   @Prop()
