@@ -64,6 +64,9 @@ export class InlineRecipeController {
   ): CreateInlineRecipeDto {
     return {
       recipe: postInlineRecipeDto.recipe,
+      recipeName: postInlineRecipeDto.recipeName,
+      inspectionRecipe: postInlineRecipeDto.inspectionRecipe,
+      inspectionRecipeName: postInlineRecipeDto.inspectionRecipeName,
       vehicleModel: postInlineRecipeDto.vehicleModel,
       vehicleColor: postInlineRecipeDto.vehicleColor,
     };

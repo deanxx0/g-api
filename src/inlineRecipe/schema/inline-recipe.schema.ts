@@ -9,6 +9,15 @@ export class InlineRecipe {
   @Prop({ type: mongoose.Schema.Types.ObjectId, ref: 'Recipe', required: true })
   recipe: string;
 
+  @Prop()
+  recipeName: String;
+  
+  @Prop()
+  inspectionRecipe: String;
+  
+  @Prop()
+  inspectionRecipeName: String;
+
   @Prop({ required: true })
   vehicleModel: string;
 
