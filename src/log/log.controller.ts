@@ -17,11 +17,7 @@ export class LogController {
 
   @Get('filter')
   async findByFilter(@Query() query: any): Promise<LogDocument[]> {
-    return this.LogService.findByFilter(
-      query.from,
-      query.to,
-      query.type,
-    );
+    return this.LogService.findByFilter(query.from, query.to, query.type);
   }
 
   @Get('type-list')
@@ -37,9 +33,7 @@ export class LogController {
   }
 
   @Get('limit-desc')
-  async findAllLimitDesc(
-    @Query() query: any,
-  ): Promise<LogDocument[]> {
+  async findAllLimitDesc(@Query() query: any): Promise<LogDocument[]> {
     return this.LogService.findAllLimitDesc(query.limit);
   }
 

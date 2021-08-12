@@ -1,10 +1,7 @@
 import { Injectable } from '@nestjs/common';
 import { InjectModel } from '@nestjs/mongoose';
 import { Model } from 'mongoose';
-import {
-  Log,
-  LogDocument,
-} from './schema/log.schema';
+import { Log, LogDocument } from './schema/log.schema';
 
 @Injectable()
 export class LogService {
@@ -27,18 +24,14 @@ export class LogService {
     );
 
     if (type == 'all') {
-      return this.LogModel
-        .find({
-          createdAt: { $gte: fromDate, $lte: toDate },
-        })
-        .exec();
+      return this.LogModel.find({
+        createdAt: { $gte: fromDate, $lte: toDate },
+      }).exec();
     } else {
-      return this.LogModel
-        .find({
-          createdAt: { $gte: fromDate, $lte: toDate },
-          type: type,
-        })
-        .exec();
+      return this.LogModel.find({
+        createdAt: { $gte: fromDate, $lte: toDate },
+        type: type,
+      }).exec();
     }
   }
 
@@ -47,8 +40,7 @@ export class LogService {
   }
 
   async findAllLimitDesc(limit: string): Promise<LogDocument[]> {
-    return this.LogModel
-      .find({})
+    return this.LogModel.find({})
       .sort({ _id: -1 })
       .limit(parseInt(limit))
       .exec();

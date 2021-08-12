@@ -5,10 +5,7 @@ import { Model } from 'mongoose';
 import { InspectionStatus } from 'src/connector/enum/inspection-status';
 import { CreateInspectionDto } from './dto/create-inspection.dto';
 import { Inspection, InspectionDocument } from './schema/inspection.schema';
-import {
-  Log,
-  LogDocument,
-} from '../log/schema/log.schema';
+import { Log, LogDocument } from '../log/schema/log.schema';
 import { CreateLogDto } from '../log/dto/create-log.dto';
 import {
   InspectionResult,

@@ -15,10 +15,7 @@ import {
 import { Sensor, SensorDocument } from 'src/sensor/schema/sensor.schema';
 import { CreateInferenceResultDto } from '../inferenceResult/dto/create-inference-result.dto';
 import { Timetest, TimetestDocument } from './timetest/timetest.schema';
-import {
-  Log,
-  LogDocument,
-} from 'src/log/schema/log.schema';
+import { Log, LogDocument } from 'src/log/schema/log.schema';
 import { CreateLogDto } from 'src/log/dto/create-log.dto';
 import {
   InferenceResult,
@@ -124,9 +121,7 @@ export class ConnectorService {
 
   async createLog(system: string, type: string, description: string) {
     let createdLogDto: CreateLogDto;
-    let createdLog = new this.logModel(
-      createdLogDto,
-    );
+    let createdLog = new this.logModel(createdLogDto);
 
     createdLog.system = system;
     createdLog.type = type;
@@ -141,9 +136,7 @@ export class ConnectorService {
       .exec();
 
     let createdLogDto: CreateLogDto;
-    let createdLog = new this.logModel(
-      createdLogDto,
-    );
+    let createdLog = new this.logModel(createdLogDto);
 
     createdLog.system = 'MASTER';
     createdLog.type = 'INFO';
