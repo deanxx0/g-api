@@ -15,6 +15,7 @@ import { LogModule } from './log/log.module';
 import { VehicleModelModule } from './vehicleModel/vehicle-model.module';
 import { VehicleColorModule } from './vehicleColor/vehicle-color.module';
 import { DefectMapModule } from './defectMap/defect-map.module';
+import { InspectionRecipeModule } from './inspectionRecipe/inspection-recipe.module';
 
 @Module({
   imports: [
@@ -36,6 +37,7 @@ import { DefectMapModule } from './defectMap/defect-map.module';
     VehicleModelModule,
     VehicleColorModule,
     DefectMapModule,
+    InspectionRecipeModule,
   ],
 })
 export class AppModule {}
