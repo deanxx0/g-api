@@ -6,10 +6,10 @@ import { InspectionStatus } from 'src/connector/enum/inspection-status';
 import { CreateInspectionDto } from './dto/create-inspection.dto';
 import { Inspection, InspectionDocument } from './schema/inspection.schema';
 import {
-  InspectionLog,
-  InspectionLogDocument,
-} from '../inspectionLog/schema/inspection-log.schema';
-import { CreateInspectionLogDto } from '../inspectionLog/dto/create-inspection-log.dto';
+  Log,
+  LogDocument,
+} from '../log/schema/log.schema';
+import { CreateLogDto } from '../log/dto/create-log.dto';
 import {
   InspectionResult,
   InspectionResultDocument,
@@ -24,8 +24,8 @@ export class InspectionService {
   constructor(
     @InjectModel(Inspection.name)
     private inspectionModel: Model<InspectionDocument>,
-    @InjectModel(InspectionLog.name)
-    private inspectionLogModel: Model<InspectionLogDocument>,
+    @InjectModel(Log.name)
+    private inspectionLogModel: Model<LogDocument>,
     @InjectModel(InspectionResult.name)
     private inspectionResultModel: Model<InspectionResultDocument>,
     @Inject('KAFKA-CONNECTOR') private kafkaService: KafkaService,
@@ -158,8 +158,8 @@ export class InspectionService {
 
   async createInspectionLog(
     createdInspection: InspectionDocument,
-  ): Promise<InspectionLogDocument> {
-    let createdInspectionLogDto: CreateInspectionLogDto;
+  ): Promise<LogDocument> {
+    let createdInspectionLogDto: CreateLogDto;
     let createdInspectionLog = new this.inspectionLogModel(
       createdInspectionLogDto,
     );
