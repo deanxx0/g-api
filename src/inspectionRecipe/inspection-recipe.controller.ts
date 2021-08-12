@@ -12,7 +12,7 @@ import { PostInspectionRecipeDto } from './dto/post-inspection-recipe.dto';
 import { InspectionRecipeDocument } from './schema/inspection-recipe.schema';
 import { InspectionRecipeService } from './inspection-recipe.service';
 
-@Controller('sensor')
+@Controller('inspection-recipe')
 export class InspectionRecipeController {
   constructor(private inspectionRecipeService: InspectionRecipeService) {}
 
