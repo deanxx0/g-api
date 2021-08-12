@@ -15,6 +15,11 @@ import { Vehicle } from './schema/vehicle.schema';
 export class VehicleController {
   constructor(private vehicleService: VehicleService) {}
 
+  @Get('model-color-list')
+  async getModelColorList(): Promise<object> {
+    return this.vehicleService.getModelColorList();
+  }
+
   @Get()
   async findAllVehicles(): Promise<Vehicle[]> {
     return this.vehicleService.findAllVehicles();
