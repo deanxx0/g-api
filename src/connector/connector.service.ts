@@ -122,6 +122,19 @@ export class ConnectorService {
     return `${formatHours}:${formatMinutes}:${formatSeconds}`;
   }
 
+  async createLog(system: string, type: string, description: string) {
+    let createdLogDto: CreateLogDto;
+    let createdLog = new this.logModel(
+      createdLogDto,
+    );
+
+    createdLog.system = system;
+    createdLog.type = type;
+    createdLog.description = description;
+
+    createdLog.save();
+  }
+
   async createInspectionLog(inspectionId: string, status: string) {
     const inspectionDoc: InspectionDocument = await this.inspectionModel
       .findOne({ _id: inspectionId })
