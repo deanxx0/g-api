@@ -45,18 +45,20 @@ export class DefectMapService {
           if (camera.groups[1] == 'LEFT' && camera.groups[2] == 'SIDE') {
             finalX =
               ir.grab.distance +
-              rotatedPoint.x * camera.resolution -
+              rotatedPoint.x * camera.resolution*6 -
               camera.x * 10;
-            finalY = camera.z * 10 - rotatedPoint.y * camera.resolution;
+            finalY = camera.z * 10 - rotatedPoint.y * camera.resolution*6;
           } else if (
             camera.groups[1] == 'RIGHT' &&
             camera.groups[2] == 'SIDE'
           ) {
-            finalX = ir.grab.distance - rotatedPoint.x * camera.resolution;
-            finalY = 8000 - camera.z * 10 + rotatedPoint.y * camera.resolution;
+            finalX = ir.grab.distance - rotatedPoint.x * camera.resolution*6-
+            camera.x * 10;
+            finalY = 8000 - camera.z * 10 + rotatedPoint.y * camera.resolution*6;
           } else {
-            finalX = ir.grab.distance + rotatedPoint.x * camera.resolution;
-            finalY = 2666 + camera.y * 10 - rotatedPoint.y * camera.resolution;
+            finalX = ir.grab.distance + rotatedPoint.x * camera.resolution*3 -
+            camera.x * 10;
+            finalY = 2666 + camera.y * 10 - rotatedPoint.y * camera.resolution*3 ;
           }
 
           finalPoints.push({ x: finalX, y: finalY });
