@@ -25,9 +25,12 @@ export class InferenceResultService {
 
     let inferDocsPerDefect: Array<object> = [];
 
+    let inferenceNumber = 0;
+
     inferDocs.forEach((inferDoc) => {
       inferDoc.defects.forEach((defect, index) => {
         const dividedInferDoc = {
+          inferenceNumber: inferenceNumber,
           inspectionId: inferDoc.inspectionId,
           inspectionNo: inferDoc.inspectionNo,
           camera: inferDoc.camera,
@@ -37,6 +40,7 @@ export class InferenceResultService {
           defect: [defect],
         };
         inferDocsPerDefect.push(dividedInferDoc);
+        inferenceNumber++;
       });
     });
 
