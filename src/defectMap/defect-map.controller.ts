@@ -27,6 +27,7 @@ export class DefectMapController {
 
   @Get('list')
   async getList(@Query() query: any) {
+    console.log(`defect-map-getList!`);
     return this.defectMapService.getList(query.inspectionId);
   }
 }
