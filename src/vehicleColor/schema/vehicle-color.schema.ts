@@ -4,7 +4,7 @@ export type VehicleColorDocument = VehicleColor & Document;
 
 @Schema({ timestamps: true })
 export class VehicleColor {
-  @Prop({ required: true })
+  @Prop()
   color: String;
 }
 
