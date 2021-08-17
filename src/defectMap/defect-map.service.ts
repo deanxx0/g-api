@@ -72,8 +72,7 @@ export class DefectMapService {
               rotatedPoint.y * camera.resolution * RESOLUTION_MODIFIER;
           }
 
-          const imagePath: string = `${ir.inspectionNo}/${ir.cameraName}/${ir.grab.seq}_${i}_result.jpg`;
-          finalPoints.push({ x: finalX, y: finalY, imagePath: imagePath});
+          finalPoints.push({ x: finalX, y: finalY, inspectionNo: ir.inspectionNo, cameraName: ir.cameraName, frame: ir.grab.seq, defectIndex: i });
         }
       }
     }
