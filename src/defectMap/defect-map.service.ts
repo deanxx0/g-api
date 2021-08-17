@@ -72,7 +72,8 @@ export class DefectMapService {
               rotatedPoint.y * camera.resolution * RESOLUTION_MODIFIER;
           }
 
-          finalPoints.push({ x: finalX, y: finalY });
+          const imagePath: string = `${ir.inspectionNo}/${ir.cameraName}/${ir.grab.seq}_${i}_result.jpg`;
+          finalPoints.push({ x: finalX, y: finalY, imagePath: imagePath});
         }
       }
     }
