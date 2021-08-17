@@ -1,0 +1,13 @@
+export class VehicleDto {
+  name: String;
+  vinCode: String;
+  vinNumber: String;
+  properties: {
+    width: number;
+    height: number;
+    length: number;
+    model: string;
+    color: String;
+  };
+  options: String[];
+}
