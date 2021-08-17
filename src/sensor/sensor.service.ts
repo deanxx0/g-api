@@ -12,6 +12,7 @@ export class SensorService {
 
   async create(createSensorDto: CreateSensorDto): Promise<SensorDocument> {
     const createdSensor = new this.sensorModel(createSensorDto);
+    const a = 0; // test github
     return createdSensor.save();
   }
 
