@@ -21,6 +21,7 @@ export class Vehicle {
       length: { type: Number },
       model: { type: String },
       color: { type: String },
+      detailColor: { type: String },
     }),
   )
   properties: Record<string, any>;
