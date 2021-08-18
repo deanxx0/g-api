@@ -79,12 +79,12 @@ export class VehicleService {
 
     if (vehicleModelFindResult.length == 0) {
       const createdVehicleModel = new this.vehicleModelModel(vehicleModelDoc);
-      createdVehicleModel.save();
+      createdVehicleModel.save((error, savedDoc) => {});
     }
 
     if (vehicleColorFindResult.length == 0) {
       const createdVehicleColor = new this.vehicleColorModel(vehicleColorDoc);
-      createdVehicleColor.save();
+      createdVehicleColor.save((error, savedDoc) => {});
     }
 
     return createdVehicle.save();

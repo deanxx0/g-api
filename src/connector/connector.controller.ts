@@ -13,7 +13,7 @@ const topicSensorStatus = 'glovis.fct.sensorStatus';
 const topicCameraStatus = 'glovis.fct.cameraStatus';
 const topicLightStatus = 'glovis.fct.lightStatus';
 const topicLog = 'glovis.fct.log';
-const topictimetest = 'glovis.fct.timetest';
+const topicCancelInspection = 'glovis.fct.cancelInspection';
 
 @Controller()
 export class ConnectorController {
@@ -30,20 +30,13 @@ export class ConnectorController {
     this.kafkaService.subscribeToResponseOf(topicCameraStatus, this);
     this.kafkaService.subscribeToResponseOf(topicLightStatus, this);
     this.kafkaService.subscribeToResponseOf(topicLog, this);
-    this.kafkaService.subscribeToResponseOf(topictimetest, this);
+    this.kafkaService.subscribeToResponseOf(topicCancelInspection, this);
   }
 
   @SubscribeTo(topicLog)
   async getLog(data, key, offset, timestamp) {
     data = JSON.parse(data);
     this.connectorService.createLog(data.system, data.type, data.description);
-  }
-
-  @SubscribeTo(topictimetest)
-  async getTimetest(data) {
-    data = JSON.parse(data);
-    console.log(data);
-    this.connectorService.createTimetest({ num: data.num });
   }
 
   @SubscribeTo(topicLightStatus)

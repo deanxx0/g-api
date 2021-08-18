@@ -14,7 +14,6 @@ import {
 } from 'src/inspectionResult/schema/inspection-result.schema';
 import { Sensor, SensorDocument } from 'src/sensor/schema/sensor.schema';
 import { CreateInferenceResultDto } from '../inferenceResult/dto/create-inference-result.dto';
-import { Timetest, TimetestDocument } from './timetest/timetest.schema';
 import { Log, LogDocument } from 'src/log/schema/log.schema';
 import { CreateLogDto } from 'src/log/dto/create-log.dto';
 import {
@@ -39,14 +38,7 @@ export class ConnectorService {
     private logModel: Model<LogDocument>,
     @InjectModel(InferenceResult.name)
     private inferenceResultModel: Model<InferenceResultDocument>,
-    @InjectModel(Timetest.name)
-    private timetestModel: Model<TimetestDocument>,
   ) {}
-
-  async createTimetest(createdTimetest): Promise<TimetestDocument> {
-    const createdTimetestDoc = new this.timetestModel(createdTimetest);
-    return await createdTimetestDoc.save();
-  }
 
   async updateLightStatus(id: string, status: string) {
     this.lightModel.updateOne({ _id: id }, { $set: { status: status } }).exec();
