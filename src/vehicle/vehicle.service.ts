@@ -59,7 +59,6 @@ export class VehicleService {
   async create(vehicleDto: VehicleDto): Promise<Vehicle> {
     const createdVehicle = new this.vehicleModel(vehicleDto);
 
-    /*
     const vehicleModelDoc: CreateVehicleModelDto = {
       model: createdVehicle.properties.model,
     };
@@ -80,22 +79,13 @@ export class VehicleService {
 
     if (vehicleModelFindResult.length == 0) {
       const createdVehicleModel = new this.vehicleModelModel(vehicleModelDoc);
-      try {
-        createdVehicleModel.save();
-      } catch (error) {
-        console.log(error);
-      }
+      createdVehicleModel.save((error, savedDoc) => {});
     }
 
     if (vehicleColorFindResult.length == 0) {
       const createdVehicleColor = new this.vehicleColorModel(vehicleColorDoc);
-      try {
-        createdVehicleColor.save();
-      } catch (error) {
-        console.log(error);
-      }
+      createdVehicleColor.save((error, savedDoc) => {});
     }
-    */
 
     return createdVehicle.save();
   }
