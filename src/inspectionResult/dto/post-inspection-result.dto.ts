@@ -8,6 +8,7 @@ export class PostInspectionResultDto {
   elapseTime: String;
   vehicleModel: String;
   vehicleColor: String;
+  vehicleDetailColor: String;
   vinCode: String;
   vinNumber: String;
   totalInferences: number;

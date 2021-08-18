@@ -143,6 +143,8 @@ export class InspectionService {
     createdInspectionResult.elapseTime = '-';
     createdInspectionResult.vehicleModel = createdDoc.vehicle.properties.model;
     createdInspectionResult.vehicleColor = createdDoc.vehicle.properties.color;
+    createdInspectionResult.vehicleDetailColor =
+      createdDoc.vehicle.properties.detailColor;
     createdInspectionResult.vinCode = createdDoc.vehicle.vinCode;
     createdInspectionResult.vinNumber = createdDoc.vehicle.vinNumber;
     createdInspectionResult.totalInferences = 0;

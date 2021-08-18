@@ -72,7 +72,14 @@ export class DefectMapService {
               rotatedPoint.y * camera.resolution * RESOLUTION_MODIFIER;
           }
 
-          finalPoints.push({ x: finalX, y: finalY, inspectionNo: ir.inspectionNo, cameraName: ir.cameraName, frame: ir.grab.seq, defectIndex: i });
+          finalPoints.push({
+            x: finalX,
+            y: finalY,
+            inspectionNo: ir.inspectionNo,
+            cameraName: ir.cameraName,
+            frame: ir.grab.seq,
+            defectIndex: i,
+          });
         }
       }
     }
