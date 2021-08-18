@@ -26,7 +26,7 @@ export class InspectionResult {
 
   @Prop()
   vehicleColor: String;
-  
+
   @Prop()
   vehicleDetailColor: String;
 
