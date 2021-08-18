@@ -26,6 +26,9 @@ export class InspectionResult {
 
   @Prop()
   vehicleColor: String;
+  
+  @Prop()
+  vehicleDetailColor: String;
 
   @Prop()
   vinCode: String;
