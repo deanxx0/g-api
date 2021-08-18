@@ -15,7 +15,6 @@ import {
   InspectionResult,
   InspectionResultSchema,
 } from 'src/inspectionResult/schema/inspection-result.schema';
-import { Timetest, TimetestSchema } from './timetest/timetest.schema';
 import { Log, LogSchema } from 'src/log/schema/log.schema';
 
 import { ScheduleModule } from '@nestjs/schedule';
@@ -36,7 +35,6 @@ import {
       { name: InspectionResult.name, schema: InspectionResultSchema },
       { name: Log.name, schema: LogSchema },
       { name: InferenceResult.name, schema: InferenceResultSchema },
-      { name: Timetest.name, schema: TimetestSchema },
     ]),
     KafkaModule.register([
       {
