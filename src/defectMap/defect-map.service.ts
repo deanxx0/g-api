@@ -30,7 +30,7 @@ export class DefectMapService {
         .find({ inspectionId: inspectionId })
         .exec();
 
-    const RESOLUTION_MODIFIER = 6;
+    const RESOLUTION_MODIFIER = 1;
     let finalPoints = [];
     for (let ir of inferenceResults) {
       if (ir.defects.length > 0) {
@@ -45,9 +45,9 @@ export class DefectMapService {
             finalX =
               ir.grab.distance +
               rotatedPoint.x * camera.resolution * RESOLUTION_MODIFIER -
-              camera.x * 10;
+              camera.x;
             finalY =
-              camera.z * 10 -
+              camera.z -
               rotatedPoint.y * camera.resolution * RESOLUTION_MODIFIER;
           } else if (
             camera.groups[1] == 'RIGHT' &&
@@ -56,19 +56,19 @@ export class DefectMapService {
             finalX =
               ir.grab.distance -
               rotatedPoint.x * camera.resolution * RESOLUTION_MODIFIER -
-              camera.x * 10;
+              camera.x;
             finalY =
               8000 -
-              camera.z * 10 +
+              camera.z +
               rotatedPoint.y * camera.resolution * RESOLUTION_MODIFIER;
           } else {
             finalX =
               ir.grab.distance +
               rotatedPoint.x * camera.resolution * RESOLUTION_MODIFIER -
-              camera.x * 10;
+              camera.x;
             finalY =
               2666 +
-              camera.y * 10 -
+              camera.y -
               rotatedPoint.y * camera.resolution * RESOLUTION_MODIFIER;
           }
 
