@@ -54,12 +54,12 @@ export class VehicleService {
 
   async findByVin(vin: string): Promise<Vehicle> {
     const doc = await this.vehicleModel
-    .find({ vinCode: vin })
-    .sort({ _id: -1 })
-    .limit(1)
-    .exec();
+      .find({ vinCode: vin })
+      .sort({ _id: -1 })
+      .limit(1)
+      .exec();
 
-    return doc[doc.length-1];
+    return doc[doc.length - 1];
   }
 
   async create(vehicleDto: VehicleDto): Promise<Vehicle> {
