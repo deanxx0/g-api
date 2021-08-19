@@ -73,8 +73,8 @@ export class DefectMapService {
           }
 
           finalPoints.push({
-            x: finalX,
-            y: finalY,
+            x: Number(finalX.toFixed(2)),
+            y: Number(finalY.toFixed(2)),
             inspectionNo: ir.inspectionNo,
             cameraName: ir.cameraName,
             frame: ir.grab.seq,
@@ -100,22 +100,30 @@ export class DefectMapService {
       if (rotateDegree == 0) {
         const newX = originalX;
         const newY = originalY;
-        return { x: newX, y: newY };
+        const fromCenterX = newX - frameWidth / 2;
+        const fromCenterY = newY - frameHeight / 2;
+        return { x: fromCenterX, y: fromCenterY };
       }
       if (rotateDegree == 90) {
         const newX = frameHeight - originalY;
         const newY = originalX;
-        return { x: newX, y: newY };
+        const fromCenterX = newX - frameHeight / 2;
+        const fromCenterY = newY - frameWidth / 2;
+        return { x: fromCenterX, y: fromCenterY };
       }
       if (rotateDegree == 180) {
         const newX = frameWidth - originalX;
         const newY = frameHeight - originalY;
-        return { x: newX, y: newY };
+        const fromCenterX = newX - frameWidth / 2;
+        const fromCenterY = newY - frameHeight / 2;
+        return { x: fromCenterX, y: fromCenterY };
       }
       if (rotateDegree == 270) {
         const newX = originalY;
         const newY = frameWidth - originalX;
-        return { x: newX, y: newY };
+        const fromCenterX = newX - frameHeight / 2;
+        const fromCenterY = newY - frameWidth / 2;
+        return { x: fromCenterX, y: fromCenterY };
       }
     }
 
@@ -123,22 +131,30 @@ export class DefectMapService {
       if (rotateDegree == 0) {
         const newX = frameWidth - originalX;
         const newY = originalY;
-        return { x: newX, y: newY };
+        const fromCenterX = newX - frameWidth / 2;
+        const fromCenterY = newY - frameHeight / 2;
+        return { x: fromCenterX, y: fromCenterY };
       }
       if (rotateDegree == 90) {
         const newX = frameHeight - originalY;
         const newY = frameWidth - originalX;
-        return { x: newX, y: newY };
+        const fromCenterX = newX - frameHeight / 2;
+        const fromCenterY = newY - frameWidth / 2;
+        return { x: fromCenterX, y: fromCenterY };
       }
       if (rotateDegree == 180) {
         const newX = originalX;
         const newY = frameHeight - originalY;
-        return { x: newX, y: newY };
+        const fromCenterX = newX - frameWidth / 2;
+        const fromCenterY = newY - frameHeight / 2;
+        return { x: fromCenterX, y: fromCenterY };
       }
       if (rotateDegree == 270) {
         const newX = originalY;
         const newY = originalX;
-        return { x: newX, y: newY };
+        const fromCenterX = newX - frameHeight / 2;
+        const fromCenterY = newY - frameWidth / 2;
+        return { x: fromCenterX, y: fromCenterY };
       }
     }
   }
