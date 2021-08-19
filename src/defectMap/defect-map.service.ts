@@ -47,7 +47,7 @@ export class DefectMapService {
               rotatedPoint.x * camera.resolution * RESOLUTION_MODIFIER -
               camera.x;
             finalY =
-              camera.z -
+              camera.z +
               rotatedPoint.y * camera.resolution * RESOLUTION_MODIFIER;
           } else if (
             camera.groups[1] == 'RIGHT' &&
@@ -67,8 +67,8 @@ export class DefectMapService {
               rotatedPoint.x * camera.resolution * RESOLUTION_MODIFIER -
               camera.x;
             finalY =
-              2666 +
-              camera.y -
+              5333 -
+              camera.y +
               rotatedPoint.y * camera.resolution * RESOLUTION_MODIFIER;
           }
 
