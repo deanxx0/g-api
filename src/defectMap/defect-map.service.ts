@@ -24,19 +24,19 @@ export class DefectMapService {
     return this.inferenceResultModel.findById(id);
   }
 
-  async getList(inspectionId: string) {
+  async getList(inspectionId: string, cameraName: string) {
     const inferenceResults: InferenceResultDocument[] =
       await this.inferenceResultModel
-        .find({ inspectionId: inspectionId })
+        .find({ inspectionId: inspectionId, cameraName: cameraName })
         .exec();
 
+    const camera = await this.cameraModel.findOne({ name: cameraName }).exec();
+
     const RESOLUTION_MODIFIER = 1;
+
     let finalPoints = [];
     for (let ir of inferenceResults) {
       if (ir.defects.length > 0) {
-        const camera = await this.cameraModel
-          .findOne({ name: ir.cameraName })
-          .exec();
         for (let i = 0; i < ir.defects.length; i++) {
           const rotatedPoint = await this.rotate(ir.defects[i], camera);
           let finalX: number = 0;
@@ -83,7 +83,9 @@ export class DefectMapService {
         }
       }
     }
-    console.log(`defect map list count: ${finalPoints.length}`);
+    console.log(
+      `inspectionId: ${inspectionId} / cameraName: ${cameraName} / defect count: ${finalPoints.length}`,
+    );
     return finalPoints;
   }
 
