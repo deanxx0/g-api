@@ -105,18 +105,14 @@ export class DefectMapService {
         const fromCenterY = newY - frameHeight / 2;
         return { x: fromCenterX, y: fromCenterY };
       }
+      //90도만 맞음
       if (rotateDegree == 90) {
         const newX = frameHeight - originalY;
         const newY = originalX;
-        return { x: newX, y: newY };
+        const fromCenterX = frameHeight / 2 - newX;
+        const fromCenterY = frameWidth / 2 - newY;
+        return { x: fromCenterX, y: fromCenterY };
       }
-      // if (rotateDegree == 90) {
-      //   const newX = frameHeight - originalY;
-      //   const newY = originalX;
-      //   const fromCenterX = newX - frameHeight / 2;
-      //   const fromCenterY = newY - frameWidth / 2;
-      //   return { x: fromCenterX, y: fromCenterY };
-      // }
       if (rotateDegree == 180) {
         const newX = frameWidth - originalX;
         const newY = frameHeight - originalY;
