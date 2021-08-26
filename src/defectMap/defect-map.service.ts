@@ -48,7 +48,7 @@ export class DefectMapService {
               ir.grab.distance +
               rotatedPoint.x * camera.resolution * RESOLUTION_MODIFIER -
               camera.x;
-            finalY = rotatedPoint.y * camera.resolution * RESOLUTION_MODIFIER;
+            finalY = camera.z + rotatedPoint.y * camera.resolution * RESOLUTION_MODIFIER;
           } else if (
             camera.groups[1] == 'RIGHT' &&
             camera.groups[2] == 'SIDE'
@@ -58,7 +58,7 @@ export class DefectMapService {
               rotatedPoint.x * camera.resolution * RESOLUTION_MODIFIER -
               camera.x;
             finalY =
-              8000 - rotatedPoint.y * camera.resolution * RESOLUTION_MODIFIER;
+              8000 - camera.z + rotatedPoint.y * camera.resolution * RESOLUTION_MODIFIER;
           } else {
             finalX =
               ir.grab.distance +
