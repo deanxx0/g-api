@@ -35,7 +35,9 @@ export class DefectMapService {
     let finalPoints = [];
     for (let ir of inferenceResults) {
       if (ir.defects.length > 0) {
-        const camera = await this.cameraModel.findOne({ name: ir.cameraName }).exec();
+        const camera = await this.cameraModel
+          .findOne({ name: ir.cameraName })
+          .exec();
 
         for (let i = 0; i < ir.defects.length; i++) {
           const rotatedPoint = await this.rotate(ir.defects[i], camera);
@@ -46,8 +48,7 @@ export class DefectMapService {
               ir.grab.distance +
               rotatedPoint.x * camera.resolution * RESOLUTION_MODIFIER -
               camera.x;
-            finalY =
-              rotatedPoint.y * camera.resolution * RESOLUTION_MODIFIER;
+            finalY = rotatedPoint.y * camera.resolution * RESOLUTION_MODIFIER;
           } else if (
             camera.groups[1] == 'RIGHT' &&
             camera.groups[2] == 'SIDE'
@@ -57,8 +58,7 @@ export class DefectMapService {
               rotatedPoint.x * camera.resolution * RESOLUTION_MODIFIER -
               camera.x;
             finalY =
-              8000 -
-              rotatedPoint.y * camera.resolution * RESOLUTION_MODIFIER;
+              8000 - rotatedPoint.y * camera.resolution * RESOLUTION_MODIFIER;
           } else {
             finalX =
               ir.grab.distance +
@@ -77,6 +77,9 @@ export class DefectMapService {
             cameraName: ir.cameraName,
             frame: ir.grab.seq,
             defectIndex: i,
+            originalX: ir.defects[i].x,
+            originalY: ir.defects[i].y,
+            distance: ir.grab.distance,
           });
         }
       }
@@ -109,8 +112,7 @@ export class DefectMapService {
               ir.grab.distance +
               rotatedPoint.x * camera.resolution * RESOLUTION_MODIFIER -
               camera.x;
-            finalY =
-              rotatedPoint.y * camera.resolution * RESOLUTION_MODIFIER;
+            finalY = rotatedPoint.y * camera.resolution * RESOLUTION_MODIFIER;
           }
           // } else if (
           //   camera.groups[1] == 'RIGHT' &&
@@ -141,6 +143,9 @@ export class DefectMapService {
             cameraName: ir.cameraName,
             frame: ir.grab.seq,
             defectIndex: i,
+            originalX: ir.defects[i].x,
+            originalY: ir.defects[i].y,
+            distance: ir.grab.distance,
           });
         }
       }
