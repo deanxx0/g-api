@@ -138,7 +138,7 @@ export class InspectionService {
 
     createdInspectionResult.inspectionId = createdDoc._id;
     createdInspectionResult.inspectionNo = createdDoc.inspectionNo;
-    createdInspectionResult.startTime = createdDoc.createdAt;
+    createdInspectionResult.startTime = null;
     createdInspectionResult.endTime = null;
     createdInspectionResult.elapseTime = '-';
     createdInspectionResult.vehicleModel = createdDoc.vehicle.properties.model;
