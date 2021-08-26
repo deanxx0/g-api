@@ -41,29 +41,19 @@ export class DefectMapService {
           let finalY: number = 0;
           if (camera.groups[1] == 'LEFT' && camera.groups[2] == 'SIDE') {
             finalX =
-              ir.grab.distance +
-              rotatedPoint.x * camera.resolution -
-              camera.x;
+              ir.grab.distance + rotatedPoint.x * camera.resolution - camera.x;
             finalY = camera.z + rotatedPoint.y * camera.resolution;
           } else if (
             camera.groups[1] == 'RIGHT' &&
             camera.groups[2] == 'SIDE'
           ) {
             finalX =
-              ir.grab.distance -
-              rotatedPoint.x * camera.resolution -
-              camera.x;
-            finalY =
-              8000 - camera.z + rotatedPoint.y * camera.resolution;
+              ir.grab.distance - rotatedPoint.x * camera.resolution - camera.x;
+            finalY = 8000 - camera.z + rotatedPoint.y * camera.resolution;
           } else {
             finalX =
-              ir.grab.distance +
-              rotatedPoint.x * camera.resolution -
-              camera.x;
-            finalY =
-              5333 -
-              camera.y +
-              rotatedPoint.y * camera.resolution;
+              ir.grab.distance + rotatedPoint.x * camera.resolution - camera.x;
+            finalY = 5333 - camera.y + rotatedPoint.y * camera.resolution;
           }
           finalPoints.push({
             x: Number(finalX.toFixed(2)),
@@ -102,21 +92,18 @@ export class DefectMapService {
           let finalY: number = 0;
           if (camera.groups[1] == 'LEFT' && camera.groups[2] == 'SIDE') {
             finalX =
-              ir.grab.distance +
-              rotatedPoint.x * camera.resolution - camera.x;
+              ir.grab.distance + rotatedPoint.x * camera.resolution - camera.x;
             finalY = rotatedPoint.y * camera.resolution;
           } else if (
             camera.groups[1] == 'RIGHT' &&
             camera.groups[2] == 'SIDE'
           ) {
             finalX =
-              ir.grab.distance + 
-              rotatedPoint.x * camera.resolution - camera.x;
+              ir.grab.distance + rotatedPoint.x * camera.resolution - camera.x;
             finalY = rotatedPoint.y * camera.resolution * -1;
           } else {
             finalX =
-              ir.grab.distance +
-              rotatedPoint.x * camera.resolution - camera.x;
+              ir.grab.distance + rotatedPoint.x * camera.resolution - camera.x;
             finalY = rotatedPoint.y * camera.resolution + camera.y;
           }
 
@@ -148,7 +135,7 @@ export class DefectMapService {
     const originalX = defect.x;
     const originalY = defect.y;
     // console.log(`rotatedDegree: ${rotateDegree} / frameWidth: ${frameWidth} / frameHeight: ${flip} / originalX: ${defect.x} / originalY: ${defect.y}`);
-    
+
     if (flip == false) {
       if (rotateDegree == 0 || rotateDegree == 180) {
         const newX = originalX;
