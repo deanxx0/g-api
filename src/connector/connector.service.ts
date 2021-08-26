@@ -79,7 +79,21 @@ export class ConnectorService {
       .exec();
   }
 
-  async updateInspectionResultTime(id: string) {
+  async updateInspectionResultStartTime(id: string) {
+    const inspectionDoc: any = await this.inspectionModel
+      .findOne({ _id: id })
+      .exec();
+    const startTime = await inspectionDoc.updatedAt;
+
+    this.inspectionResultModel
+      .updateOne(
+        { inspectionId: id },
+        { $set: { startTime: startTime } },
+      )
+      .exec();
+  }
+
+  async updateInspectionResultEndTime(id: string) {
     const inspectionDoc: any = await this.inspectionModel
       .findOne({ _id: id })
       .exec();
