@@ -77,6 +77,9 @@ export class DefectMapService {
             cameraName: ir.cameraName,
             frame: ir.grab.seq,
             defectIndex: i,
+            originalX: ir.defects[i].x,
+            originalY: ir.defects[i].y,
+            distance: ir.grab.distance,
           });
         }
       }
@@ -141,6 +144,9 @@ export class DefectMapService {
             cameraName: ir.cameraName,
             frame: ir.grab.seq,
             defectIndex: i,
+            originalX: ir.defects[i].x,
+            originalY: ir.defects[i].y,
+            distance: ir.grab.distance,
           });
         }
       }
