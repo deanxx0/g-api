@@ -24,7 +24,70 @@ export class DefectMapService {
     return this.inferenceResultModel.findById(id);
   }
 
-  async getList(inspectionId: string, cameraName: string) {
+  async getList(inspectionId: string) {
+    const inferenceResults: InferenceResultDocument[] =
+      await this.inferenceResultModel
+        .find({ inspectionId: inspectionId })
+        .exec();
+
+    const RESOLUTION_MODIFIER = 1;
+
+    let finalPoints = [];
+    for (let ir of inferenceResults) {
+      if (ir.defects.length > 0) {
+        const camera = await this.cameraModel.findOne({ name: ir.cameraName }).exec();
+
+        for (let i = 0; i < ir.defects.length; i++) {
+          const rotatedPoint = await this.rotate(ir.defects[i], camera);
+          let finalX: number = 0;
+          let finalY: number = 0;
+          if (camera.groups[1] == 'LEFT' && camera.groups[2] == 'SIDE') {
+            finalX =
+              ir.grab.distance +
+              rotatedPoint.x * camera.resolution * RESOLUTION_MODIFIER -
+              camera.x;
+            finalY =
+              rotatedPoint.y * camera.resolution * RESOLUTION_MODIFIER;
+          } else if (
+            camera.groups[1] == 'RIGHT' &&
+            camera.groups[2] == 'SIDE'
+          ) {
+            finalX =
+              ir.grab.distance -
+              rotatedPoint.x * camera.resolution * RESOLUTION_MODIFIER -
+              camera.x;
+            finalY =
+              8000 -
+              rotatedPoint.y * camera.resolution * RESOLUTION_MODIFIER;
+          } else {
+            finalX =
+              ir.grab.distance +
+              rotatedPoint.x * camera.resolution * RESOLUTION_MODIFIER -
+              camera.x;
+            finalY =
+              5333 -
+              camera.y +
+              rotatedPoint.y * camera.resolution * RESOLUTION_MODIFIER;
+          }
+
+          finalPoints.push({
+            x: Number(finalX.toFixed(2)),
+            y: Number(finalY.toFixed(2)),
+            inspectionNo: ir.inspectionNo,
+            cameraName: ir.cameraName,
+            frame: ir.grab.seq,
+            defectIndex: i,
+          });
+        }
+      }
+    }
+    console.log(
+      `inspectionId: ${inspectionId} / defect count: ${finalPoints.length}`,
+    );
+    return finalPoints;
+  }
+
+  async getListByCameraName(inspectionId: string, cameraName: string) {
     const inferenceResults: InferenceResultDocument[] =
       await this.inferenceResultModel
         .find({ inspectionId: inspectionId, cameraName: cameraName })
