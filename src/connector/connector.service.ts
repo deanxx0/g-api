@@ -79,17 +79,14 @@ export class ConnectorService {
       .exec();
   }
 
-  async updateInspectionResultStartTime(id: string) {
-    const inspectionDoc: any = await this.inspectionModel
-      .findOne({ _id: id })
-      .exec();
-    const startTime = await inspectionDoc.updatedAt;
+  async updateInspectionResultStartTime(id: string, logDoc) {
+    // const inspectionDoc: any = await this.inspectionModel
+    //   .findOne({ _id: id })
+    //   .exec();
+    const startTime = await logDoc.createdAt;
 
     this.inspectionResultModel
-      .updateOne(
-        { inspectionId: id },
-        { $set: { startTime: startTime } },
-      )
+      .updateOne({ inspectionId: id }, { $set: { startTime: startTime } })
       .exec();
   }
 
@@ -136,7 +133,10 @@ export class ConnectorService {
     createdLog.save();
   }
 
-  async createInspectionLog(inspectionId: string, status: string) {
+  async createInspectionLog(
+    inspectionId: string,
+    status: string,
+  ): Promise<LogDocument> {
     const inspectionDoc: InspectionDocument = await this.inspectionModel
       .findOne({ _id: inspectionId })
       .exec();
@@ -148,7 +148,7 @@ export class ConnectorService {
     createdLog.type = 'INFO';
     createdLog.description = `InspectionNO: ${inspectionDoc.inspectionNo}, Status: ${status}, Vincode: ${inspectionDoc.vehicle.vinCode}, Model: ${inspectionDoc.vehicle.properties.model}, Color: ${inspectionDoc.vehicle.properties.color}`;
 
-    createdLog.save();
+    return await createdLog.save();
   }
 
   private inferencResultCache: Array<CreateInferenceResultDto> = [];
