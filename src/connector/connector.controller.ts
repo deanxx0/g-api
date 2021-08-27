@@ -97,7 +97,10 @@ export class ConnectorController {
       InspectionStatus.BeginInspection,
     );
 
-    await this.connectorService.updateInspectionResultStartTime(data.inspection, logDoc);
+    await this.connectorService.updateInspectionResultStartTime(
+      data.inspection,
+      logDoc,
+    );
   }
 
   @SubscribeTo(topicEndInspection)

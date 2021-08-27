@@ -86,10 +86,7 @@ export class ConnectorService {
     const startTime = await logDoc.createdAt;
 
     this.inspectionResultModel
-      .updateOne(
-        { inspectionId: id },
-        { $set: { startTime: startTime } },
-      )
+      .updateOne({ inspectionId: id }, { $set: { startTime: startTime } })
       .exec();
   }
 
@@ -136,7 +133,10 @@ export class ConnectorService {
     createdLog.save();
   }
 
-  async createInspectionLog(inspectionId: string, status: string): Promise<LogDocument> {
+  async createInspectionLog(
+    inspectionId: string,
+    status: string,
+  ): Promise<LogDocument> {
     const inspectionDoc: InspectionDocument = await this.inspectionModel
       .findOne({ _id: inspectionId })
       .exec();
