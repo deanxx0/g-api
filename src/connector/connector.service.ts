@@ -79,11 +79,11 @@ export class ConnectorService {
       .exec();
   }
 
-  async updateInspectionResultStartTime(id: string) {
-    const inspectionDoc: any = await this.inspectionModel
-      .findOne({ _id: id })
-      .exec();
-    const startTime = await inspectionDoc.updatedAt;
+  async updateInspectionResultStartTime(id: string, logDoc) {
+    // const inspectionDoc: any = await this.inspectionModel
+    //   .findOne({ _id: id })
+    //   .exec();
+    const startTime = await logDoc.createdAt;
 
     this.inspectionResultModel
       .updateOne(
