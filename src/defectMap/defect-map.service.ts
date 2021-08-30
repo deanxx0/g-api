@@ -32,6 +32,7 @@ export class DefectMapService {
     let finalPoints = [];
     for (let ir of inferenceResults) {
       if (ir.defects.length > 0) {
+        //console.log(`___________cameraName: ${ir.cameraName}`);
         const camera = await this.cameraModel
           .findOne({ name: ir.cameraName })
           .exec();
